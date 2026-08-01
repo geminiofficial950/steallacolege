@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stella College — Credential Verification</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b4b;--navy2:#122060;--navy3:#1a3a6b;
+  --gold:#c9a84c;--gold2:#e8c96a;
+  --cream:#f9f7f2;--off:#f0ece2;--border:#e2ddd4;
+  --text:#1a1a2e;--muted:#6b6b80;--success:#2d7a4f;
+  --danger:#c0392b;--white:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+
+header{
+  background:var(--navy);padding:1.25rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(201,168,76,0.2);
+}
+.brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none}
+.brand-star{color:var(--gold);font-size:1.3rem}
+.brand-name{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.2rem;font-weight:600;letter-spacing:0.02em}
+.brand-tag{font-size:0.68rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase}
+
+main{max-width:680px;margin:0 auto;padding:3rem 1.5rem}
+
+/* SEARCH */
+.search-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:2rem;text-align:center}
+.search-icon{font-size:2rem;margin-bottom:0.75rem;display:block}
+.search-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);font-weight:600;margin-bottom:0.3rem}
+.search-sub{color:var(--muted);font-size:0.875rem;margin-bottom:1.5rem}
+.search-row{display:flex;gap:0.75rem}
+.search-input{
+  flex:1;border:1.5px solid var(--border);border-radius:10px;
+  padding:0.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;
+  color:var(--text);outline:none;transition:border-color 0.2s;background:var(--cream);
+}
+.search-input:focus{border-color:var(--navy);background:var(--white)}
+.search-btn{
+  background:var(--navy);color:var(--white);border:none;border-radius:10px;
+  padding:0.8rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;
+  font-weight:500;cursor:pointer;transition:background 0.2s;white-space:nowrap;
+}
+.search-btn:hover{background:var(--navy3)}
+.search-btn:disabled{background:#aaa;cursor:not-allowed}
+
+/* LOADING */
+.loading{text-align:center;padding:2.5rem;color:var(--muted);display:none}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESULT */
+.result{display:none;animation:fadeUp 0.3s ease}
+
+/* CREDENTIAL CARD */
+.cred-card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:1.5rem}
+.cred-header{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);
+  padding:2.5rem 2rem;text-align:center;position:relative;
+}
+.cred-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(201,168,76,0.18) 0%,transparent 70%);
+}
+.cred-emblem{
+  width:90px;height:90px;border-radius:50%;border:2.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:2rem;
+  margin:0 auto 1rem;background:rgba(255,255,255,0.06);position:relative;
+}
+.cred-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--white);font-weight:600;position:relative}
+.cred-course{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:rgba(255,255,255,0.75);margin-top:0.3rem;font-style:italic;position:relative}
+.cred-issuer{color:var(--gold);font-size:0.75rem;margin-top:0.5rem;letter-spacing:0.1em;text-transform:uppercase;position:relative}
+
+/* STATUS STAMPS */
+.status-stamp{
+  border-radius:10px;padding:0.85rem 1.1rem;margin:1.25rem 1.5rem 0;
+  display:flex;align-items:center;gap:0.6rem;font-size:0.875rem;
+}
+.status-stamp.valid{background:rgba(45,122,79,0.08);border:1px solid rgba(45,122,79,0.25);color:var(--success)}
+.status-stamp.expired{background:rgba(184,115,51,0.08);border:1px solid rgba(184,115,51,0.25);color:#b87333}
+.status-stamp.invalid{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2);color:var(--danger)}
+.stamp-icon{font-size:1.1rem;flex-shrink:0}
+.stamp-text{font-weight:500}
+.stamp-sub{font-size:0.78rem;opacity:0.8;margin-top:0.1rem}
+
+/* SOURCE BADGE */
+.source-badge{
+  display:inline-flex;align-items:center;gap:0.35rem;
+  font-size:0.68rem;padding:0.2rem 0.6rem;border-radius:20px;
+  margin:0.75rem 1.5rem 0;font-weight:500;letter-spacing:0.03em;
+}
+.source-badge.sheets{background:rgba(45,122,79,0.1);color:var(--success);border:1px solid rgba(45,122,79,0.2)}
+.source-badge.local{background:rgba(201,168,76,0.12);color:#8a6a20;border:1px solid rgba(201,168,76,0.25)}
+
+/* DETAILS */
+.details{padding:1.25rem 1.5rem 1.5rem}
+.detail-row{display:flex;justify-content:space-between;align-items:flex-start;padding:0.7rem 0;border-bottom:1px solid var(--border);font-size:0.875rem;gap:1rem}
+.detail-row:last-child{border-bottom:none}
+.detail-label{color:var(--muted);font-weight:500;flex-shrink:0}
+.detail-val{color:var(--text);text-align:right;word-break:break-word;max-width:380px}
+.detail-val.mono{font-family:monospace;font-size:0.8rem;color:var(--navy)}
+
+/* TYPE PILLS */
+.type-pills{display:flex;gap:0.4rem;justify-content:flex-end;flex-wrap:wrap}
+.pill{font-size:0.7rem;padding:0.2rem 0.55rem;border-radius:20px;font-weight:500}
+.pill-certificate{background:rgba(201,168,76,0.15);color:#8a6a20}
+.pill-badge{background:rgba(184,115,51,0.15);color:#7a4d1d}
+
+/* ACTIONS */
+.actions{padding:0 1.5rem 1.5rem;display:flex;gap:0.6rem;flex-wrap:wrap}
+.btn-li{
+  flex:1;min-width:180px;background:#0a66c2;color:white;border:none;border-radius:10px;
+  padding:0.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;
+  transition:background 0.2s;
+}
+.btn-li:hover{background:#004182}
+.btn-copy{
+  background:var(--cream);border:1px solid var(--border);border-radius:10px;
+  padding:0.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.875rem;
+  cursor:pointer;transition:all 0.2s;color:var(--text);
+}
+.btn-copy:hover{border-color:var(--navy);color:var(--navy)}
+
+/* NOT FOUND */
+.not-found{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2.5rem;text-align:center}
+.not-found-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.4}
+.not-found-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--navy);font-weight:600;margin-bottom:0.4rem}
+.not-found-sub{color:var(--muted);font-size:0.875rem;line-height:1.7}
+
+/* CONFIG NOTICE */
+.config-notice{
+  background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);
+  border-radius:10px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;
+  font-size:0.82rem;color:#8a6a20;display:none;
+  display:flex;align-items:flex-start;gap:0.6rem;
+}
+
+footer{text-align:center;padding:2rem;font-size:0.78rem;color:var(--muted);border-top:1px solid var(--border);margin-top:2rem}
+.footer-star{color:var(--gold)}
+
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--navy);color:var(--white);padding:0.75rem 1.25rem;border-radius:10px;font-size:0.85rem;z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;border-left:3px solid var(--gold)}
+.toast.show{transform:translateY(0);opacity:1}
+
+@media(max-width:500px){
+  .search-row{flex-direction:column}
+  header{flex-direction:column;gap:0.4rem;text-align:center}
+  .actions{flex-direction:column}
+  .btn-li{min-width:unset}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand d-flex align-items-center" href="/">
+  
+    <img
+      src="/assets/img/logo/23.png"
+      width="220"
+      height="100"
+      alt="Stella College logo"
+      class="img-fluid"
+    />
+  </a>
+   <span class="brand-tag">Credential Verification</span>
+</header>
+
+<main>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <div class="search-title">Verify a credential</div>
+    <div class="search-sub">Enter a Stella College credential ID to confirm it is authentic</div>
+    <div class="search-row">
+      <input class="search-input" type="text" id="vid"
+        placeholder="e.g. SC-240501-A3B4C5"
+        oninput="this.value=this.value.toUpperCase()"
+        onkeydown="if(event.key==='Enter')doVerify()">
+      <button class="search-btn" id="verify-btn" onclick="doVerify()">Verify</button>
+    </div>
+  </div>
+
+  <!-- Loading spinner -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div>Checking credential registry…</div>
+  </div>
+
+  <!-- Result area -->
+  <div class="result" id="result"></div>
+</main>
+
+<footer>
+  <span class="footer-star">★</span> Stella College · Credential Portal ·
+  This page is publicly accessible for verification purposes only
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ──
+// The Apps Script URL is shared from localStorage (set in staff portal Settings).
+// This means the same browser that configured the staff portal will also
+// have it here. For cross-device use, the developer should hardcode the URL below.
+const HARDCODED_SHEETS_URL = ''; // <-- Developer: paste your Apps Script URL here for cross-device support
+
+function getSheetsUrl() {
+  // Priority: hardcoded URL > localStorage (set from staff portal Settings)
+  if (HARDCODED_SHEETS_URL) return HARDCODED_SHEETS_URL;
+  const settings = JSON.parse(localStorage.getItem('sc_settings') || '{}');
+  return settings.sheetsUrl || '';
+}
+console.log('Using Sheets URL:', getSheetsUrl());
+console.log('hardcoded:', !!HARDCODED_SHEETS_URL, 'localStorage:', !!getSheetsUrl());
+
+// ── AUTO-LOAD FROM URL PARAM ──
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if (id) {
+    document.getElementById('vid').value = id.toUpperCase();
+    doVerify();
+  }
+});
+
+// ── MAIN VERIFY FUNCTION ──
+async function doVerify() {
+  const q = document.getElementById('vid').value.trim().toUpperCase();
+  const resultEl = document.getElementById('result');
+  const loadingEl = document.getElementById('loading');
+  const btn = document.getElementById('verify-btn');
+
+  if (!q) { showToast('Please enter a credential ID'); return; }
+
+  // Reset UI
+  resultEl.style.display = 'none';
+  resultEl.innerHTML = '';
+  loadingEl.style.display = 'block';
+  btn.disabled = true;
+  btn.textContent = 'Checking…';
+
+  const sheetsUrl = getSheetsUrl();
+  let cred = null;
+  let source = null; // 'sheets' or 'local'
+
+  // ── 1. Try Google Sheets first ──
+  if (sheetsUrl) {
+    try {
+      const res = await fetch(`${sheetsUrl}?action=lookup&id=${encodeURIComponent(q)}`, {
+        method: 'GET',
+        mode: 'cors'
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status === 'found' && data.credential) {
+          cred = data.credential;
+          source = 'sheets';
+        } else if (data.status === 'not_found') {
+          // Confirmed not in Sheets — don't fall back to local
+          cred = null;
+          source = 'sheets';
+        }
+      }
+    } catch (err) {
+      // Sheets unreachable — fall back to localStorage
+      console.warn('Sheets lookup failed, falling back to localStorage:', err);
+      source = null;
+    }
+  }
+
+  // ── 2. Fall back to localStorage ONLY if Sheets is not configured or unreachable ──
+  if (source === null) {
+    const localCreds = JSON.parse(localStorage.getItem('sc_creds') || '[]');
+    const localMatch = localCreds.find(c => c.id === q);
+    if (localMatch) {
+      // Normalise local data to same shape as Sheets response
+      cred = {
+        id: localMatch.id,
+        name: localMatch.name,
+        email: localMatch.email,
+        course: localMatch.course,
+        types: Array.isArray(localMatch.types) ? localMatch.types.join(', ') : (localMatch.types || ''),
+        issued: localMatch.date,
+        expiry: localMatch.expiry || '',
+        description: localMatch.desc || ''
+      };
+      source = 'local';
+    }
+  }
+
+  // ── Render result ──
+  loadingEl.style.display = 'none';
+  btn.disabled = false;
+  btn.textContent = 'Verify';
+  resultEl.style.display = 'block';
+
+  if (!cred) {
+    resultEl.innerHTML = notFoundHtml(q, source === 'sheets');
+    return;
+  }
+
+  renderCredential(cred, source, resultEl);
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── RENDER CREDENTIAL ──
+function renderCredential(c, source, el) {
+  const now = new Date();
+  const expired = c.expiry && new Date(c.expiry + 'T23:59:59') < now;
+
+  // Parse types — could be "certificate, badge" or "certificate" or array
+  const typesArr = typeof c.types === 'string'
+    ? c.types.split(',').map(t => t.trim()).filter(Boolean)
+    : (Array.isArray(c.types) ? c.types : [c.types]);
+
+  const typeIcons = typesArr.includes('certificate') && typesArr.includes('badge') ? '📜🏅'
+    : typesArr.includes('certificate') ? '📜' : '🏅';
+
+  const typePills = typesArr.map(t => `<span class="pill pill-${t.trim()}">${t.trim()}</span>`).join(' ');
+
+  const statusHtml = expired
+    ? `<div class="status-stamp expired">
+         <span class="stamp-icon">⚠</span>
+         <div><div class="stamp-text">Credential expired</div>
+         <div class="stamp-sub">Was a valid credential — passed its expiry date</div></div>
+       </div>`
+    : `<div class="status-stamp valid">
+         <span class="stamp-icon">✅</span>
+         <div><div class="stamp-text">Verified — authentic Stella College credential</div>
+         <div class="stamp-sub">Issued ${fmt(c.issued)} and currently valid</div></div>
+       </div>`;
+
+  const sourceHtml = source === 'sheets'
+    ? `<div class="source-badge sheets">✓ Verified against live Google Sheets registry</div>`
+    : `<div class="source-badge local">⚡ Verified from local cache — configure Sheets for full verification</div>`;
+
+  const liUrl = buildLinkedInUrl(c);
+
+  el.innerHTML = `
+    <div class="cred-card">
+      <div class="cred-header">
+        <div class="cred-emblem">${typeIcons}</div>
+        <div class="cred-name">${esc(c.name)}</div>
+        <div class="cred-course">${esc(c.course)}</div>
+        <div class="cred-issuer">★ Stella College</div>
+      </div>
+      ${statusHtml}
+      ${sourceHtml}
+      <div class="details">
+        <div class="detail-row">
+          <span class="detail-label">Recipient</span>
+          <span class="detail-val"><strong>${esc(c.name)}</strong></span>
+        </div>
+        ${c.email ? `<div class="detail-row">
+          <span class="detail-label">Email</span>
+          <span class="detail-val">${esc(c.email)}</span>
+        </div>` : ''}
+        <div class="detail-row">
+          <span class="detail-label">Course</span>
+          <span class="detail-val">${esc(c.course)}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Credential type</span>
+          <span class="detail-val"><div class="type-pills">${typePills}</div></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Issue date</span>
+          <span class="detail-val">${fmt(c.issued)}</span>
+        </div>
+        ${c.expiry ? `<div class="detail-row">
+          <span class="detail-label">Expiry date</span>
+          <span class="detail-val">${fmt(c.expiry)}${expired ? ' <span style="color:var(--danger);font-size:0.8rem">(expired)</span>' : ''}</span>
+        </div>` : ''}
+        ${c.description ? `<div class="detail-row">
+          <span class="detail-label">About</span>
+          <span class="detail-val">${esc(c.description)}</span>
+        </div>` : ''}
+        <div class="detail-row">
+          <span class="detail-label">Issued by</span>
+          <span class="detail-val">Stella College</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Credential ID</span>
+          <span class="detail-val mono">${esc(c.id)}</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn-li" onclick="window.open('${liUrl}','_blank')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          Add to LinkedIn Profile
+        </button>
+        <button class="btn-copy" onclick="copyLink()">📋 Copy link</button>
+      </div>
+    </div>`;
+}
+
+// ── NOT FOUND ──
+function notFoundHtml(q, confirmedFromSheets) {
+  const note = confirmedFromSheets
+    ? 'This ID was checked against the live Stella College registry and does not exist.'
+    : 'This ID could not be found. Please check the ID and try again.';
+  return `<div class="not-found">
+    <div class="not-found-icon">✕</div>
+    <div class="not-found-title">Credential not found</div>
+    <div class="not-found-sub">
+      No credential with ID <strong>${esc(q)}</strong> was found.<br>
+      <span style="font-size:0.8rem;margin-top:0.5rem;display:block">${note}</span>
+    </div>
+  </div>`;
+}
+
+// ── LINKEDIN URL ──
+function buildLinkedInUrl(c) {
+  const pageUrl = encodeURIComponent(window.location.href.split('?')[0] + '?id=' + c.id);
+  const issueDate = c.issued || c.date || '';
+  const yr = issueDate.slice(0, 4);
+  const mo = parseInt(issueDate.slice(5, 7)) || 1;
+  let url = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME`
+    + `&name=${encodeURIComponent(c.course)}`
+    + `&organizationName=${encodeURIComponent('Stella College')}`
+    + `&issueYear=${yr}&issueMonth=${mo}`
+    + `&certUrl=${pageUrl}`
+    + `&certId=${encodeURIComponent(c.id)}`;
+  if (c.expiry) {
+    url += `&expirationYear=${c.expiry.slice(0, 4)}&expirationMonth=${parseInt(c.expiry.slice(5, 7))}`;
+  }
+  return url;
+}
+
+// ── HELPERS ──
+function fmt(d) {
+  if (!d) return '—';
+  // Handle both YYYY-MM-DD and ISO strings
+  const clean = d.length > 10 ? d.slice(0, 10) : d;
+  return new Date(clean + 'T12:00:00').toLocaleDateString('en-AU', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function copyLink() {
+  const id = document.getElementById('vid').value.trim();
+  const link = window.location.href.split('?')[0] + '?id=' + id;
+  navigator.clipboard.writeText(link).then(() => showToast('Link copied!'));
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+
+...
+<!-- your HTML content -->
+
+<!-- <script>
+const API_URL = "https://script.google.com/macros/s/AKfycbymYeJ-d-ZZvlJT7PlMVLpeO2msGy-1G9nyiNEgl4nDNVzLigZU8XKLdMetUB1JYgomTQ/exec";
+
+async function verifyCredentials() {
+  const id = document.getElementById("studentId").value;
+
+  const response = await fetch(API_URL, {
+    method: "GET",
+  });
+
+  const data = await response.json();
+  console.log(data);
+
+  if (data.status === "success") {
+    document.getElementById("result").innerHTML =
+      "✅ Verified: " + JSON.stringify(data.data);
+  } else {
+    document.getElementById("result").innerHTML = "❌ Not found";
+  }
+}
+</script> -->
+
+</body>
+</html>
+</body>
+</html>

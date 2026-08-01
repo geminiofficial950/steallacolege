@@ -1,0 +1,362 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "basicInfo": {
+        "title": "CHC43015 – Certificate IV in Ageing Support",
+        "shortTitle": "Certificate IV in Ageing Support",
+        "category": "Healthcare",
+        "subcategory": "Aged Care",
+        "tag": "Ageing",
+        "level": "Certificate IV",
+        "duration": "52 weeks",
+        "price": 15,
+        "currency": "AUD",
+        "rating": 4.8,
+        "reviewCount": 127,
+        "language": "English",
+        "lastUpdated": "2024-01-15"
+      },
+      "media": {
+        "thumbnail": "/assets/img/courses/course_thumb01.jpg",
+        "gallery": [
+          "/assets/img/courses/course_thumb01.jpg",
+          "/assets/img/courses/course_thumb02.jpg"
+        ],
+        "videoTrailer": "https://youtube.com/watch?v=example",
+        "documents": [
+          {
+            "title": "Course Brochure",
+            "type": "pdf",
+            "url": "/documents/course-brochure.pdf",
+            "size": "2.5 MB"
+          }
+        ]
+      },
+      "instructor": {
+        "name": "Sarah Johnson",
+        "title": "Senior Aged Care Specialist",
+        "bio": "With over 15 years of experience in aged care, Sarah has trained thousands of students and is passionate about quality care delivery.",
+        "avatar": "/assets/img/instructor/sarah-johnson.jpg",
+        "credentials": [
+          "Master of Health Science",
+          "Certificate IV in Training and Assessment",
+          "Registered Nurse"
+        ],
+        "socialLinks": {
+          "linkedin": "https://linkedin.com/in/sarah-johnson-agedcare",
+          "twitter": "https://twitter.com/sarahj_agedcare",
+          "website": "https://sarahjohnson.com"
+        }
+      },
+      "description": {
+        "short": "Comprehensive training for aged care support workers with practical skills and industry experience.",
+        "full": "This qualification reflects the role of support workers who complete specialised tasks and functions in aged services; either in residential, home or community based environments. Workers will take responsibility for their own outputs within defined organisation guidelines and maintain quality service delivery through the development, facilitation and review of individualised service planning and delivery.",
+        "highlights": [
+          "Nationally recognised qualification",
+          "120 hours work placement included",
+          "Flexible study options available",
+          "Industry-experienced trainers",
+          "Job placement assistance"
+        ]
+      },
+      "learningOutcomes": [
+        "Provide person-centred support to older people",
+        "Implement individualised service plans",
+        "Work effectively in aged care settings",
+        "Maintain quality service delivery standards",
+        "Demonstrate leadership in care teams",
+        "Support people with complex needs",
+        "Work with groups of older people"
+      ],
+      "prerequisites": [
+        "Basic English language skills (Year 10 equivalent)",
+        "Physical fitness for care work",
+        "Empathy and compassion for older people",
+        "Basic computer skills for online components"
+      ],
+      "targetAudience": [
+        "New entrants to aged care",
+        "Existing care workers seeking advancement",
+        "Career changers interested in healthcare",
+        "Community service workers",
+        "People seeking meaningful work"
+      ],
+      "courseStructure": {
+        "totalUnits": 17,
+        "coreUnits": 15,
+        "electiveUnits": 3,
+        "totalHours": 520,
+        "modules": [
+          {
+            "id": "module-1",
+            "title": "Core Aged Care Principles",
+            "description": "Foundation knowledge for aged care work",
+            "duration": "2 weeks",
+            "isCore": true,
+            "order": 1,
+            "lessons": [
+              {
+                "id": "lesson-1-1",
+                "title": "Introduction to Aged Care",
+                "description": "Understanding the aged care sector and its importance",
+                "duration": "45 minutes",
+                "type": "video",
+                "resources": [
+                  "Aged Care Standards Guide",
+                  "Industry Overview Document"
+                ]
+              },
+              {
+                "id": "lesson-1-2",
+                "title": "Person-Centred Care",
+                "description": "Principles of individualised care and dignity",
+                "duration": "60 minutes",
+                "type": "video",
+                "resources": [
+                  "Person-Centred Care Framework",
+                  "Case Study Examples"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "module-2",
+            "title": "Practical Care Skills",
+            "description": "Hands-on care techniques and procedures",
+            "duration": "3 weeks",
+            "isCore": true,
+            "order": 2,
+            "lessons": [
+              {
+                "id": "lesson-2-1",
+                "title": "Personal Care Assistance",
+                "description": "Daily living support techniques",
+                "duration": "90 minutes",
+                "type": "practical",
+                "resources": [
+                  "Care Procedure Manual",
+                  "Safety Guidelines"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "requirements": {
+        "entryRequirements": "There are no formal entry requirements for entry to this qualification.",
+        "courseRequirements": "A national Police clearance is required before the placement component can be undertaken. Evidence of some vaccinations is also a requirement including but not limited to influenza (flu) vaccination, COVID vaccination prior to the placement component.",
+        "licensingRequirements": "No licensing, legislative, regulatory or certification requirements apply to this qualification at the time of publication.",
+        "ageRequirements": {
+          "minimum": 18,
+          "maximum": null
+        },
+        "healthRequirements": [
+          "Physical fitness for care work",
+          "Up-to-date vaccinations",
+          "Clear police check"
+        ]
+      },
+      "careerInformation": {
+        "jobRoles": [
+          {
+            "title": "Accommodation Support Worker",
+            "description": "Provide direct care and support to residents in aged care facilities",
+            "salaryRange": {
+              "min": 45000,
+              "max": 65000,
+              "currency": "AUD"
+            },
+            "requirements": [
+              "Certificate IV in Ageing Support",
+              "Police clearance",
+              "First Aid certificate"
+            ],
+            "growthProspects": "Strong growth expected due to aging population",
+            "workSettings": [
+              "Residential aged care facilities",
+              "Nursing homes",
+              "Assisted living communities"
+            ]
+          },
+          {
+            "title": "Community Support Worker",
+            "description": "Support older people in their own homes and communities",
+            "salaryRange": {
+              "min": 42000,
+              "max": 60000,
+              "currency": "AUD"
+            },
+            "requirements": [
+              "Certificate IV in Ageing Support",
+              "Driver's license",
+              "Police clearance"
+            ],
+            "growthProspects": "High demand for home care services",
+            "workSettings": [
+              "Client homes",
+              "Community centres",
+              "Day programs"
+            ]
+          }
+        ],
+        "careerPaths": [
+          {
+            "title": "Senior Care Coordinator",
+            "description": "Progress to supervisory roles in aged care",
+            "nextSteps": [
+              "Gain 2+ years experience",
+              "Complete leadership training",
+              "Apply for senior positions"
+            ],
+            "relatedCourses": [2, 3],
+            "timeToAchieve": "2-3 years"
+          }
+        ],
+        "industryRelevance": "The aged care sector is experiencing significant growth due to Australia's aging population, creating strong job prospects for qualified workers."
+      },
+      "workPlacement": {
+        "description": "Bring your learning to life by applying what you've learned in the classroom to real-world settings. Every qualification at Intercare includes a work placement.",
+        "duration": "3 weeks",
+        "hours": 120,
+        "process": [
+          "Student placement will be organised on behalf of the Student by InterCare Training",
+          "The Student will be allocated work placement within a 1-hour radius of the course location (public transport is not taken into consideration within this timing)",
+          "Student work placement is non-negotiable and must be completed within a 3 week period Monday to Friday. No weekend work is required",
+          "We work closely with our industry partners to make student's work placement as seamless as possible"
+        ],
+        "requirements": [
+          "Our industry partners require a clean police check for us to place you for work placement. If you have concerns regarding your police check, please raise this before enrolment so we can advise if this may impact your ability to complete the qualification."
+        ],
+        "benefits": [
+          "Real-world experience in aged care settings",
+          "Industry networking opportunities",
+          "Practical skill application",
+          "Potential employment opportunities",
+          "Professional references"
+        ],
+        "note": "Discover the prerequisites for enrolling in our work placement program.",
+        "locations": [
+          "Melbourne",
+          "Sydney", 
+          "Brisbane",
+          "Perth"
+        ]
+      },
+      "certification": {
+        "type": "Nationally Recognised Qualification",
+        "issuer": "Australian Skills Quality Authority (ASQA)",
+        "validity": "No expiry",
+        "requirements": [
+          "Complete all units",
+          "120 hours work placement",
+          "Pass all assessments"
+        ],
+        "accreditation": "CHC43015"
+      },
+      "delivery": {
+        "modes": ["Online", "In-person", "Hybrid"],
+        "schedule": {
+          "startDates": [
+            "2024-02-01",
+            "2024-03-01",
+            "2024-04-01"
+          ],
+          "classTimes": "Flexible - self-paced with weekly check-ins",
+          "timezone": "AEST"
+        },
+        "support": {
+          "instructorSupport": "Available during business hours",
+          "peerSupport": "Online discussion forums",
+          "technicalSupport": "24/7 technical assistance"
+        }
+      },
+      "socialProof": {
+        "testimonials": [
+          {
+            "id": "testimonial-1",
+            "name": "Jennifer Smith",
+            "role": "Aged Care Worker",
+            "company": "Sunrise Aged Care",
+            "content": "This course gave me the confidence and skills I needed to start my career in aged care. The work placement was invaluable!",
+            "rating": 5,
+            "avatar": "/assets/img/testimonials/jennifer-smith.jpg",
+            "courseId": 1
+          }
+        ],
+        "statistics": {
+          "studentsEnrolled": 1250,
+          "completionRate": 87,
+          "jobPlacementRate": 92,
+          "averageRating": 4.8,
+          "yearsRunning": 5
+        }
+      },
+      "seo": {
+        "metaDescription": "Certificate IV in Ageing Support - Comprehensive aged care training with work placement. Start your career in aged care today with InterCare Training.",
+        "keywords": [
+          "aged care",
+          "certificate IV",
+          "healthcare",
+          "support worker",
+          "aged care training",
+          "CHC43015",
+          "aged care course",
+          "healthcare qualification"
+        ],
+        "featured": true,
+        "popular": true
+      },
+      "pricing": {
+        "basePrice": 15,
+        "currency": "AUD",
+        "discounts": [
+          {
+            "type": "early_bird",
+            "percentage": 20,
+            "validUntil": "2024-02-15",
+            "description": "Early bird discount - 20% off if enrolled before Feb 15"
+          }
+        ],
+        "paymentPlans": [
+          {
+            "name": "Monthly",
+            "installments": 6,
+            "amount": 2.50,
+            "total": 15
+          },
+          {
+            "name": "Weekly",
+            "installments": 24,
+            "amount": 0.63,
+            "total": 15
+          }
+        ],
+        "funding": {
+          "governmentFunding": true,
+          "eligibility": "Subject to eligibility criteria",
+          "description": "Government funding may be available for eligible students"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2024-01-15",
+    "totalCourses": 1,
+    "categories": [
+      "Healthcare",
+      "Business",
+      "Technology",
+      "Education"
+    ],
+    "levels": [
+      "Certificate I",
+      "Certificate II", 
+      "Certificate III",
+      "Certificate IV",
+      "Diploma",
+      "Advanced Diploma"
+    ]
+  }
+}

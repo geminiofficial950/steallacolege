@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stella College — Staff Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0d1b4b; --navy2:#122060; --navy3:#1a3a6b;
+  --gold:#c9a84c; --gold2:#e8c96a; --copper:#b87333;
+  --cream:#f9f7f2; --off:#f0ece2; --border:#e2ddd4;
+  --text:#1a1a2e; --muted:#6b6b80; --success:#2d7a4f;
+  --danger:#c0392b; --white:#ffffff; --card:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);position:relative;overflow:hidden}
+#login-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(201,168,76,0.15) 0%,transparent 65%)}
+.login-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:3rem 2.5rem;width:100%;max-width:400px;position:relative;backdrop-filter:blur(10px)}
+.login-star{font-size:2.5rem;color:var(--gold);text-align:center;display:block;margin-bottom:0.75rem}
+.login-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--white);text-align:center;font-weight:600;margin-bottom:0.3rem}
+.login-sub{color:rgba(255,255,255,0.45);font-size:0.85rem;text-align:center;margin-bottom:2rem}
+.login-label{display:block;font-size:0.75rem;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem}
+.login-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:0.85rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s;margin-bottom:1.25rem}
+.login-input:focus{border-color:var(--gold)}
+.login-input::placeholder{color:rgba(255,255,255,0.25)}
+.login-btn{width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:0.9rem;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.2s}
+.login-btn:hover{background:var(--gold2)}
+.login-err{color:#ff7675;font-size:0.82rem;text-align:center;margin-top:0.75rem;display:none}
+
+/* APP */
+#app{display:none;min-height:100vh}
+
+/* NAV */
+nav{background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:62px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(201,168,76,0.15)}
+.nav-brand{display:flex;align-items:center;gap:0.6rem}
+.nav-star{color:var(--gold);font-size:1.3rem}
+.nav-title{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.2rem;font-weight:600;letter-spacing:0.02em}
+.nav-badge{font-size:0.65rem;background:rgba(201,168,76,0.2);color:var(--gold);padding:0.2rem 0.5rem;border-radius:4px;letter-spacing:0.05em;margin-left:0.25rem}
+.nav-right{display:flex;align-items:center;gap:0.5rem}
+.nav-tab{background:none;border:none;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-size:0.85rem;padding:0.45rem 0.9rem;border-radius:6px;cursor:pointer;transition:all 0.2s}
+.nav-tab:hover,.nav-tab.active{background:rgba(201,168,76,0.12);color:var(--gold)}
+.nav-logout{background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);font-family:'DM Sans',sans-serif;font-size:0.78rem;padding:0.35rem 0.8rem;border-radius:6px;cursor:pointer;transition:all 0.2s;margin-left:0.5rem}
+.nav-logout:hover{border-color:rgba(255,255,255,0.35);color:var(--white)}
+
+/* SHEETS STATUS INDICATOR */
+.sheets-status{display:flex;align-items:center;gap:0.4rem;font-size:0.72rem;padding:0.3rem 0.7rem;border-radius:20px;border:1px solid rgba(255,255,255,0.1);margin-right:0.5rem}
+.sheets-status.connected{color:#68d391;border-color:rgba(104,211,145,0.3)}
+.sheets-status.disconnected{color:rgba(255,255,255,0.35);border-color:rgba(255,255,255,0.1)}
+.sheets-dot{width:6px;height:6px;border-radius:50%}
+.sheets-status.connected .sheets-dot{background:#68d391}
+.sheets-status.disconnected .sheets-dot{background:rgba(255,255,255,0.2)}
+
+/* VIEWS */
+.view{display:none;animation:fadeUp 0.3s ease}
+.view.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION */
+.section{max-width:1080px;margin:0 auto;padding:2.5rem 2rem}
+.sec-head{margin-bottom:2rem}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:1.75rem;color:var(--navy);font-weight:600}
+.sec-sub{color:var(--muted);font-size:0.875rem;margin-top:0.25rem}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
+.stat-card.copper::after{background:var(--copper)}
+.stat-card.navy::after{background:var(--navy)}
+.stat-card.success::after{background:var(--success)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--navy);font-weight:600}
+.stat-lbl{font-size:0.78rem;color:var(--muted);margin-top:0.2rem;letter-spacing:0.04em;text-transform:uppercase}
+
+/* FORM */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem}
+.form-card-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--navy);font-weight:600;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border)}
+.fg{display:flex;flex-direction:column;gap:0.35rem;margin-bottom:1.1rem}
+.fg label{font-size:0.75rem;font-weight:500;color:var(--navy);letter-spacing:0.06em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{border:1px solid var(--border);border-radius:8px;padding:0.65rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:0.875rem;color:var(--text);background:var(--cream);outline:none;transition:border-color 0.2s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--navy);background:var(--white)}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+
+/* TYPE CHECKBOXES */
+.cred-type-group{display:flex;gap:0.75rem;margin-bottom:1.1rem}
+.ctype{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:0.9rem 0.75rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.6rem;background:var(--cream)}
+.ctype:hover{border-color:var(--gold)}
+.ctype.checked{border-color:var(--navy);background:var(--navy)}
+.ctype.checked .ctype-label{color:var(--white)}
+.ctype.checked .ctype-icon{background:rgba(201,168,76,0.2);color:var(--gold)}
+.ctype-icon{width:34px;height:34px;border-radius:8px;background:rgba(13,27,75,0.07);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.ctype-label{font-size:0.875rem;font-weight:500;color:var(--text)}
+.ctype-sub{font-size:0.72rem;color:var(--muted);margin-top:0.1rem}
+
+/* UPLOAD ZONES */
+.upload-tmpl-zone{border:2px dashed var(--border);border-radius:12px;padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--card);position:relative}
+.upload-tmpl-zone:hover{border-color:var(--gold);background:rgba(201,168,76,0.04)}
+.upload-tmpl-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:1rem}
+.tmpl-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.tmpl-preview{width:100%;height:120px;overflow:hidden;background:var(--off);display:flex;align-items:center;justify-content:center}
+.tmpl-preview img{width:100%;height:100%;object-fit:cover}
+.tmpl-body{padding:0.75rem}
+.tmpl-name{font-size:0.85rem;font-weight:500;color:var(--text);margin-bottom:0.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tmpl-type-lbl{font-size:0.7rem;color:var(--muted)}
+.tmpl-actions{display:flex;gap:0.4rem;margin-top:0.5rem}
+
+/* BUTTONS */
+.btn-issue{width:100%;background:var(--navy);color:var(--white);border:none;border-radius:10px;padding:0.9rem;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;transition:background 0.2s;margin-top:0.25rem}
+.btn-issue:hover{background:var(--navy3)}
+.btn-sm{font-size:0.76rem;padding:0.35rem 0.7rem;border-radius:6px;border:1px solid var(--border);background:var(--white);color:var(--text);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;white-space:nowrap;display:inline-flex;align-items:center;gap:0.3rem}
+.btn-sm:hover{border-color:var(--navy);color:var(--navy)}
+.btn-sm.gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-sm.gold:hover{background:var(--gold2)}
+.btn-sm.danger{color:var(--danger);border-color:#f5c6c3}
+.btn-sm.danger:hover{background:#fdf0ef}
+.btn-sm.li{background:#0a66c2;color:#fff;border-color:#0a66c2}
+.btn-sm.li:hover{background:#004182}
+.btn-sm.dl{background:#2d7a4f;color:#fff;border-color:#2d7a4f}
+.btn-sm.dl:hover{background:#236040}
+
+/* TABLE */
+.cred-table{width:100%;border-collapse:collapse}
+.cred-table th{font-size:0.72rem;font-weight:500;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;padding:0.6rem 1rem;text-align:left;border-bottom:1px solid var(--border)}
+.cred-table td{padding:0.8rem 1rem;border-bottom:1px solid var(--border);font-size:0.84rem;vertical-align:middle}
+.cred-table tr:last-child td{border-bottom:none}
+.cred-table tr:hover td{background:rgba(201,168,76,0.03)}
+.td-actions{display:flex;gap:0.3rem;flex-wrap:wrap}
+
+/* PILLS */
+.pill{font-size:0.68rem;padding:0.2rem 0.55rem;border-radius:20px;font-weight:500}
+.pill-certificate{background:rgba(201,168,76,0.15);color:#8a6a20}
+.pill-badge{background:rgba(184,115,51,0.15);color:#7a4d1d}
+.pill-both{background:rgba(13,27,75,0.1);color:var(--navy)}
+.pill-id{background:var(--off);color:var(--muted);font-family:monospace;font-size:0.65rem}
+.pill-synced{background:rgba(45,122,79,0.1);color:var(--success);font-size:0.65rem}
+.pill-unsynced{background:rgba(192,57,43,0.08);color:var(--danger);font-size:0.65rem}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{background:var(--white);border-radius:18px;padding:0;max-width:580px;width:90%;max-height:90vh;overflow-y:auto;transform:translateY(10px);transition:transform 0.2s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-head{background:var(--navy);padding:1.5rem 2rem;border-radius:18px 18px 0 0;display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.3rem;font-weight:600}
+.modal-close{background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.3rem;cursor:pointer;padding:0.25rem}
+.modal-close:hover{color:var(--white)}
+.modal-body{padding:2rem}
+
+/* SETTINGS VIEW */
+.settings-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
+.settings-card-title{font-size:0.875rem;font-weight:500;color:var(--navy);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border)}
+.settings-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.settings-input{flex:1;min-width:200px;border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--text);background:var(--cream);outline:none;transition:border-color 0.2s}
+.settings-input:focus{border-color:var(--navy);background:var(--white)}
+.settings-hint{font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.5}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--navy);color:var(--white);padding:0.8rem 1.4rem;border-radius:10px;font-size:0.85rem;z-index:9999;transform:translateY(80px);opacity:0;transition:all 0.3s;border-left:3px solid var(--gold);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.error{border-left-color:var(--danger)}
+.toast.success-t{border-left-color:var(--success)}
+
+/* EMPTY */
+.empty{text-align:center;padding:3rem;color:var(--muted)}
+.empty-ico{font-size:2.2rem;opacity:0.35;margin-bottom:0.75rem}
+
+/* HIDDEN CANVAS for download */
+#dl-canvas{display:none}
+
+@media(max-width:700px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .two-col{grid-template-columns:1fr}
+  .fg-row{grid-template-columns:1fr}
+  nav{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <span class="login-star">★</span>
+    <div class="login-title">Stella College</div>
+    <div class="login-sub">Staff Portal — restricted access</div>
+    <label class="login-label">Username</label>
+    <input class="login-input" type="text" id="lu" placeholder="staff username" autocomplete="username">
+    <label class="login-label">Password</label>
+    <input class="login-input" type="password" id="lp" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Sign in</button>
+    <div class="login-err" id="lerr">Incorrect username or password</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav>
+    <div class="nav-brand">
+      <span class="nav-star">★</span>
+      <span class="nav-title"><a class="brand d-flex align-items-center" href="/">
+  
+    <img
+      src="/assets/img/logo/23.png"
+      width="150"
+      height="60"
+      alt="Stella College logo"
+      class="img-fluid"
+    />
+  </a></span>
+      <span class="nav-badge">STAFF</span>
+    </div>
+    <div class="nav-right">
+      <div class="sheets-status disconnected" id="sheets-indicator">
+        <div class="sheets-dot"></div>
+        <span id="sheets-status-text">Sheets not configured</span>
+      </div>
+      <button class="nav-tab active" onclick="showView('dashboard')">Dashboard</button>
+      <button class="nav-tab" onclick="showView('issue')">Issue</button>
+      <button class="nav-tab" onclick="showView('all')">Records</button>
+      <button class="nav-tab" onclick="showView('templates')">Templates</button>
+      <button class="nav-tab" onclick="showView('settings')">Settings</button>
+      <button class="nav-logout" onclick="doLogout()">Sign out</button>
+    </div>
+  </nav>
+
+  <!-- DASHBOARD -->
+  <div class="view active" id="view-dashboard">
+    <div class="section">
+      <div class="sec-head">
+        <div class="sec-title">Dashboard</div>
+        <div class="sec-sub">Overview of all issued credentials</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="s-total">0</div><div class="stat-lbl">Total issued</div></div>
+        <div class="stat-card copper"><div class="stat-num" id="s-cert">0</div><div class="stat-lbl">Certificates</div></div>
+        <div class="stat-card navy"><div class="stat-num" id="s-badge">0</div><div class="stat-lbl">Badges</div></div>
+        <div class="stat-card success"><div class="stat-num" id="s-course">0</div><div class="stat-lbl">Unique courses</div></div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">Recent credentials</div>
+        <table class="cred-table">
+          <thead><tr><th>Recipient</th><th>Course</th><th>Type</th><th>Issued</th><th>Sheets</th><th>Actions</th></tr></thead>
+          <tbody id="dash-tbody"></tbody>
+        </table>
+        <div class="empty" id="dash-empty" style="display:none">
+          <div class="empty-ico">📋</div>
+          No credentials yet — <a href="#" onclick="showView('issue')" style="color:var(--navy)">issue one now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISSUE -->
+  <div class="view" id="view-issue">
+    <div class="section">
+      <div class="sec-head">
+        <div class="sec-title">Issue credential</div>
+        <div class="sec-sub">Select certificate and/or badge — both can be issued at the same time</div>
+      </div>
+      <div class="two-col">
+        <div class="form-card">
+          <div class="form-card-title">Recipient details</div>
+          <div class="fg"><label>Issue type — select one or both</label></div>
+          <div class="cred-type-group">
+            <div class="ctype checked" id="chk-cert" onclick="toggleType('cert')">
+              <div class="ctype-icon">📜</div>
+              <div><div class="ctype-label">Certificate</div><div class="ctype-sub">Formal credential</div></div>
+            </div>
+            <div class="ctype" id="chk-badge" onclick="toggleType('badge')">
+              <div class="ctype-icon">🏅</div>
+              <div><div class="ctype-label">Badge</div><div class="ctype-sub">Digital badge</div></div>
+            </div>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label>First name *</label><input type="text" id="f-first" placeholder="Sarah"></div>
+            <div class="fg"><label>Last name *</label><input type="text" id="f-last" placeholder="Johnson"></div>
+          </div>
+          <div class="fg"><label>Email address *</label><input type="email" id="f-email" placeholder="sarah@email.com"></div>
+          <div class="fg"><label>Course / skill name *</label><input type="text" id="f-course" placeholder="e.g. Mental Health Professional Development"></div>
+          <div class="fg-row">
+            <div class="fg"><label>Issue date *</label><input type="date" id="f-date"></div>
+            <div class="fg"><label>Expiry date (optional)</label><input type="date" id="f-expiry"></div>
+          </div>
+          <div class="fg"><label>Description (optional)</label><textarea id="f-desc" rows="2" placeholder="What skills or competencies does this recognise?"></textarea></div>
+          <div id="cert-tmpl-sel" class="fg">
+            <label>Certificate template</label>
+            <select id="f-cert-tmpl"><option value="">— default (no template) —</option></select>
+          </div>
+          <div id="badge-tmpl-sel" class="fg" style="display:none">
+            <label>Badge template</label>
+            <select id="f-badge-tmpl"><option value="">— default (no template) —</option></select>
+          </div>
+          <button class="btn-issue" onclick="issueCredential()">✦ Issue &amp; Generate Credential</button>
+        </div>
+        <div>
+          <div class="form-card" id="preview-card">
+            <div class="form-card-title">Live preview</div>
+            <div id="preview-body" style="text-align:center;padding:1rem 0;color:var(--muted);font-size:0.875rem">Fill in the form to see a preview</div>
+          </div>
+          <div class="form-card" style="margin-top:1rem">
+            <div class="form-card-title">Workflow</div>
+            <div style="font-size:0.82rem;color:var(--muted);line-height:2">
+              ① Unique credential ID generated<br>
+              ② Row saved to Google Sheets automatically<br>
+              ③ Share the link with the student<br>
+              ④ Student clicks "Add to LinkedIn"<br>
+              ⑤ Download certificate/badge if needed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL RECORDS -->
+  <div class="view" id="view-all">
+    <div class="section">
+      <div class="sec-head" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div>
+          <div class="sec-title">All records</div>
+          <div class="sec-sub">Full credential registry</div>
+        </div>
+        <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap">
+          <input type="text" id="search-input" placeholder="Search name, email or course…" style="border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.85rem;font-family:'DM Sans',sans-serif;font-size:0.84rem;background:var(--white);outline:none;width:240px" oninput="renderAll()">
+          <select id="filter-type" style="border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;font-family:'DM Sans',sans-serif;font-size:0.84rem;background:var(--white);outline:none" onchange="renderAll()">
+            <option value="">All types</option>
+            <option value="certificate">Certificate</option>
+            <option value="badge">Badge</option>
+            <option value="both">Both</option>
+          </select>
+          <button class="btn-sm gold" onclick="retrySyncAll()">↻ Sync all to Sheets</button>
+        </div>
+      </div>
+      <div class="form-card" style="padding:0;overflow:hidden">
+        <table class="cred-table">
+          <thead><tr><th>Recipient</th><th>Email</th><th>Course</th><th>Type</th><th>Issued</th><th>Expiry</th><th>ID</th><th>Sheets</th><th>Actions</th></tr></thead>
+          <tbody id="all-tbody"></tbody>
+        </table>
+        <div class="empty" id="all-empty" style="display:none">
+          <div class="empty-ico">📋</div>No records found
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEMPLATES -->
+  <div class="view" id="view-templates">
+    <div class="section">
+      <div class="sec-head">
+        <div class="sec-title">Credential templates</div>
+        <div class="sec-sub">Upload your branded certificate and badge designs</div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="form-card-title" style="margin-bottom:1rem">📜 Certificate templates</div>
+          <div class="tmpl-grid" id="cert-tmpls"></div>
+          <div class="upload-tmpl-zone">
+            <input type="file" accept="image/png,image/jpeg,image/jpg" onchange="uploadTemplate(this,'certificate')">
+            <div style="font-size:1.8rem;margin-bottom:0.4rem">＋</div>
+            <div style="font-size:0.85rem;font-weight:500;color:var(--navy)">Upload certificate template</div>
+            <div style="font-size:0.78rem;color:var(--muted);margin-top:0.25rem">PNG or JPG — A4 landscape recommended</div>
+          </div>
+        </div>
+        <div>
+          <div class="form-card-title" style="margin-bottom:1rem">🏅 Badge templates</div>
+          <div class="tmpl-grid" id="badge-tmpls"></div>
+          <div class="upload-tmpl-zone">
+            <input type="file" accept="image/png,image/jpeg,image/jpg,image/svg+xml" onchange="uploadTemplate(this,'badge')">
+            <div style="font-size:1.8rem;margin-bottom:0.4rem">＋</div>
+            <div style="font-size:0.85rem;font-weight:500;color:var(--navy)">Upload badge template</div>
+            <div style="font-size:0.78rem;color:var(--muted);margin-top:0.25rem">PNG or JPG — square format recommended</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="view" id="view-settings">
+    <div class="section">
+      <div class="sec-head">
+        <div class="sec-title">Settings</div>
+        <div class="sec-sub">Configure Google Sheets integration and portal options</div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Google Sheets Integration</div>
+        <div class="fg"><label>Apps Script Web App URL</label>
+          <div class="settings-row">
+            <input class="settings-input" type="text" id="sheets-url" placeholder="https://script.google.com/macros/s/YOUR_ID/exec">
+            <button class="btn-sm gold" onclick="saveSettings()">Save</button>
+            <button class="btn-sm" onclick="testSheets()">Test connection</button>
+          </div>
+          <div class="settings-hint">
+            Paste your Google Apps Script deployment URL here. Every time a credential is issued, a row is automatically added to your Google Sheet.<br>
+            See the <strong>Developer Setup Guide</strong> for step-by-step instructions on creating this URL.
+          </div>
+        </div>
+        <div id="sheets-test-result" style="display:none;margin-top:0.75rem;padding:0.75rem;border-radius:8px;font-size:0.82rem"></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Staff accounts</div>
+        <div style="font-size:0.85rem;color:var(--muted);line-height:1.8">
+          Current accounts are set in the HTML source file. Ask your developer to update the <code style="background:var(--off);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.8rem">USERS</code> object near the top of <code style="background:var(--off);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.8rem">stella-staff.html</code>.<br>
+          Current accounts: <strong>stella.admin</strong> and <strong>staff</strong>
+        </div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Verify page URL</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-bottom:0.5rem">This is the public URL students and employers use to verify credentials:</div>
+        <div style="font-family:monospace;font-size:0.82rem;background:var(--off);padding:0.6rem 1rem;border-radius:8px;color:var(--navy);word-break:break-all" id="verify-url-display">—</div>
+        <button class="btn-sm" style="margin-top:0.6rem" onclick="copyVerifyUrl()">📋 Copy URL</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<!-- ISSUED MODAL -->
+<div class="modal-overlay" id="issued-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">✦ Credential issued!</div>
+      <button class="modal-close" onclick="closeModal('issued-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- DOWNLOAD MODAL -->
+<div class="modal-overlay" id="dl-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">⬇ Download credential</div>
+      <button class="modal-close" onclick="closeModal('dl-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="dl-modal-body"></div>
+  </div>
+</div>
+
+<!-- Hidden canvas for image generation -->
+<canvas id="dl-canvas" style="display:none"></canvas>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── AUTH ──
+const USERS = { 'stella.admin': 'StC0ll3g3!', 'staff': 'stella2024' };
+
+function doLogin() {
+  const u = document.getElementById('lu').value.trim();
+  const p = document.getElementById('lp').value;
+  if (USERS[u] === p) {
+    sessionStorage.setItem('sc_auth', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    init();
+  } else {
+    document.getElementById('lerr').style.display = 'block';
+    document.getElementById('lp').value = '';
+  }
+}
+function doLogout() { sessionStorage.removeItem('sc_auth'); location.reload(); }
+if (sessionStorage.getItem('sc_auth') === '1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
+
+// ── STATE ──
+let creds = JSON.parse(localStorage.getItem('sc_creds') || '[]');
+let tmpls = JSON.parse(localStorage.getItem('sc_tmpls') || '[]');
+let settings = JSON.parse(localStorage.getItem('sc_settings') || '{}');
+let issueTypes = { cert: true, badge: false };
+
+function saveCreds() { localStorage.setItem('sc_creds', JSON.stringify(creds)); }
+function saveTmpls() { localStorage.setItem('sc_tmpls', JSON.stringify(tmpls)); }
+function saveSettings() {
+  settings.sheetsUrl = document.getElementById('sheets-url').value.trim();
+  localStorage.setItem('sc_settings', JSON.stringify(settings));
+  updateSheetsIndicator();
+  showToast('Settings saved', 'success-t');
+}
+
+// ── INIT ──
+function init() {
+  document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('sheets-url').value = settings.sheetsUrl || '';
+  document.getElementById('verify-url-display').textContent =
+    window.location.href.replace('stella-staff.html', 'stella-verify.html');
+  updateSheetsIndicator();
+  updateStats();
+  renderDash();
+  renderTemplateSelects();
+  renderTmplCards();
+  ['f-first', 'f-last', 'f-course', 'f-date', 'f-cert-tmpl', 'f-badge-tmpl'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.addEventListener('input', updatePreview); el.addEventListener('change', updatePreview); }
+  });
+}
+
+// ── SHEETS INDICATOR ──
+function updateSheetsIndicator() {
+  const ind = document.getElementById('sheets-indicator');
+  const txt = document.getElementById('sheets-status-text');
+  if (settings.sheetsUrl) {
+    ind.className = 'sheets-status connected';
+    txt.textContent = 'Sheets connected';
+  } else {
+    ind.className = 'sheets-status disconnected';
+    txt.textContent = 'Sheets not configured';
+  }
+}
+
+// ── VIEWS ──
+function showView(v) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + v).classList.add('active');
+  const tabs = { dashboard: 0, issue: 1, all: 2, templates: 3, settings: 4 };
+  document.querySelectorAll('.nav-tab')[tabs[v]]?.classList.add('active');
+  if (v === 'all') renderAll();
+  if (v === 'dashboard') { updateStats(); renderDash(); }
+  if (v === 'templates') renderTmplCards();
+  window.scrollTo(0, 0);
+}
+
+// ── TYPE TOGGLE ──
+function toggleType(t) {
+  issueTypes[t] = !issueTypes[t];
+  if (!issueTypes.cert && !issueTypes.badge) issueTypes[t] = true;
+  document.getElementById('chk-cert').classList.toggle('checked', issueTypes.cert);
+  document.getElementById('chk-badge').classList.toggle('checked', issueTypes.badge);
+  document.getElementById('cert-tmpl-sel').style.display = issueTypes.cert ? '' : 'none';
+  document.getElementById('badge-tmpl-sel').style.display = issueTypes.badge ? '' : 'none';
+  updatePreview();
+}
+
+// ── LIVE PREVIEW ──
+function updatePreview() {
+  const first = document.getElementById('f-first').value || 'Recipient';
+  const last = document.getElementById('f-last').value || 'Name';
+  const course = document.getElementById('f-course').value || 'Course Name';
+  const date = document.getElementById('f-date').value;
+  const certTmpl = document.getElementById('f-cert-tmpl').value;
+  const badgeTmpl = document.getElementById('f-badge-tmpl').value;
+  let html = '';
+  if (issueTypes.cert) {
+    const t = tmpls.find(x => x.id === certTmpl);
+    html += `<div style="margin-bottom:1rem">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.4rem">Certificate</div>
+      ${t
+        ? `<div style="position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+             <img src="${t.data}" style="width:100%;display:block">
+             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.25rem;pointer-events:none">
+               <div style="font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1rem;font-weight:600;text-shadow:0 1px 3px rgba(255,255,255,0.9)">${esc(first)} ${esc(last)}</div>
+               <div style="font-size:0.65rem;color:var(--navy);opacity:0.8;text-shadow:0 1px 2px rgba(255,255,255,0.9)">${esc(course)}</div>
+             </div>
+           </div>`
+        : `<div style="background:linear-gradient(135deg,var(--navy),var(--navy3));border-radius:10px;padding:1.5rem;text-align:center">
+             <div style="color:var(--gold);font-size:0.6rem;letter-spacing:0.15em;margin-bottom:0.4rem">★ STELLA COLLEGE ★</div>
+             <div style="font-family:'Cormorant Garamond',serif;color:white;font-size:0.65rem;margin-bottom:0.25rem;opacity:0.8">Certificate of Completion</div>
+             <div style="font-family:'Cormorant Garamond',serif;color:white;font-size:1rem;font-weight:600">${esc(first)} ${esc(last)}</div>
+             <div style="color:rgba(255,255,255,0.6);font-size:0.6rem;margin-top:0.25rem">${esc(course)}</div>
+             <div style="color:var(--gold);font-size:0.55rem;margin-top:0.4rem">${date ? fmt(date) : ''}</div>
+           </div>`}
+    </div>`;
+  }
+  if (issueTypes.badge) {
+    const t = tmpls.find(x => x.id === badgeTmpl);
+    html += `<div>
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.4rem">Badge</div>
+      ${t
+        ? `<div style="position:relative;display:inline-block">
+             <img src="${t.data}" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)">
+           </div>`
+        : `<div style="display:flex;justify-content:center"><div style="width:90px;height:90px;border-radius:50%;background:var(--navy);border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.15rem">
+             <span style="color:var(--gold);font-size:1.1rem">★</span>
+             <span style="color:white;font-size:0.42rem;text-align:center;padding:0 6px;line-height:1.3">${esc(course.slice(0, 22))}</span>
+           </div></div>`}
+    </div>`;
+  }
+  document.getElementById('preview-body').innerHTML = html || '<div style="color:var(--muted);font-size:0.875rem">Select a type above</div>';
+}
+
+// ── ISSUE CREDENTIAL ──
+function issueCredential() {
+  const first = document.getElementById('f-first').value.trim();
+  const last = document.getElementById('f-last').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const course = document.getElementById('f-course').value.trim();
+  const date = document.getElementById('f-date').value;
+  const expiry = document.getElementById('f-expiry').value;
+  const desc = document.getElementById('f-desc').value.trim();
+  const certTmpl = document.getElementById('f-cert-tmpl').value;
+  const badgeTmpl = document.getElementById('f-badge-tmpl').value;
+
+  // Validation
+  if (!first || !last || !email || !course || !date) {
+    showToast('Please fill in all required fields (*)', 'error'); return;
+  }
+  if (!email.includes('@')) { showToast('Please enter a valid email address', 'error'); return; }
+  if (!issueTypes.cert && !issueTypes.badge) { showToast('Please select at least one credential type', 'error'); return; }
+
+  const types = [];
+  if (issueTypes.cert) types.push('certificate');
+  if (issueTypes.badge) types.push('badge');
+
+  const id = 'SC-' + date.slice(2, 4) + date.slice(5, 7) + date.slice(8, 10) + '-' +
+    Math.random().toString(36).slice(2, 8).toUpperCase();
+
+  const cred = {
+    id, types,
+    name: first + ' ' + last, first, last, email,
+    course, date, expiry, desc,
+    certTmpl, badgeTmpl,
+    issued: new Date().toISOString(),
+    synced: false
+  };
+
+  creds.unshift(cred);
+  saveCreds();
+  updateStats();
+  renderDash();
+
+  // Send to Google Sheets (non-blocking)
+  syncToSheets(cred);
+
+  // Show modal
+  showIssuedModal(cred);
+
+  // Reset form
+  ['f-first', 'f-last', 'f-email', 'f-course', 'f-expiry', 'f-desc'].forEach(fid => {
+    document.getElementById(fid).value = '';
+  });
+  document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('f-cert-tmpl').value = '';
+  document.getElementById('f-badge-tmpl').value = '';
+  updatePreview();
+}
+
+// ── GOOGLE SHEETS SYNC ──
+async function syncToSheets(cred) {
+  if (!settings.sheetsUrl) return;
+  try {
+    const verifyUrl = window.location.href.replace('stella-staff.html', 'stella-verify.html') + '?id=' + cred.id;
+    const payload = {
+      id: cred.id,
+      name: cred.name,
+      first: cred.first,
+      last: cred.last,
+      email: cred.email,
+      course: cred.course,
+      types: cred.types.join(', '),
+      issued: cred.date,
+      expiry: cred.expiry || '',
+      description: cred.desc || '',
+      verifyUrl: verifyUrl,
+      issuedAt: cred.issued
+    };
+    const res = await fetch(settings.sheetsUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // Mark synced (no-cors always returns opaque response, so we assume success)
+    const idx = creds.findIndex(c => c.id === cred.id);
+    if (idx !== -1) { creds[idx].synced = true; saveCreds(); renderDash(); }
+    showToast('✓ Saved to Google Sheets', 'success-t');
+  } catch (err) {
+    showToast('Sheets sync failed — saved locally only', 'error');
+    console.error('Sheets sync error:', err);
+  }
+}
+
+async function retrySyncAll() {
+  if (!settings.sheetsUrl) { showToast('Configure Sheets URL in Settings first', 'error'); return; }
+  const unsynced = creds.filter(c => !c.synced);
+  if (!unsynced.length) { showToast('All records already synced'); return; }
+  showToast('Syncing ' + unsynced.length + ' records...');
+  for (const c of unsynced) { await syncToSheets(c); }
+}
+
+async function testSheets() {
+  const url = document.getElementById('sheets-url').value.trim();
+  const resultEl = document.getElementById('sheets-test-result');
+  if (!url) { showToast('Enter a URL first', 'error'); return; }
+  resultEl.style.display = 'block';
+  resultEl.style.background = '#f0f4ff';
+  resultEl.style.color = '#555';
+  resultEl.textContent = 'Testing connection…';
+  try {
+    await fetch(url, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ test: true, source: 'stella-portal' })
+    });
+    resultEl.style.background = 'rgba(45,122,79,0.08)';
+    resultEl.style.color = '#2d7a4f';
+    resultEl.textContent = '✓ Connection successful — Google Sheets is reachable';
+  } catch (e) {
+    resultEl.style.background = 'rgba(192,57,43,0.06)';
+    resultEl.style.color = '#c0392b';
+    resultEl.textContent = '✗ Connection failed — check the URL and try again';
+  }
+}
+
+// ── ISSUED MODAL ──
+function showIssuedModal(c) {
+  const link = window.location.href.replace('stella-staff.html', 'stella-verify.html') + '?id=' + c.id;
+  const typeIcons = c.types.includes('certificate') && c.types.includes('badge') ? '📜🏅'
+    : c.types.includes('certificate') ? '📜' : '🏅';
+  document.getElementById('modal-body').innerHTML = `
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">${typeIcons}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--navy);font-weight:600">${esc(c.name)}</div>
+      <div style="color:var(--muted);font-size:0.875rem;margin-top:0.25rem">${esc(c.course)}</div>
+      <div style="margin-top:0.5rem">${c.types.map(t => `<span class="pill pill-${t}" style="margin-right:0.3rem">${t}</span>`).join('')}</div>
+    </div>
+    <div style="background:var(--off);border-radius:10px;padding:1rem;margin-bottom:0.75rem">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.4rem">Credential ID</div>
+      <div style="font-family:monospace;font-size:1rem;color:var(--navy);font-weight:500">${c.id}</div>
+    </div>
+    <div style="background:var(--off);border-radius:10px;padding:1rem;margin-bottom:1.25rem">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.4rem">Shareable link — send to student</div>
+      <div style="font-size:0.78rem;color:var(--navy);word-break:break-all">${link}</div>
+    </div>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+      <button class="btn-sm gold" onclick="copyText('${link}')">📋 Copy link</button>
+      <button class="btn-sm li" onclick="shareLinkedIn(creds.find(x=>x.id==='${c.id}'))">in LinkedIn</button>
+      <button class="btn-sm dl" onclick="closeModal('issued-modal');openDownloadModal('${c.id}')">⬇ Download</button>
+      <button class="btn-sm" onclick="closeModal('issued-modal')">Done</button>
+    </div>`;
+  document.getElementById('issued-modal').classList.add('open');
+}
+
+// ── DOWNLOAD MODAL ──
+function openDownloadModal(id) {
+  const c = creds.find(x => x.id === id);
+  if (!c) return;
+  const hasCert = c.types.includes('certificate');
+  const hasBadge = c.types.includes('badge');
+  document.getElementById('dl-modal-body').innerHTML = `
+    <div style="margin-bottom:1.25rem">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--navy);font-weight:600;margin-bottom:0.25rem">${esc(c.name)}</div>
+      <div style="color:var(--muted);font-size:0.85rem">${esc(c.course)}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem">
+      ${hasCert ? `
+      <div style="background:var(--off);border-radius:10px;padding:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem">
+        <div>
+          <div style="font-size:0.875rem;font-weight:500;color:var(--text)">📜 Certificate</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:0.15rem">PNG image — A4 landscape</div>
+        </div>
+        <button class="btn-sm dl" onclick="downloadCredential('${id}','certificate')">⬇ Download PNG</button>
+      </div>` : ''}
+      ${hasBadge ? `
+      <div style="background:var(--off);border-radius:10px;padding:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem">
+        <div>
+          <div style="font-size:0.875rem;font-weight:500;color:var(--text)">🏅 Badge</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:0.15rem">PNG image — square format</div>
+        </div>
+        <button class="btn-sm dl" onclick="downloadCredential('${id}','badge')">⬇ Download PNG</button>
+      </div>` : ''}
+    </div>
+    <div style="margin-top:1rem;font-size:0.78rem;color:var(--muted);line-height:1.6;background:var(--off);padding:0.75rem 1rem;border-radius:8px">
+      💡 If you uploaded a custom template, it will appear in the download. Otherwise the default Stella College design is used.
+    </div>`;
+  document.getElementById('dl-modal').classList.add('open');
+}
+
+// ── DOWNLOAD CERTIFICATE / BADGE AS PNG ──
+function downloadCredential(id, type) {
+  const c = creds.find(x => x.id === id);
+  if (!c) return;
+
+  const canvas = document.getElementById('dl-canvas');
+
+  if (type === 'certificate') {
+    // A4 landscape at 150dpi ≈ 1754 x 1240
+    const W = 1754, H = 1240;
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    const tmpl = tmpls.find(t => t.id === c.certTmpl);
+
+    const render = () => {
+      // Background
+      ctx.fillStyle = '#f9f7f2';
+      ctx.fillRect(0, 0, W, H);
+
+      // Side bars
+      ctx.fillStyle = '#0d1b4b';
+      ctx.fillRect(0, 0, 28, H);
+      ctx.fillRect(W - 28, 0, 28, H);
+
+      // Header band
+      const grd = ctx.createLinearGradient(28, 0, W - 28, H * 0.2);
+      grd.addColorStop(0, '#0d1b4b');
+      grd.addColorStop(0.6, '#122060');
+      grd.addColorStop(1, '#1a3a6b');
+      ctx.fillStyle = grd;
+      ctx.fillRect(28, 0, W - 56, H * 0.2);
+
+      // Gold line under header
+      ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(28, H * 0.2); ctx.lineTo(W - 28, H * 0.2); ctx.stroke();
+
+      // College name in header
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 52px Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('STELLA COLLEGE', W / 2, H * 0.11);
+
+      ctx.fillStyle = '#c9a84c';
+      ctx.font = '20px Arial, sans-serif';
+      ctx.fillText('PROFESSIONAL DEVELOPMENT & EDUCATION', W / 2, H * 0.155);
+
+      // Outer border
+      ctx.strokeStyle = '#0d1b4b'; ctx.lineWidth = 3;
+      ctx.strokeRect(42, 18, W - 84, H - 36);
+
+      // Inner gold border
+      ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 1;
+      ctx.strokeRect(54, 28, W - 108, H - 56);
+
+      // "This is to certify that"
+      ctx.fillStyle = '#888888';
+      ctx.font = 'italic 22px Georgia, serif';
+      ctx.fillText('This is to certify that', W / 2, H * 0.33);
+
+      // RECIPIENT NAME — large
+      ctx.fillStyle = '#0d1b4b';
+      ctx.font = 'bold 72px Georgia, serif';
+      ctx.fillText(c.name, W / 2, H * 0.46);
+
+      // Decorative line
+      ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(W / 2 - 200, H * 0.51); ctx.lineTo(W / 2 + 200, H * 0.51); ctx.stroke();
+
+      // "has successfully completed"
+      ctx.fillStyle = '#888888';
+      ctx.font = '18px Arial, sans-serif';
+      ctx.letterSpacing = '3px';
+      ctx.fillText('HAS SUCCESSFULLY COMPLETED', W / 2, H * 0.57);
+
+      // COURSE NAME
+      ctx.fillStyle = '#122060';
+      ctx.font = 'bold 38px Georgia, serif';
+      // Word-wrap course name if long
+      const maxWidth = W - 200;
+      const words = c.course.split(' ');
+      let line = '', lines = [];
+      for (const word of words) {
+        const test = line + (line ? ' ' : '') + word;
+        if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line = word; }
+        else line = test;
+      }
+      lines.push(line);
+      lines.forEach((l, i) => ctx.fillText(l, W / 2, H * 0.65 + i * 44));
+
+      // Divider diamond
+      ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(W / 2 - 180, H * 0.75); ctx.lineTo(W / 2 + 180, H * 0.75); ctx.stroke();
+      ctx.fillStyle = '#c9a84c';
+      ctx.beginPath(); ctx.moveTo(W / 2, H * 0.75 - 7); ctx.lineTo(W / 2 + 7, H * 0.75); ctx.lineTo(W / 2, H * 0.75 + 7); ctx.lineTo(W / 2 - 7, H * 0.75); ctx.closePath(); ctx.fill();
+
+      // ISSUE DATE
+      ctx.fillStyle = '#888888';
+      ctx.font = '20px Arial, sans-serif';
+      ctx.fillText('ISSUED: ' + fmt(c.date), W / 2, H * 0.8);
+
+      // Footer band
+      ctx.fillStyle = '#f0ece2';
+      ctx.fillRect(28, H * 0.87, W - 56, H * 0.13);
+      ctx.strokeStyle = '#0d1b4b'; ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.moveTo(28, H * 0.87); ctx.lineTo(W - 28, H * 0.87); ctx.stroke();
+
+      // Signature line
+      ctx.strokeStyle = '#0d1b4b'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(W / 2 - 120, H * 0.93); ctx.lineTo(W / 2 + 120, H * 0.93); ctx.stroke();
+      ctx.fillStyle = '#aaaaaa'; ctx.font = '14px Arial, sans-serif';
+      ctx.fillText('AUTHORISED SIGNATURE', W / 2, H * 0.95);
+
+      // ID
+      ctx.textAlign = 'left'; ctx.fillStyle = '#aaaaaa'; ctx.font = '14px monospace';
+      ctx.fillText('ID: ' + c.id, 60, H * 0.95);
+
+      // Date footer
+      ctx.textAlign = 'right';
+      ctx.fillText(fmt(c.date), W - 60, H * 0.95);
+      ctx.textAlign = 'center';
+
+      triggerDownload(canvas, c.name.replace(/\s+/, '-') + '-certificate.png');
+    };
+
+    if (tmpl) {
+      // Overlay template image first, then text on top
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, W, H);
+        // Overlay name, course, date on template
+        ctx.fillStyle = '#0d1b4b';
+        ctx.font = 'bold 72px Georgia, serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(c.name, W / 2, H * 0.46);
+        ctx.font = 'bold 38px Georgia, serif';
+        ctx.fillText(c.course, W / 2, H * 0.65);
+        ctx.fillStyle = '#888888';
+        ctx.font = '20px Arial, sans-serif';
+        ctx.fillText('ISSUED: ' + fmt(c.date), W / 2, H * 0.8);
+        triggerDownload(canvas, c.name.replace(/\s+/, '-') + '-certificate.png');
+      };
+      img.onerror = render; // fallback to default if image fails
+      img.src = tmpl.data;
+    } else {
+      render();
+    }
+
+  } else if (type === 'badge') {
+    const S = 600;
+    canvas.width = S; canvas.height = S;
+    const ctx = canvas.getContext('2d');
+    const tmpl = tmpls.find(t => t.id === c.badgeTmpl);
+
+    const renderBadge = () => {
+      // Circular clip
+      ctx.beginPath(); ctx.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2); ctx.clip();
+
+      // Background
+      const grd = ctx.createLinearGradient(0, 0, S, S);
+      grd.addColorStop(0, '#0d1b4b'); grd.addColorStop(1, '#1a3a6b');
+      ctx.fillStyle = grd; ctx.fillRect(0, 0, S, S);
+
+      // Gold ring
+      ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 18;
+      ctx.beginPath(); ctx.arc(S / 2, S / 2, S / 2 - 12, 0, Math.PI * 2); ctx.stroke();
+
+      // Inner ring
+      ctx.strokeStyle = 'rgba(201,168,76,0.3)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(S / 2, S / 2, S / 2 - 36, 0, Math.PI * 2); ctx.stroke();
+
+      // Star
+      ctx.fillStyle = '#c9a84c';
+      drawStar(ctx, S / 2, S * 0.28, 5, 38, 16);
+
+      // College name
+      ctx.fillStyle = '#c9a84c';
+      ctx.font = 'bold 28px Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('STELLA COLLEGE', S / 2, S * 0.47);
+
+      // Course name (wrap)
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px Georgia, serif';
+      const words = c.course.split(' ');
+      let line = '', blines = [];
+      for (const w of words) {
+        const test = line + (line ? ' ' : '') + w;
+        if (ctx.measureText(test).width > S - 120 && line) { blines.push(line); line = w; }
+        else line = test;
+      }
+      blines.push(line);
+      blines.slice(0, 3).forEach((l, i) => ctx.fillText(l, S / 2, S * 0.57 + i * 30));
+
+      // Date
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      ctx.font = '18px Arial, sans-serif';
+      ctx.fillText(fmt(c.date), S / 2, S * 0.82);
+
+      triggerDownload(canvas, c.name.replace(/\s+/, '-') + '-badge.png');
+    };
+
+    if (tmpl) {
+      const img = new Image();
+      img.onload = () => {
+        ctx.beginPath(); ctx.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2); ctx.clip();
+        ctx.drawImage(img, 0, 0, S, S);
+        triggerDownload(canvas, c.name.replace(/\s+/, '-') + '-badge.png');
+      };
+      img.onerror = renderBadge;
+      img.src = tmpl.data;
+    } else {
+      renderBadge();
+    }
+  }
+}
+
+function drawStar(ctx, cx, cy, spikes, outerR, innerR) {
+  let rot = (Math.PI / 2) * 3, step = Math.PI / spikes;
+  ctx.beginPath(); ctx.moveTo(cx, cy - outerR);
+  for (let i = 0; i < spikes; i++) {
+    ctx.lineTo(cx + Math.cos(rot) * outerR, cy + Math.sin(rot) * outerR); rot += step;
+    ctx.lineTo(cx + Math.cos(rot) * innerR, cy + Math.sin(rot) * innerR); rot += step;
+  }
+  ctx.lineTo(cx, cy - outerR); ctx.closePath(); ctx.fill();
+}
+
+function triggerDownload(canvas, filename) {
+  const a = document.createElement('a');
+  a.download = filename;
+  a.href = canvas.toDataURL('image/png', 1.0);
+  a.click();
+  showToast('⬇ Downloading ' + filename, 'success-t');
+}
+
+// ── LINKEDIN SHARE ──
+function shareLinkedIn(c) {
+  if (!c) return;
+  const verifyUrl = encodeURIComponent(window.location.href.replace('stella-staff.html', 'stella-verify.html') + '?id=' + c.id);
+  const li = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(c.course)}&organizationName=${encodeURIComponent('Stella College')}&issueYear=${c.date.slice(0, 4)}&issueMonth=${parseInt(c.date.slice(5, 7))}&certUrl=${verifyUrl}&certId=${encodeURIComponent(c.id)}${c.expiry ? `&expirationYear=${c.expiry.slice(0, 4)}&expirationMonth=${parseInt(c.expiry.slice(5, 7))}` : ''}`;
+  window.open(li, '_blank');
+}
+
+// ── STATS ──
+function updateStats() {
+  document.getElementById('s-total').textContent = creds.length;
+  document.getElementById('s-cert').textContent = creds.filter(c => c.types?.includes('certificate')).length;
+  document.getElementById('s-badge').textContent = creds.filter(c => c.types?.includes('badge')).length;
+  document.getElementById('s-course').textContent = [...new Set(creds.map(c => c.course))].length;
+}
+
+// ── RENDER DASHBOARD ──
+function renderDash() {
+  const tbody = document.getElementById('dash-tbody');
+  const empty = document.getElementById('dash-empty');
+  const recent = creds.slice(0, 8);
+  if (!recent.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = recent.map(c => `
+    <tr>
+      <td><strong>${esc(c.name)}</strong></td>
+      <td>${esc(c.course)}</td>
+      <td>${typePillsHtml(c)}</td>
+      <td style="color:var(--muted);font-size:0.8rem">${fmt(c.date)}</td>
+      <td>${c.synced ? '<span class="pill pill-synced">✓ synced</span>' : '<span class="pill pill-unsynced">pending</span>'}</td>
+      <td><div class="td-actions">
+        <button class="btn-sm dl" onclick="openDownloadModal('${c.id}')">⬇</button>
+        <button class="btn-sm li" onclick="shareLinkedIn(creds.find(x=>x.id==='${c.id}'))">in</button>
+        <button class="btn-sm" onclick="copyText(window.location.href.replace('stella-staff.html','stella-verify.html')+'?id=${c.id}')">📋</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ── RENDER ALL ──
+function renderAll() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const ft = document.getElementById('filter-type').value;
+  let list = creds.filter(c => {
+    const match = !q || (c.name + c.course + c.email).toLowerCase().includes(q);
+    const typeMatch = !ft || c.types?.includes(ft) || (ft === 'both' && c.types?.length === 2);
+    return match && typeMatch;
+  });
+  const tbody = document.getElementById('all-tbody');
+  const empty = document.getElementById('all-empty');
+  if (!list.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = list.map(c => `
+    <tr>
+      <td><strong>${esc(c.name)}</strong></td>
+      <td style="color:var(--muted);font-size:0.8rem">${esc(c.email)}</td>
+      <td>${esc(c.course)}</td>
+      <td>${typePillsHtml(c)}</td>
+      <td style="color:var(--muted);font-size:0.8rem">${fmt(c.date)}</td>
+      <td style="color:var(--muted);font-size:0.8rem">${c.expiry ? fmt(c.expiry) : '—'}</td>
+      <td><span class="pill pill-id">${c.id}</span></td>
+      <td>${c.synced ? '<span class="pill pill-synced">✓ synced</span>' : '<span class="pill pill-unsynced">pending</span>'}</td>
+      <td><div class="td-actions">
+        <button class="btn-sm dl" onclick="openDownloadModal('${c.id}')">⬇ Download</button>
+        <button class="btn-sm li" onclick="shareLinkedIn(creds.find(x=>x.id==='${c.id}'))">in</button>
+        <button class="btn-sm" onclick="copyText(window.location.href.replace('stella-staff.html','stella-verify.html')+'?id=${c.id}')">📋</button>
+        ${!c.synced ? `<button class="btn-sm gold" onclick="syncToSheets(creds.find(x=>x.id==='${c.id}'))">↻ Sync</button>` : ''}
+        <button class="btn-sm danger" onclick="deleteCred('${c.id}')">✕</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function typePillsHtml(c) {
+  if (!c.types) return '—';
+  if (c.types.length === 2) return '<span class="pill pill-both">Both</span>';
+  return c.types.map(t => `<span class="pill pill-${t}">${t}</span>`).join(' ');
+}
+
+// ── DELETE ──
+function deleteCred(id) {
+  if (!confirm('Delete this credential? This cannot be undone.')) return;
+  creds = creds.filter(c => c.id !== id);
+  saveCreds(); updateStats(); renderDash(); renderAll();
+  showToast('Credential deleted');
+}
+
+// ── TEMPLATES ──
+function uploadTemplate(input, type) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const id = 'tmpl-' + Date.now();
+    tmpls.push({ id, type, name: file.name.replace(/\.[^.]+$/, ''), data: e.target.result, mime: file.type });
+    saveTmpls(); renderTemplateSelects(); renderTmplCards();
+    showToast('Template uploaded: ' + file.name, 'success-t');
+    input.value = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderTemplateSelects() {
+  const certSel = document.getElementById('f-cert-tmpl');
+  const badgeSel = document.getElementById('f-badge-tmpl');
+  certSel.innerHTML = '<option value="">— default (no template) —</option>' +
+    tmpls.filter(t => t.type === 'certificate').map(t => `<option value="${t.id}">${esc(t.name)}</option>`).join('');
+  badgeSel.innerHTML = '<option value="">— default (no template) —</option>' +
+    tmpls.filter(t => t.type === 'badge').map(t => `<option value="${t.id}">${esc(t.name)}</option>`).join('');
+}
+
+function renderTmplCards() {
+  ['certificate', 'badge'].forEach(type => {
+    const el = document.getElementById(type === 'certificate' ? 'cert-tmpls' : 'badge-tmpls');
+    const list = tmpls.filter(t => t.type === type);
+    el.innerHTML = list.map(t => `
+      <div class="tmpl-card">
+        <div class="tmpl-preview">
+          <img src="${t.data}" alt="${esc(t.name)}" onerror="this.style.display='none'">
+        </div>
+        <div class="tmpl-body">
+          <div class="tmpl-name">${esc(t.name)}</div>
+          <div class="tmpl-type-lbl">${type}</div>
+          <div class="tmpl-actions">
+            <button class="btn-sm danger" onclick="deleteTmpl('${t.id}')">Delete</button>
+          </div>
+        </div>
+      </div>`).join('');
+  });
+}
+
+function deleteTmpl(id) {
+  if (!confirm('Delete this template?')) return;
+  tmpls = tmpls.filter(t => t.id !== id);
+  saveTmpls(); renderTemplateSelects(); renderTmplCards();
+  showToast('Template deleted');
+}
+
+// ── HELPERS ──
+function fmt(d) {
+  if (!d) return '—';
+  return new Date(d + 'T12:00:00').toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function esc(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function copyText(t) { navigator.clipboard.writeText(t).then(() => showToast('Copied!')); }
+function copyVerifyUrl() {
+  const url = window.location.href.replace('stella-staff.html', 'stella-verify.html');
+  navigator.clipboard.writeText(url).then(() => showToast('Verify URL copied!'));
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function showToast(msg, cls) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (cls ? ' ' + cls : '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// run if already logged in
+if (sessionStorage.getItem('sc_auth') === '1') init();
+</script>
+</body>
+</html>

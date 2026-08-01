@@ -1,0 +1,58 @@
+/* -------------------------
+   THIRD-PARTY LIBRARIES
+-------------------------- */
+
+/* These are small → inline into one CSS file */
+@import "react-toastify/dist/ReactToastify.css";
+// @import "swiper/swiper-bundle.min.css";   /* better than bundle import */
+/* Swiper CSS (correct way for v10+) */
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "aos/dist/aos.css";
+@import "react-responsive-modal/styles.css";
+@import "intl-tel-input/build/css/intlTelInput.css";
+
+/* -------------------------
+   YOUR LOCAL CSS FILES
+-------------------------- */
+
+@import "../../public/assets/css/bootstrap.min.css";
+@import "../../public/assets/css/animate.min.css";
+@import "../../public/assets/css/default-icons.css";
+@import "../../public/assets/css/flaticon-skillgro-new.css";
+@import "../../public/assets/css/flaticon-skillgro.css";
+@import "../../public/assets/css/fontawesome-all.min.css";
+@import "../../public/assets/css/spacing.css";
+@import "../../public/assets/css/plyr.css";
+@import "../../public/assets/css/tg-cursor.css";
+
+/* ⚠️ Removed duplicate AOS import */
+/* @import "../../public/assets/css/aos.css"; */
+
+/* SCSS main theme */
+@import "./scss/main.scss";
+
+/* -------------------------
+   CUSTOM GLOBAL CSS
+-------------------------- */
+
+.blink-badge {
+  color: #ff0000;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 10px;
+  display: inline-block;
+  margin-bottom: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,39 @@
+@use 'colors' as *;
+@use 'typography' as *;
+
+:root {
+
+   $theme-fonts: (
+  "body": var(--font-inter),
+  "heading": var(--font-poppins),
+);
+
+    //@Font Size
+    @each $body, $shades in $font-size {
+        @each $shade, $value in $shades {
+            --tg-#{$body}-#{$shade}: #{$value};
+        }
+    }
+
+    //@Line Height
+    @each $line-height, $shades in $theme-lh {
+        @each $shade, $value in $shades {
+            --tg-#{$line-height}-#{$shade}: #{$value};
+        }
+    }
+
+    //@Color Declaration
+    @each $color, $shades in $colors {
+        @each $shade, $value in $shades {
+            --tg-#{$color}-#{$shade}: #{$value};
+        }
+    }
+
+    //@Font Weight Declaration
+    @each $fw, $shades in $font-weight {
+        @each $shade, $value in $shades {
+            --tg-#{$fw}-#{$shade}: #{$value};
+        }
+    }
+
+}
