@@ -89,18 +89,7 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                     <span className="footer__locations-state">{state}</span>
                     <ul className="footer__locations-list">
                       {locations.map((address) => (
-                        <li key={address}>
-                          <Link
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                              address,
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`View ${address} on Google Maps`}
-                          >
-                            {address}
-                          </Link>
-                        </li>
+                        <li key={address}>{address}</li>
                       ))}
                     </ul>
                   </div>

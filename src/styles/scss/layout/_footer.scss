@@ -539,16 +539,6 @@
       border-radius: 50%;
       background: rgba(178, 187, 204, 0.7);
     }
-    & a {
-      color: #b2bbcc;
-      transition: color 0.2s ease;
-      &:hover,
-      &:focus-visible {
-        color: var(--tg-theme-secondary);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-      }
-    }
   }
 }
 .copy-right-text {
