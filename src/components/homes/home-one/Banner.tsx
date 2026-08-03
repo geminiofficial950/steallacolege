@@ -1,7 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
+import { Autoplay, Pagination } from "swiper/modules";
 import SvgAnimation from "@/hooks/SvgAnimation";
 import BtnArrow from "@/svg/BtnArrow";
 
@@ -13,6 +15,44 @@ import banner_shape_4 from "@/assets/img/banner/banner_shape02.svg";
 import banner_icon_1 from "@/assets/img/banner/bg_dots.svg";
 import banner_author_1 from "@/assets/img/banner/banner_author01.png";
 import banner_author_2 from "@/assets/img/banner/banner_author02.png";
+import banner_vr_person from "@/assets/img/banner/banner_vr_person.png";
+
+const VIDEO_EMBED_SRC =
+  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
+
+const blockVideoActions = (e: React.SyntheticEvent) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
+const BannerVideoFrame: React.FC<{ title: string }> = ({ title }) => (
+  <div
+    className="banner-video-card__frame"
+    onContextMenu={blockVideoActions}
+    onDragStart={blockVideoActions}
+  >
+    <iframe
+      src={VIDEO_EMBED_SRC}
+      title={title}
+      width={640}
+      height={360}
+      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="strict-origin-when-cross-origin"
+      sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
+      style={{ pointerEvents: "none" }}
+      tabIndex={-1}
+    />
+    {/* Blocks right-click / drag over the cross-origin player */}
+    <div
+      className="banner-video-card__shield"
+      onContextMenu={blockVideoActions}
+      onDragStart={blockVideoActions}
+      aria-hidden="true"
+    />
+  </div>
+);
 
 const Banner: React.FC = () => {
   const svgIconRef = SvgAnimation("/assets/img/objects/title_shape.svg");
@@ -27,6 +67,51 @@ const Banner: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 991.98px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const syncSlideSize = useCallback((swiper: SwiperType) => {
+    const mobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 991.98px)").matches;
+
+    if (mobile) {
+      swiper.params.autoHeight = true;
+      swiper.el.style.height = "";
+      swiper.slides.forEach((slide) => {
+        (slide as HTMLElement).style.height = "";
+      });
+      swiper.updateAutoHeight?.(0);
+      swiper.update();
+      return;
+    }
+
+    swiper.params.autoHeight = false;
+    swiper.el.style.height = "";
+    swiper.slides.forEach((slide) => {
+      (slide as HTMLElement).style.height = "";
+    });
+
+    const hero = swiper.el.querySelector(
+      ".banner-slide--hero",
+    ) as HTMLElement | null;
+    if (!hero) return;
+
+    const height = Math.ceil(hero.getBoundingClientRect().height);
+    if (height <= 0) return;
+
+    swiper.el.style.height = `${height}px`;
+    swiper.slides.forEach((slide) => {
+      (slide as HTMLElement).style.height = `${height}px`;
+    });
+  }, []);
 
   const handleOpen = () => setShowModal(true);
   const handleClose = () => {
@@ -37,7 +122,7 @@ const Banner: React.FC = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -57,12 +142,16 @@ const Banner: React.FC = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+        throw new Error(
+          data.error || "Something went wrong. Please try again.",
+        );
       }
 
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Unexpected error occurred.");
+      setError(
+        err instanceof Error ? err.message : "Unexpected error occurred.",
+      );
     } finally {
       setLoading(false);
     }
@@ -70,150 +159,253 @@ const Banner: React.FC = () => {
 
   return (
     <>
-      <section
-        className="banner-area banner-bg tg-motion-effects position-relative overflow-hidden"
-      ><div className="position-absolute top-0 start-0 w-100 h-100">
-          {/* <Image
-            src="/assets/img/banner/banner_bg.png"
-            alt="background"
-            fill
-            priority
-            sizes="100vw"
-            className="object-fit-cover"
-             aria-hidden="true"
-              fetchPriority="low"
-          /> */}
-        </div>
+      <section className="banner-area banner-bg tg-motion-effects position-relative overflow-hidden">
+        <div className="position-absolute top-0 start-0 w-100 h-100" />
+
         <div className="container">
-          <div className="row justify-content-between align-items-center">
-            <div className="col-xl-6 col-lg-6">
-              <div className="banner__content">
-                <h3
-                  className="title tg-svg"
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            className="banner-swiper"
+            slidesPerView={1}
+            spaceBetween={0}
+            loop
+            speed={800}
+            autoHeight={isMobile}
+            watchOverflow
+            observer
+            observeParents
+            allowTouchMove
+            autoplay={{
+              delay: 8000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            pagination={{ clickable: true }}
+            onSwiper={(swiper) => {
+              requestAnimationFrame(() => syncSlideSize(swiper));
+              window.setTimeout(() => syncSlideSize(swiper), 300);
+              window.setTimeout(() => syncSlideSize(swiper), 800);
+            }}
+            onSlideChange={(swiper) => {
+              if (
+                typeof window !== "undefined" &&
+                window.matchMedia("(max-width: 991.98px)").matches
+              ) {
+                swiper.updateAutoHeight(0);
+              }
+            }}
+            onResize={syncSlideSize}
+          >
+            {/* ── Slide 1: Existing hero (unchanged) ── */}
+            <SwiperSlide>
+              <div className="row justify-content-between align-items-center banner-slide banner-slide--hero">
+                <div className="col-xl-6 col-lg-6">
+                  <div className="banner__content">
+                    <h3 className="title tg-svg" ref={svgIconRef}>
+                      Educate. Evaluate.
+                      <span className="position-relative">
+                        <span className="svg-icon"></span>
+                        <svg
+                          x="0px"
+                          y="0px"
+                          width="100%"
+                          height="auto"
+                          aria-hidden="true"
+                          preserveAspectRatio="none"
+                          viewBox="0 0 209 59"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M4.74438 7.70565C69.7006 -1.18799 136.097 -2.38304 203.934 4.1205C207.178 4.48495 209.422 7.14626 208.933 10.0534C206.793 23.6481 205.415 36.5704 204.801 48.8204C204.756 51.3291 202.246 53.5582 199.213 53.7955C136.093 59.7623 74.1922 60.5985 13.5091 56.3043C10.5653 56.0924 7.84371 53.7277 7.42158 51.0325C5.20725 38.2627 2.76333 25.6511 0.0898448 13.1978C-0.465589 10.5873 1.61173 8.1379 4.73327 7.70565"
+                            fill="currentcolor"
+                          />
+                        </svg>
+                        <span>Excel.</span>
+                      </span>
+                    </h3>
+                    <p>
+                      Trusted by thousands of individuals and businesses for
+                      practical, industry relevant learning from micro learning,
+                      short online courses to nationally recognised programs.
+                    </p>
+                    <div className="banner__btn-wrap">
+                      <button
+                        type="button"
+                        className="btn arrow-btn"
+                        onClick={handleOpen}
+                      >
+                        Enquire Now <BtnArrow />
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-                  ref={svgIconRef}
-                >
-                  Educate. Evaluate.
-                  <span className="position-relative">
-                    <span className="svg-icon"></span>
-                    <svg
-                      x="0px"
-                      y="0px"
-                      width="100%"
-                      height="auto"
-                      aria-hidden="true"
-                      preserveAspectRatio="none"
-                      viewBox="0 0 209 59"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4.74438 7.70565C69.7006 -1.18799 136.097 -2.38304 203.934 4.1205C207.178 4.48495 209.422 7.14626 208.933 10.0534C206.793 23.6481 205.415 36.5704 204.801 48.8204C204.756 51.3291 202.246 53.5582 199.213 53.7955C136.093 59.7623 74.1922 60.5985 13.5091 56.3043C10.5653 56.0924 7.84371 53.7277 7.42158 51.0325C5.20725 38.2627 2.76333 25.6511 0.0898448 13.1978C-0.465589 10.5873 1.61173 8.1379 4.73327 7.70565"
-                        fill="currentcolor"
+                <div className="col-lg-6">
+                  <div className="banner__images">
+                    <div className="relative w-full">
+                      <Image
+                        src={banner_img_1}
+                        alt="Hero image"
+                        priority
+                        fetchPriority="high"
+                        width={1200}
+                        height={800}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="main-img"
                       />
-                    </svg>
-                    <span>
-                      Excel.
-                    </span>
-                  </span>
-                </h3>
-                <p>
-                  Trusted by thousands of individuals and businesses for
-                  practical, industry relevant learning from micro learning,
-                  short online courses to nationally recognised programs.
-                </p>
-                <div className="banner__btn-wrap">
-                  <button
-                    type="button"
-                    className="btn arrow-btn"
-                    onClick={handleOpen}
-                  >
-                    Enquire Now <BtnArrow />
-                  </button>
+                    </div>
+                    <div className="hidden md:block shape big-shape">
+                      <Image
+                        src={banner_shape_1}
+                        alt="shape"
+                        className="tg-motion-effects1"
+                        loading="lazy"
+                        fetchPriority="low"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <Image
+                      src={banner_icon_1}
+                      alt="shape"
+                      className="shape bg-dots rotateme"
+                      fetchPriority="high"
+                      priority={true}
+                      style={{ contentVisibility: "auto" }}
+                    />
+                    <Image
+                      src={banner_shape_2}
+                      alt="shape"
+                      className="shape small-shape tg-motion-effects3"
+                      loading="lazy"
+                      fetchPriority="low"
+                      aria-hidden="true"
+                    />
+                    <div className="banner__author">
+                      <div className="banner__author-item">
+                        <div className="image">
+                          <Image
+                            src={banner_author_1}
+                            loading="lazy"
+                            alt="img"
+                            fetchPriority="low"
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <h3 className="name">Roberta Fox</h3>
+                      </div>
+                      <div className="banner__author-item">
+                        <div className="image">
+                          <Image
+                            src={banner_author_2}
+                            loading="lazy"
+                            alt="img"
+                            fetchPriority="low"
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <h3 className="name">Michel Jones</h3>
+                      </div>
+                      <Image
+                        src={banner_shape_4}
+                        alt="shape"
+                        className="arrow-shape tg-motion-effects3"
+                        loading="lazy"
+                        fetchPriority="low"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
 
-            <div className="col-lg-6">
-              <div className="banner__images">
-
-<div className="relative w-full">
-  <Image
-    src={banner_img_1}
-    alt="Hero image"
-    priority
-    fetchPriority="high"
-    width={1200}
-    height={800}
-    sizes="(max-width: 768px) 100vw, 50vw"
-     className="main-img"
-  />
-</div>
-                <div
-                  className=" hidden md:block shape big-shape"
-
-                >
-                  <Image
-                    src={banner_shape_1}
-                    alt="shape"
-                    className="tg-motion-effects1"
-                    loading="lazy"
-                    fetchPriority="low"
-                    aria-hidden="true"
-                  />
-                </div>
-                <Image
-                  src={banner_icon_1}
-                  alt="shape"
-                  // role="presentation"
-                  className="shape bg-dots rotateme"
-                
-                  // aria-hidden="true"
-                    fetchPriority="high"
-                     priority={true}   
-                     style={{ contentVisibility: "auto" }}
-                />
-                <Image
-                  src={banner_shape_2}
-                  alt="shape"
-                  className="shape small-shape tg-motion-effects3"
-                  loading="lazy"
-                  fetchPriority="low"
-                  aria-hidden="true"
-                />
-                <div className="banner__author">
-                  <div className="banner__author-item">
-                    <div className="image">
-                      <Image 
-                      src={banner_author_1} 
-                      loading="lazy" 
-                      alt="img"
-                    fetchPriority="low"
-                    aria-hidden="true" />
-                    </div>
-                    <h3 className="name">Roberta Fox</h3>
+            {/* ── Slide 2: Zigzag videos + Coming Soon ── */}
+            <SwiperSlide>
+              <div className="banner-slide banner-slide--video">
+                <div className="banner-video-zigzag">
+                  <div className="banner-video-zigzag__person">
+                    <Image
+                      src={banner_vr_person}
+                      alt="Learner wearing VR headset"
+                      width={280}
+                      height={280}
+                      className="banner-video-zigzag__person-img"
+                      loading="lazy"
+                    />
+                    <span
+                      className="banner-video-zigzag__person-ring"
+                      aria-hidden="true"
+                    />
                   </div>
-                  <div className="banner__author-item">
-                    <div className="image">
-                      <Image src={banner_author_2} loading="lazy" alt="img"
-                    fetchPriority="low"
-                    aria-hidden="true" />
+
+                  {/* Top: video left | Coming Soon right */}
+                  <div className="row g-3 g-lg-4 align-items-center banner-video-zigzag__row">
+                    <div className="col-lg-6">
+                      <div
+                        className="banner-video-card"
+                        onContextMenu={blockVideoActions}
+                      >
+                        <BannerVideoFrame title="Stella College upcoming video one" />
+                      </div>
                     </div>
-                    <h3 className="name">Michel Jones</h3>
+                    <div className="col-lg-6">
+                      <div className="banner-video-zigzag__copy banner-video-zigzag__copy--end">
+                        <span className="banner-video-zigzag__label d-none d-lg-inline-flex">
+                          Coming Soon
+                        </span>
+                        <h3>
+                          Immersive learning is <span>almost here</span>
+                        </h3>
+                        <p>
+                          <span className="d-none d-lg-inline">
+                            Experience campus-style training in a new interactive
+                            format.{" "}
+                          </span>
+                          Get ready for something powerful from Stella College.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <Image 
-                    src={banner_shape_4}
-                    alt="shape"
-                    className="arrow-shape tg-motion-effects3"
-                    loading="lazy"
-                    fetchPriority="low"
-                    aria-hidden="true"
-                  />
+
+                  {/* Bottom: Coming Soon left | video right */}
+                  <div className="row g-3 g-lg-4 align-items-center banner-video-zigzag__row">
+                    <div className="col-lg-6 order-lg-1 order-2">
+                      <div className="banner-video-zigzag__copy banner-video-zigzag__copy--cta">
+                        <span className="banner-video-zigzag__label d-none d-lg-inline-flex">
+                          Coming Soon
+                        </span>
+                        <h3>
+                          Coming soon to <span>your screen</span>
+                        </h3>
+                        <p className="banner-video-zigzag__copy-extra d-none d-lg-block">
+                          Stay tuned for fresh learning journeys designed to
+                          help you upskill faster and go further.
+                        </p>
+                        <button
+                          type="button"
+                          className="btn arrow-btn"
+                          onClick={handleOpen}
+                        >
+                          Enquire Now <BtnArrow />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 order-lg-2 order-1">
+                      <div
+                        className="banner-video-card banner-video-card--br"
+                        onContextMenu={blockVideoActions}
+                      >
+                        <BannerVideoFrame title="Stella College upcoming video two" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </SwiperSlide>
+          </Swiper>
         </div>
+
         <Image
           src={banner_shape_3}
           alt="shape"
@@ -227,7 +419,6 @@ const Banner: React.FC = () => {
       {/* ── Enquire Now Modal ── */}
       {showModal && (
         <>
-          {/* Backdrop */}
           <div
             style={{
               position: "fixed",
@@ -238,7 +429,6 @@ const Banner: React.FC = () => {
             onClick={handleClose}
           />
 
-          {/* Modal */}
           <div
             className="modal fade show d-block"
             tabIndex={-1}
@@ -260,8 +450,6 @@ const Banner: React.FC = () => {
               style={{ maxWidth: "500px", width: "90%", marginTop: "150px" }}
             >
               <div className="modal-content rounded-4 shadow-lg border-0">
-
-                {/* Header */}
                 <div className="modal-header border-0 pb-0 pt-4 px-4">
                   <h5 className="modal-title fw-bold fs-4">Enquire Now</h5>
                   <button
@@ -272,34 +460,42 @@ const Banner: React.FC = () => {
                   />
                 </div>
 
-                {/* Body */}
                 <div className="modal-body px-4 pt-2 pb-4">
                   {submitted ? (
-                    /* ── Success State ── */
                     <div className="text-center py-4">
-                      <div className="mb-3" style={{ fontSize: "3rem" }}>✅</div>
-                      <h6 className="fw-bold fs-5">Thank you for reaching out!</h6>
+                      <div className="mb-3" style={{ fontSize: "3rem" }}>
+                        ✅
+                      </div>
+                      <h6 className="fw-bold fs-5">
+                        Thank you for reaching out!
+                      </h6>
                       <p className="text-muted mb-4">
-                        We have received your enquiry and will get back to you shortly.
+                        We have received your enquiry and will get back to you
+                        shortly.
                       </p>
-                      <button className="btn btn-primary w-100" onClick={handleClose}>
+                      <button
+                        className="btn btn-primary w-100"
+                        onClick={handleClose}
+                      >
                         Close
                       </button>
                     </div>
                   ) : (
-                    /* ── Form ── */
                     <form onSubmit={handleSubmit} noValidate>
-
-                      {/* Error Alert */}
                       {error && (
-                        <div className="alert alert-danger py-2 mb-3" role="alert">
+                        <div
+                          className="alert alert-danger py-2 mb-3"
+                          role="alert"
+                        >
                           {error}
                         </div>
                       )}
 
-                      {/* Full Name */}
                       <div className="mb-3">
-                        <label htmlFor="enquiry-name" className="form-label fw-semibold">
+                        <label
+                          htmlFor="enquiry-name"
+                          className="form-label fw-semibold"
+                        >
                           Full Name <span className="text-danger">*</span>
                         </label>
                         <input
@@ -314,9 +510,11 @@ const Banner: React.FC = () => {
                         />
                       </div>
 
-                      {/* Email */}
                       <div className="mb-3">
-                        <label htmlFor="enquiry-email" className="form-label fw-semibold">
+                        <label
+                          htmlFor="enquiry-email"
+                          className="form-label fw-semibold"
+                        >
                           Email Address <span className="text-danger">*</span>
                         </label>
                         <input
@@ -331,9 +529,11 @@ const Banner: React.FC = () => {
                         />
                       </div>
 
-                      {/* Phone Number */}
                       <div className="mb-3">
-                        <label htmlFor="enquiry-phone" className="form-label fw-semibold">
+                        <label
+                          htmlFor="enquiry-phone"
+                          className="form-label fw-semibold"
+                        >
                           Phone Number <span className="text-danger">*</span>
                         </label>
                         <input
@@ -347,9 +547,11 @@ const Banner: React.FC = () => {
                         />
                       </div>
 
-                      {/* Message */}
                       <div className="mb-4">
-                        <label htmlFor="enquiry-message" className="form-label fw-semibold">
+                        <label
+                          htmlFor="enquiry-message"
+                          className="form-label fw-semibold"
+                        >
                           Message
                         </label>
                         <textarea
@@ -364,7 +566,6 @@ const Banner: React.FC = () => {
                         />
                       </div>
 
-                      {/* Actions */}
                       <div className="d-flex flex-column flex-sm-row gap-2">
                         <button
                           type="submit"
@@ -396,7 +597,6 @@ const Banner: React.FC = () => {
                     </form>
                   )}
                 </div>
-
               </div>
             </div>
           </div>
