@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
@@ -33,20 +33,33 @@ const Banner: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 991.98px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const syncSlideSize = useCallback((swiper: SwiperType) => {
-    const isMobile =
+    const mobile =
       typeof window !== "undefined" &&
       window.matchMedia("(max-width: 991.98px)").matches;
 
-    if (isMobile) {
+    if (mobile) {
+      swiper.params.autoHeight = true;
       swiper.el.style.height = "";
       swiper.slides.forEach((slide) => {
         (slide as HTMLElement).style.height = "";
       });
+      swiper.updateAutoHeight?.(0);
+      swiper.update();
       return;
     }
 
+    swiper.params.autoHeight = false;
     swiper.el.style.height = "";
     swiper.slides.forEach((slide) => {
       (slide as HTMLElement).style.height = "";
@@ -123,7 +136,7 @@ const Banner: React.FC = () => {
             spaceBetween={0}
             loop
             speed={800}
-            autoHeight={false}
+            autoHeight={isMobile}
             watchOverflow
             observer
             observeParents
@@ -139,8 +152,15 @@ const Banner: React.FC = () => {
               window.setTimeout(() => syncSlideSize(swiper), 300);
               window.setTimeout(() => syncSlideSize(swiper), 800);
             }}
+            onSlideChange={(swiper) => {
+              if (
+                typeof window !== "undefined" &&
+                window.matchMedia("(max-width: 991.98px)").matches
+              ) {
+                swiper.updateAutoHeight(0);
+              }
+            }}
             onResize={syncSlideSize}
-            onImagesReady={syncSlideSize}
           >
             {/* ── Slide 1: Existing hero (unchanged) ── */}
             <SwiperSlide>
@@ -305,16 +325,18 @@ const Banner: React.FC = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="banner-video-zigzag__copy banner-video-zigzag__copy--end">
-                        <span className="banner-video-zigzag__label">
+                        <span className="banner-video-zigzag__label d-none d-lg-inline-flex">
                           Coming Soon
                         </span>
                         <h3>
                           Immersive learning is <span>almost here</span>
                         </h3>
                         <p>
-                          Experience campus-style training in a new interactive
-                          format. Get ready for something powerful from Stella
-                          College.
+                          <span className="d-none d-lg-inline">
+                            Experience campus-style training in a new interactive
+                            format.{" "}
+                          </span>
+                          Get ready for something powerful from Stella College.
                         </p>
                       </div>
                     </div>
@@ -324,13 +346,13 @@ const Banner: React.FC = () => {
                   <div className="row g-3 g-lg-4 align-items-center banner-video-zigzag__row">
                     <div className="col-lg-6 order-lg-1 order-2">
                       <div className="banner-video-zigzag__copy banner-video-zigzag__copy--cta">
-                        <span className="banner-video-zigzag__label">
+                        <span className="banner-video-zigzag__label d-none d-lg-inline-flex">
                           Coming Soon
                         </span>
                         <h3>
                           Coming soon to <span>your screen</span>
                         </h3>
-                        <p>
+                        <p className="banner-video-zigzag__copy-extra d-none d-lg-block">
                           Stay tuned for fresh learning journeys designed to
                           help you upskill faster and go further.
                         </p>
