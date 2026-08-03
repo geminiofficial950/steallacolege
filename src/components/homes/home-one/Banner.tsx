@@ -18,7 +18,41 @@ import banner_author_2 from "@/assets/img/banner/banner_author02.png";
 import banner_vr_person from "@/assets/img/banner/banner_vr_person.png";
 
 const VIDEO_EMBED_SRC =
-  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true";
+  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
+
+const blockVideoActions = (e: React.SyntheticEvent) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
+const BannerVideoFrame: React.FC<{ title: string }> = ({ title }) => (
+  <div
+    className="banner-video-card__frame"
+    onContextMenu={blockVideoActions}
+    onDragStart={blockVideoActions}
+  >
+    <iframe
+      src={VIDEO_EMBED_SRC}
+      title={title}
+      width={640}
+      height={360}
+      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="strict-origin-when-cross-origin"
+      sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
+      style={{ pointerEvents: "none" }}
+      tabIndex={-1}
+    />
+    {/* Blocks right-click / drag over the cross-origin player */}
+    <div
+      className="banner-video-card__shield"
+      onContextMenu={blockVideoActions}
+      onDragStart={blockVideoActions}
+      aria-hidden="true"
+    />
+  </div>
+);
 
 const Banner: React.FC = () => {
   const svgIconRef = SvgAnimation("/assets/img/objects/title_shape.svg");
@@ -308,19 +342,11 @@ const Banner: React.FC = () => {
                   {/* Top: video left | Coming Soon right */}
                   <div className="row g-3 g-lg-4 align-items-center banner-video-zigzag__row">
                     <div className="col-lg-6">
-                      <div className="banner-video-card">
-                        <div className="banner-video-card__frame">
-                          <iframe
-                            src={VIDEO_EMBED_SRC}
-                            title="Stella College upcoming video one"
-                            width={640}
-                            height={360}
-                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                            allowFullScreen
-                            loading="lazy"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                          />
-                        </div>
+                      <div
+                        className="banner-video-card"
+                        onContextMenu={blockVideoActions}
+                      >
+                        <BannerVideoFrame title="Stella College upcoming video one" />
                       </div>
                     </div>
                     <div className="col-lg-6">
@@ -366,19 +392,11 @@ const Banner: React.FC = () => {
                       </div>
                     </div>
                     <div className="col-lg-6 order-lg-2 order-1">
-                      <div className="banner-video-card banner-video-card--br">
-                        <div className="banner-video-card__frame">
-                          <iframe
-                            src={VIDEO_EMBED_SRC}
-                            title="Stella College upcoming video two"
-                            width={640}
-                            height={360}
-                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                            allowFullScreen
-                            loading="lazy"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                          />
-                        </div>
+                      <div
+                        className="banner-video-card banner-video-card--br"
+                        onContextMenu={blockVideoActions}
+                      >
+                        <BannerVideoFrame title="Stella College upcoming video two" />
                       </div>
                     </div>
                   </div>

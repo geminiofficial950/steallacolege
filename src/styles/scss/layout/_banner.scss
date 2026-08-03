@@ -1978,6 +1978,9 @@
 .banner-video-card {
   position: relative;
   width: 100%;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
   &::before {
     content: "";
     position: absolute;
@@ -2038,6 +2041,10 @@
     border-radius: 14px;
     background: #0f1024;
     aspect-ratio: auto;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     box-shadow:
       0 12px 28px rgba(22, 20, 57, 0.14),
       0 2px 0 rgba(255, 255, 255, 0.35) inset;
@@ -2082,12 +2089,25 @@
       width: 100%;
       height: 100%;
       border: 0;
+      pointer-events: none;
       transform: translate(-50%, -50%) scale(1.35);
       transform-origin: center center;
       @media #{$md} {
         transform: translate(-50%, -50%) scale(1.45);
       }
     }
+  }
+  &__shield {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border-radius: inherit;
+    background: transparent;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
   }
 }
 
