@@ -2497,7 +2497,7 @@
   }
 
   @media #{$xs} {
-    --ai-strip-height: 108px;
+    --ai-strip-height: 165px;
     padding: 14px 12px 0;
     padding-bottom: var(--ai-strip-height);
     border-radius: 20px;
@@ -2926,12 +2926,12 @@
     }
 
     &__icons span {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
 
       img {
-        width: 22px;
+        width: 18px;
       }
     }
 
@@ -4129,14 +4129,19 @@
     }
 
     h3,
-    p {
+    p,
+    .college-sorted-slide__logos {
       position: relative;
       z-index: 2;
       width: min(92%, 720px);
     }
 
     h3 {
+      position: relative;
       margin: 0 0 8px;
+      width: fit-content;
+      max-width: 92%;
+      padding: 4px 18px 6px;
       background: linear-gradient(
         105deg,
         #7c3aed 0%,
@@ -4154,6 +4159,19 @@
       letter-spacing: -0.03em;
       line-height: 1.16;
 
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: 999px;
+        background: linear-gradient(
+          105deg,
+          rgba(219, 39, 119, 0.14),
+          rgba(37, 99, 235, 0.14)
+        );
+      }
+
       em {
         font-style: normal;
       }
@@ -4168,6 +4186,34 @@
       font-weight: 400;
       line-height: 1.45;
     }
+  }
+
+  &__logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 16px;
+    margin: 10px auto 0;
+    max-width: 620px;
+  }
+
+  &__logo {
+    width: 70px;
+    height: 32px;
+    object-fit: contain;
+    animation: collegeSortedLogoFocus 4.8s ease-in-out infinite;
+    will-change: transform, opacity, filter;
+
+    @for $i from 1 through 9 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{($i - 1) * 0.28}s;
+      }
+    }
+  }
+
+  &__logo--mobile-only {
+    display: none;
   }
 
   &__cta {
@@ -4303,6 +4349,10 @@
       padding: 16px 14px var(--college-sorted-copy-gap);
     }
 
+    &__logo--mobile-only {
+      display: block;
+    }
+
     &__stage {
       position: relative;
       top: auto;
@@ -4329,6 +4379,16 @@
 
       p {
         font-size: 13px;
+      }
+
+      .college-sorted-slide__logos {
+        gap: 6px 10px;
+        margin-top: 8px;
+      }
+
+      .college-sorted-slide__logo {
+        width: 78px;
+        height: 36px;
       }
     }
 
@@ -4364,6 +4424,34 @@
     &__copy p::after {
       content: "";
     }
+  }
+}
+
+@keyframes collegeSortedLogoFocus {
+  0%,
+  100% {
+    opacity: 0.78;
+    filter: saturate(0.9);
+    transform: scale(0.96);
+  }
+
+  24%,
+  44% {
+    opacity: 1;
+    filter: saturate(1.12);
+    transform: scale(1.06);
+  }
+
+  68% {
+    opacity: 0.88;
+    filter: saturate(1);
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .college-sorted-slide__logo {
+    animation: none;
   }
 }
 

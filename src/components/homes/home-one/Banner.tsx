@@ -200,6 +200,13 @@ const HeroStyleSlide: React.FC<HeroStyleSlideProps> = ({
   authors,
   onEnquire,
 }) => {
+  const categoryHref =
+    slideKey === "mental-health"
+      ? "/courses?category_id=PSODFCSD"
+      : slideKey === "disability"
+        ? "/courses?category_id=CSAGEING,CSLEISURE,CSFOOD,CSFIRSTAID"
+        : null;
+
   if (slideKey === "ai-learning") {
     return (
       <div className="banner-slide ai-center-slide">
@@ -261,13 +268,22 @@ const HeroStyleSlide: React.FC<HeroStyleSlideProps> = ({
         </h3>
         <p>{text}</p>
         <div className="creative-slide__actions">
-          <button
-            type="button"
-            className="creative-slide__cta"
-            onClick={onEnquire}
-          >
-            Explore training <BtnArrow />
-          </button>
+          {categoryHref ? (
+            <Link
+              href={categoryHref}
+              className="creative-slide__cta"
+            >
+              Explore training <BtnArrow />
+            </Link>
+          ) : (
+            <button
+              type="button"
+              className="creative-slide__cta"
+              onClick={onEnquire}
+            >
+              Explore training <BtnArrow />
+            </button>
+          )}
         </div>
       </div>
 
@@ -541,6 +557,16 @@ const COLLEGE_SORTED_ZONES = [
     startAt: 0.28,
   },
 ] as const;
+
+const STUDENT_BENEFIT_LOGOS = Array.from({ length: 7 }, (_, index) => ({
+  src: `/logo${index + 1}.webp`,
+  alt: `Student benefit logo ${index + 1}`,
+}));
+
+const MOBILE_STUDENT_BENEFIT_LOGOS = [8, 9].map((logoNumber) => ({
+  src: `/logo${logoNumber}.webp`,
+  alt: `Student benefit logo ${logoNumber}`,
+}));
 
 type CollegeSortedZoneKey = (typeof COLLEGE_SORTED_ZONES)[number]["key"];
 
@@ -862,6 +888,30 @@ const CollegeSortedSlide = () => {
           Stella College is partnered with UNiDAYS to give students discount
           over a range of products
         </p>
+        <div className="college-sorted-slide__logos" aria-label="Student benefit partners">
+          {STUDENT_BENEFIT_LOGOS.map((logo) => (
+            <Image
+              key={logo.src}
+              src={logo.src}
+              alt={logo.alt}
+              width={96}
+              height={42}
+              className="college-sorted-slide__logo"
+              loading="lazy"
+            />
+          ))}
+          {MOBILE_STUDENT_BENEFIT_LOGOS.map((logo) => (
+            <Image
+              key={logo.src}
+              src={logo.src}
+              alt={logo.alt}
+              width={96}
+              height={42}
+              className="college-sorted-slide__logo college-sorted-slide__logo--mobile-only"
+              loading="lazy"
+            />
+          ))}
+        </div>
       </div>
 
       <div className="college-sorted-slide__stage">
