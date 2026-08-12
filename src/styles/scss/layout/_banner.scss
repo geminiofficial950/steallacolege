@@ -1975,8 +1975,8 @@
     "Google Sans Flex", "Google Sans", "Product Sans", Arial, Helvetica,
     sans-serif;
   --ai-font-body: "Roboto", Arial, Helvetica, sans-serif;
-  --ai-center-fade: #f7f4ff;
-  --ai-center-fade-width: clamp(32px, 6vw, 96px);
+  --ai-center-fade: #fff;
+  --ai-center-fade-width: clamp(40px, 7vw, 110px);
   --ai-strip-height: clamp(200px, 22vw, 248px);
   position: relative;
   isolation: isolate;
@@ -1986,37 +1986,75 @@
   padding: 16px 24px 0;
   padding-bottom: var(--ai-strip-height);
   border: 0;
-  border-radius: 30px;
+  border-radius: 0;
   overflow: hidden;
   font-family: var(--ai-font-body);
   background:
     radial-gradient(
-      ellipse 55% 50% at 12% 18%,
-      rgba(99, 102, 241, 0.28),
-      transparent 58%
+      ellipse 48% 42% at 18% 22%,
+      rgba(99, 102, 241, 0.16),
+      transparent 70%
     ),
     radial-gradient(
-      ellipse 50% 45% at 88% 14%,
-      rgba(236, 72, 153, 0.2),
-      transparent 55%
+      ellipse 44% 38% at 82% 18%,
+      rgba(236, 72, 153, 0.12),
+      transparent 68%
     ),
     radial-gradient(
-      ellipse 45% 40% at 78% 72%,
-      rgba(56, 189, 248, 0.26),
-      transparent 55%
+      ellipse 40% 36% at 74% 68%,
+      rgba(56, 189, 248, 0.14),
+      transparent 68%
     ),
     radial-gradient(
-      ellipse 50% 42% at 22% 78%,
-      rgba(167, 139, 250, 0.22),
-      transparent 55%
+      ellipse 42% 36% at 26% 72%,
+      rgba(167, 139, 250, 0.12),
+      transparent 68%
     ),
     radial-gradient(
-      ellipse 70% 55% at 50% 48%,
-      rgba(255, 255, 255, 0.55),
-      transparent 62%
+      ellipse 58% 48% at 50% 46%,
+      rgba(255, 255, 255, 0.72),
+      transparent 70%
     ),
-    linear-gradient(135deg, #eef2ff 0%, #faf5ff 35%, #f0f9ff 70%, #fdf2f8 100%);
+    #fff;
   box-shadow: none;
+
+  /* Soft white edge fade — blends into site background */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        to right,
+        var(--ai-center-fade) 0%,
+        rgba(255, 255, 255, 0.85) 28%,
+        rgba(255, 255, 255, 0) 100%
+      )
+        left / var(--ai-center-fade-width) 100% no-repeat,
+      linear-gradient(
+        to left,
+        var(--ai-center-fade) 0%,
+        rgba(255, 255, 255, 0.85) 28%,
+        rgba(255, 255, 255, 0) 100%
+      )
+        right / var(--ai-center-fade-width) 100% no-repeat,
+      linear-gradient(
+        to bottom,
+        var(--ai-center-fade) 0%,
+        rgba(255, 255, 255, 0.8) 35%,
+        rgba(255, 255, 255, 0) 100%
+      )
+        top / 100% clamp(36px, 5vw, 64px) no-repeat,
+      linear-gradient(
+        to top,
+        var(--ai-center-fade) 0%,
+        rgba(255, 255, 255, 0.8) 35%,
+        rgba(255, 255, 255, 0) 100%
+      )
+        bottom / 100% clamp(40px, 5.5vw, 72px) no-repeat;
+  }
 
   &__copy {
     position: relative;
@@ -2032,10 +2070,10 @@
     align-items: center;
     gap: 9px;
     margin-bottom: 8px;
-    color: #5751e1;
+    color: #3b36c9;
     font-family: var(--ai-font-display);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: none;
 
@@ -2043,24 +2081,14 @@
     &::after {
       display: none;
     }
-
-    & strong {
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #6366f1, #0891b2);
-      color: #fff;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
   }
 
   &__copy h3 {
     margin-bottom: 12px;
     color: #1d1d1f;
     font-family: var(--ai-font-display);
-    font-size: clamp(28px, 2.8vw, 44px);
-    line-height: 1.15;
+    font-size: clamp(24px, 2.4vw, 38px);
+    line-height: 1.2;
     letter-spacing: -0.03em;
     font-weight: 500;
     text-transform: none;
@@ -2079,6 +2107,14 @@
       -webkit-background-clip: text;
       color: transparent;
       -webkit-text-fill-color: transparent;
+    }
+
+    .ai-center-slide__subline {
+      display: block;
+      margin-top: 0.12em;
+      font-size: 0.62em;
+      font-weight: 500;
+      color: #1d1d1f;
     }
   }
 
@@ -2908,6 +2944,376 @@
   .google-program-slide__icons span {
     transition: none;
     animation: none;
+  }
+}
+
+.educate-excel-slide {
+  --ee-bg: #fff;
+  --ee-text: #1a1a3f;
+  --ee-muted: #5c5c6e;
+  --ee-yellow: #f5c518;
+  --ee-blue: #4f46e5;
+  --ee-blue-deep: #4338ca;
+  --ee-font-display:
+    "Google Sans Flex", "Google Sans", "Product Sans", Arial, Helvetica,
+    sans-serif;
+  --ee-font-body: "Roboto", Arial, Helvetica, sans-serif;
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  min-height: 520px;
+  overflow: hidden;
+  border-radius: 28px;
+  background: var(--ee-bg);
+  color: var(--ee-text);
+  font-family: var(--ee-font-body);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: clamp(16px, 3vw, 40px);
+    min-height: 520px;
+    padding: clamp(28px, 3.2vw, 44px) clamp(24px, 3vw, 48px);
+  }
+
+  &__copy {
+    position: relative;
+    z-index: 2;
+    max-width: none;
+    overflow: visible;
+  }
+
+  &__title {
+    margin: 0 0 18px;
+    color: var(--ee-text);
+    font-family: var(--ee-font-display);
+    font-size: clamp(22px, 2.4vw, 34px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  &__desc {
+    max-width: 460px;
+    margin: 0 0 28px;
+    color: var(--ee-muted);
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--ee-blue) 0%, var(--ee-blue-deep) 100%);
+    color: #fff;
+    font-family: var(--ee-font-display);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow:
+      0 10px 24px rgba(79, 70, 229, 0.35),
+      0 2px 0 rgba(255, 255, 255, 0.18) inset;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      filter 0.25s ease;
+
+    svg {
+      width: 16px;
+      height: 14px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow:
+        0 14px 28px rgba(79, 70, 229, 0.4),
+        0 2px 0 rgba(255, 255, 255, 0.18) inset;
+    }
+  }
+
+  &__visual {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: clamp(360px, 40vw, 470px);
+    padding: 12px 8px 0;
+  }
+
+  &__x-pattern {
+    position: absolute;
+    left: 8%;
+    bottom: 8%;
+    z-index: 0;
+    width: 42%;
+    height: 36%;
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent 0 7px,
+        rgba(26, 26, 63, 0.07) 7px 8px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0 7px,
+        rgba(26, 26, 63, 0.07) 7px 8px
+      );
+    mask-image: radial-gradient(ellipse at 40% 60%, #000 20%, transparent 72%);
+    pointer-events: none;
+  }
+
+  &__blue-arrow {
+    position: absolute;
+    right: 4%;
+    top: 2%;
+    z-index: 1;
+    width: clamp(140px, 18vw, 210px);
+    height: auto;
+    pointer-events: none;
+    animation: educateExcelArrowDrift 5.5s ease-in-out infinite;
+  }
+
+  &__blue-arrow-shadow {
+    fill: #c7c3f5;
+  }
+
+  &__blue-arrow-body,
+  &__blue-arrow-head {
+    fill: var(--ee-blue);
+  }
+
+  &__yellow-arrow {
+    position: absolute;
+    left: 6%;
+    top: 18%;
+    z-index: 4;
+    width: clamp(88px, 11vw, 130px);
+    color: var(--ee-yellow);
+    pointer-events: none;
+    animation: educateExcelSquiggle 4.2s ease-in-out infinite;
+  }
+
+  &__peers {
+    position: absolute;
+    left: 2%;
+    top: 28%;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 168px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow:
+      0 12px 28px rgba(26, 26, 63, 0.12),
+      0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    animation: educateExcelFloat 4.8s ease-in-out infinite;
+  }
+
+  &__peer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ee-text);
+    font-family: var(--ee-font-display);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__peer-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 auto;
+  }
+
+  &__photo {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 380px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    max-height: clamp(340px, 42vw, 460px);
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 18px 28px rgba(26, 26, 63, 0.14));
+    transform-origin: center bottom;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover &__image {
+    transform: scale(1.025);
+  }
+
+  @media #{$md} {
+    min-height: 0;
+    border-radius: 22px;
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      min-height: 0;
+      padding: 24px 20px 8px;
+    }
+
+    &__copy {
+      max-width: none;
+      text-align: center;
+      margin: 0 auto;
+      order: 2;
+    }
+
+    &__title {
+      margin-bottom: 12px;
+      font-size: clamp(20px, 4.6vw, 28px);
+      white-space: nowrap;
+    }
+
+    &__desc {
+      max-width: 480px;
+      margin: 0 auto 20px;
+      font-size: 15px;
+    }
+
+    &__visual {
+      order: 1;
+      min-height: 300px;
+      margin: 0 auto;
+      width: min(100%, 420px);
+    }
+
+    &__peers {
+      left: 0;
+      top: 16%;
+      min-width: 148px;
+      transform-origin: left top;
+      animation: educateExcelFloatMd 4.8s ease-in-out infinite;
+    }
+
+    &__blue-arrow {
+      right: 0;
+      width: 130px;
+    }
+
+    &__yellow-arrow {
+      left: 2%;
+      top: 12%;
+      width: 84px;
+    }
+
+    &__photo {
+      width: min(78%, 300px);
+    }
+
+    &__image {
+      max-height: 320px;
+    }
+  }
+
+  @media #{$xs} {
+    border-radius: 18px;
+
+    &__grid {
+      padding: 18px 14px 4px;
+    }
+
+    &__title {
+      font-size: clamp(18px, 5vw, 22px);
+      white-space: nowrap;
+    }
+
+    &__peers {
+      display: none;
+    }
+
+    &__yellow-arrow {
+      display: none;
+    }
+
+    &__blue-arrow {
+      width: 100px;
+      top: 0;
+      opacity: 0.9;
+    }
+
+    &__visual {
+      min-height: 250px;
+    }
+
+    &__image {
+      max-height: 270px;
+    }
+
+    &__cta {
+      padding: 13px 24px;
+      font-size: 14px;
+    }
+  }
+}
+
+@keyframes educateExcelFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes educateExcelFloatMd {
+  0%,
+  100% {
+    transform: scale(0.92) translateY(0);
+  }
+  50% {
+    transform: scale(0.92) translateY(-8px);
+  }
+}
+
+@keyframes educateExcelArrowDrift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(4px, -6px) rotate(1.5deg);
+  }
+}
+
+@keyframes educateExcelSquiggle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .educate-excel-slide__peers,
+  .educate-excel-slide__blue-arrow,
+  .educate-excel-slide__yellow-arrow,
+  .educate-excel-slide__image {
+    animation: none !important;
+    transition: none !important;
   }
 }
 
@@ -3777,6 +4183,10 @@
 }
 
 .banner-video-zigzag {
+  --vz-font-display:
+    "Google Sans Flex", "Google Sans", "Product Sans", Arial, Helvetica,
+    sans-serif;
+  --vz-font-body: "Roboto", Arial, Helvetica, sans-serif;
   position: relative;
   width: 100%;
   max-width: 100%;
@@ -3790,6 +4200,7 @@
   background: transparent;
   border: 0;
   box-shadow: none;
+  font-family: var(--vz-font-body);
   @media #{$md} {
     height: auto;
     gap: 18px;
@@ -3923,6 +4334,7 @@
     border: 1px solid #161439;
     background: var(--tg-theme-secondary);
     color: var(--tg-heading-color);
+    font-family: var(--vz-font-display);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -3968,6 +4380,7 @@
     & h3,
     & .banner-excel-title {
       margin-bottom: 10px;
+      font-family: var(--vz-font-display);
       font-size: 28px;
       line-height: 1.25;
       letter-spacing: -0.03em;
@@ -4027,6 +4440,7 @@
     & p {
       margin-bottom: 0;
       max-width: 420px;
+      font-family: var(--vz-font-body);
       font-size: 15px;
       line-height: 1.65;
       color: #6d6c80;

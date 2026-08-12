@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import brand_1 from "@/assets/img/brands/1 and all care.png";
 // import brand_2 from "@/assets/img/brands/DACNIS.png.webp";
-import brand_2 from "@/assets/img/brands/DACNIS.webp";
+// import brand_2 from "@/assets/img/brands/DACNIS.webp";
 import brand_3 from "@/assets/img/brands/glutenfree1.png";
 import brand_4 from "@/assets/img/brands/logo.png";
 import brand_5 from "@/assets/img/brands/Logotipo_da_JBS_(2023).png";
@@ -20,7 +20,7 @@ import brand_11 from "@/assets/img/brands/microsoft.webp";
 
 const brand_data: StaticImageData[] = [
   brand_1,
-  brand_2,
+  // brand_2,
   brand_3,
   brand_4,
   brand_5,

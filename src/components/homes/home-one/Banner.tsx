@@ -128,7 +128,8 @@ const NEW_BANNER_SLIDES = [
 const VIDEO_EMBED_SRC =
   "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
-const BOTTOM_VIDEO_EMBED_SRC = VIDEO_EMBED_SRC;
+const BOTTOM_VIDEO_EMBED_SRC =
+  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_2_lfo5x8&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
 const blockVideoActions = (e: React.SyntheticEvent) => {
   e.preventDefault();
@@ -204,13 +205,15 @@ const HeroStyleSlide: React.FC<HeroStyleSlideProps> = ({
       <div className="banner-slide ai-center-slide">
         <div className="ai-center-slide__copy">
           <span className="ai-center-slide__kicker">
-            <strong>New</strong> Artificial Intelligence (AI) for everyone
+            Artificial Intelligence (AI) for everyone
           </span>
           <h3>
             <span className="ai-center-slide__hook">
               From tradies to teachers
             </span>
-            , nurses and small business owners
+            <span className="ai-center-slide__subline">
+              nurses and small business owners
+            </span>
           </h3>
           <p>{text}</p>
           <button
@@ -397,6 +400,116 @@ const GoogleProgramSlide = () => (
             width={1875}
             height={1250}
             sizes="(max-width: 991px) 90vw, 42vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const EDUCATE_EXCEL_PEERS = [
+  {
+    name: "Roberta Fox",
+    image: "/assets/img/others/testi_author01.png",
+  },
+  {
+    name: "Michel Jones",
+    image: "/assets/img/others/testi_author02.png",
+  },
+] as const;
+
+const EducateExcelSlide: React.FC<{ onEnquire: () => void }> = ({
+  onEnquire,
+}) => (
+  <div className="banner-slide educate-excel-slide">
+    <div className="educate-excel-slide__grid">
+      <div className="educate-excel-slide__copy">
+        <h3 className="educate-excel-slide__title">
+          Educate. Evaluate. Excel.
+        </h3>
+
+        <p className="educate-excel-slide__desc">
+          Trusted by thousands of individuals and businesses for practical,
+          industry relevant learning from micro learning, short online courses
+          to nationally recognised programs.
+        </p>
+
+        <button
+          type="button"
+          className="educate-excel-slide__cta"
+          onClick={onEnquire}
+        >
+          Enquire Now <BtnArrow />
+        </button>
+      </div>
+
+      <div className="educate-excel-slide__visual">
+        <span className="educate-excel-slide__x-pattern" aria-hidden="true" />
+
+        <svg
+          className="educate-excel-slide__blue-arrow"
+          viewBox="0 0 220 260"
+          aria-hidden="true"
+        >
+          <path
+            className="educate-excel-slide__blue-arrow-shadow"
+            d="M48 238 L168 78 L198 98 L78 258 Z"
+          />
+          <path
+            className="educate-excel-slide__blue-arrow-body"
+            d="M28 220 L148 60 L188 88 L68 248 Z"
+          />
+          <path
+            className="educate-excel-slide__blue-arrow-head"
+            d="M118 28 L208 78 L168 118 L148 60 Z"
+          />
+        </svg>
+
+        <svg
+          className="educate-excel-slide__yellow-arrow"
+          viewBox="0 0 160 90"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M8 72 C42 58, 58 28, 92 24 C118 21, 132 34, 148 18"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M132 8 L152 16 L138 32"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+
+        <div className="educate-excel-slide__peers" aria-label="Learners">
+          {EDUCATE_EXCEL_PEERS.map((peer) => (
+            <div key={peer.name} className="educate-excel-slide__peer">
+              <Image
+                src={peer.image}
+                alt=""
+                width={36}
+                height={36}
+                className="educate-excel-slide__peer-avatar"
+              />
+              <span>{peer.name}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="educate-excel-slide__photo">
+          <Image
+            src="/banner_img.webp"
+            alt="Student learning on a laptop"
+            width={419}
+            height={460}
+            sizes="(max-width: 991px) 78vw, 38vw"
+            className="educate-excel-slide__image"
             loading="lazy"
           />
         </div>
@@ -1025,7 +1138,12 @@ const Banner: React.FC = () => {
               if (isMobile) syncSlideSize(swiper);
             }}
           >
-            {/* ── Slide 1: Zigzag videos + Coming Soon ── */}
+            {/* ── Slide 1: Educate. Evaluate. Excel. ── */}
+            <SwiperSlide>
+              <EducateExcelSlide onEnquire={handleOpen} />
+            </SwiperSlide>
+
+            {/* ── Slide 2: Zigzag videos + Coming Soon ── */}
             <SwiperSlide>
               <div className="banner-slide banner-slide--video">
                 <div className="banner-video-zigzag">
@@ -1112,17 +1230,17 @@ const Banner: React.FC = () => {
               </div>
             </SwiperSlide>
 
-            {/* ── Slide 2: Google Program coming soon ── */}
+            {/* ── Slide 3: Google Program coming soon ── */}
             <SwiperSlide>
               <GoogleProgramSlide />
             </SwiperSlide>
 
-            {/* ── Slide 3: College Sorted hover characters ── */}
+            {/* ── Slide 4: College Sorted hover characters ── */}
             <SwiperSlide>
               <CollegeSortedSlide />
             </SwiperSlide>
 
-            {/* ── Slides 4–6: New hero-style topic banners ── */}
+            {/* ── Slides 5–7: New hero-style topic banners ── */}
             {NEW_BANNER_SLIDES.map((slide) => (
               <SwiperSlide key={slide.key}>
                 <HeroStyleSlide
