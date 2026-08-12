@@ -4,13 +4,11 @@ import faq_data from "@/data/home-data/FaqData"
 import CurvedCircle from "./CurvedCircle"
 import SvgAnimation from '@/hooks/SvgAnimation'
 import InjectableSvg from "@/hooks/InjectableSvg"
-import MotionAnimation from "@/hooks/MotionAnimation"
 
 import faq_img1 from "@/assets/img/faqsa.png"
 
 const FaqArea = () => {
 
-   MotionAnimation();
    const svgIconRef = SvgAnimation('/assets/img/others/faq_shape02.svg');
 
    return (

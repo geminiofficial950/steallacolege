@@ -15,7 +15,13 @@ type WrapperProps = {
 
 const Wrapper = ({ children }: WrapperProps) => {
   useEffect(() => {
-    AOS.init();
+    AOS.init({
+      once: true,
+      duration: 700,
+      easing: "ease-out-cubic",
+      mirror: false,
+      disableMutationObserver: true,
+    });
   }, []);
 
   MotionAnimation();
