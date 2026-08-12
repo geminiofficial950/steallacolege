@@ -51,6 +51,9 @@
             @include border-radius(30px);
         }
     }
+    &-area--home &__wrap {
+        background: var(--tg-common-color-white);
+    }
     &__item {
         text-align: center;
         & .icon {

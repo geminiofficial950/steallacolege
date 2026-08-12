@@ -14,10 +14,9 @@ import FooterOne from "./../../../layouts/footers/FooterOne";
 
 const defaultTabTitle: string[] = ["Overview", "Units", "Entry Requirement"];
 const topicCategories = new Set([
-  "Technology",
+  "Technology and AI",
   "Professional Development",
   "Business",
-  "Cyber Security",
   "Mental Health",
 ]);
 

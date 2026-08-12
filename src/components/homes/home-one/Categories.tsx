@@ -36,10 +36,11 @@ const uniqueCategories = new Map<
 >();
 
 course_data[0].course_details.forEach((item) => {
-  if (uniqueCategories.has(item.categoryId)) {
-    uniqueCategories.get(item.categoryId)!.count += 1;
+  const categoryKey = item.category.trim();
+  if (uniqueCategories.has(categoryKey)) {
+    uniqueCategories.get(categoryKey)!.count += 1;
   } else {
-    uniqueCategories.set(item.categoryId, {
+    uniqueCategories.set(categoryKey, {
       categoryName: item.category,
       count: 1,
       categoryId: item.categoryId,
@@ -60,6 +61,51 @@ const categoryFlatIcon = {
   // "Marketing": "flaticon-interaction",
 } as const;
 type CategoryId = keyof typeof categoryFlatIcon;
+
+const TechnologyAiIcon = () => (
+  <svg
+    width="96"
+    height="96"
+    viewBox="0 0 96 96"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="techAiGradient" x1="18" y1="18" x2="78" y2="78">
+        <stop stopColor="#7C3AED" />
+        <stop offset="0.5" stopColor="#2563EB" />
+        <stop offset="1" stopColor="#06B6D4" />
+      </linearGradient>
+    </defs>
+    <rect x="20" y="24" width="56" height="38" rx="10" fill="#EEF2FF" />
+    <rect
+      x="25"
+      y="29"
+      width="46"
+      height="28"
+      rx="7"
+      fill="url(#techAiGradient)"
+    />
+    <path
+      d="M38 70H58M48 62V70"
+      stroke="#1E1B4B"
+      strokeWidth="4"
+      strokeLinecap="round"
+    />
+    <circle cx="39" cy="43" r="4" fill="white" />
+    <circle cx="48" cy="43" r="4" fill="white" />
+    <circle cx="57" cy="43" r="4" fill="white" />
+    <path
+      d="M76 18L79 26L87 29L79 32L76 40L73 32L65 29L73 26L76 18Z"
+      fill="#FBBF24"
+    />
+    <path
+      d="M20 14L22 20L28 22L22 24L20 30L18 24L12 22L18 20L20 14Z"
+      fill="#A78BFA"
+    />
+  </svg>
+);
 
 // slider setting
 const setting = {
@@ -129,17 +175,21 @@ const Categories = () => {
                       <div className="categories__item">
                         <Link href={`/courses?category_id=${categoryId}`}>
                           <div className="icon">
-                            <Image
-                              src={category_Image}
-                              alt={categoryName}
-                              width={350}
-                              height={100}
-                              style={{
-                                objectFit: "contain",
-                                borderRadius: "10px",
-                                height: "80px",
-                              }}
-                            />
+                            {categoryName === "Technology and AI" ? (
+                              <TechnologyAiIcon />
+                            ) : (
+                              <Image
+                                src={category_Image}
+                                alt={categoryName}
+                                width={350}
+                                height={100}
+                                style={{
+                                  objectFit: "contain",
+                                  borderRadius: "10px",
+                                  height: "80px",
+                                }}
+                              />
+                            )}
                           </div>
                           <span className="name">{categoryName}</span>
                           <span className="courses">({count})</span>

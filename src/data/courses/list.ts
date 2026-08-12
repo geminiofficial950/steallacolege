@@ -90,7 +90,7 @@ export const courseList: CourseListItem[] = [
   {
     id: "ai-fundamentals",
     title: "AI Fundamentals – Understanding Artificial Intelligence",
-    category: "Technology",
+    category: "Technology and AI",
     categoryId: "CSTECH",
     image: "/images/courses/ai.jpg",
     price: 500,
@@ -99,7 +99,7 @@ export const courseList: CourseListItem[] = [
   {
     id: "ai-business",
     title: "AI for Business Decision Making",
-    category: "Technology",
+    category: "Technology and AI",
     categoryId: "CSTECH",
     image: "/images/courses/ai-business.jpg",
     price: 500,
@@ -108,7 +108,7 @@ export const courseList: CourseListItem[] = [
   {
     id: "advanced-ai",
     title: "Advanced AI Applications",
-    category: "Technology",
+    category: "Technology and AI",
     categoryId: "CSTECH",
     image: "/images/courses/advanced-ai.jpg",
     price: 600,
