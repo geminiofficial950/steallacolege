@@ -28,12 +28,19 @@ const options = [
   },
 ];
 
-const CustomSelect = ({ value, onChange }: any) => {
+const CustomSelect = ({ value, onChange, autoFocus = false }: any) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<any>(null);
   const [filteredCourses, setFilteredCourses] = useState<any[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const router = useRouter();
+
+  React.useEffect(() => {
+    if (autoFocus) {
+      inputRef.current?.focus();
+    }
+  }, [autoFocus]);
 
   const allCourses = course_data[0]?.course_details || [];
 
@@ -106,6 +113,7 @@ const CustomSelect = ({ value, onChange }: any) => {
       <div className="input-grp">
         <div style={{ position: "relative" }}>
           <input
+            ref={inputRef}
             type="text"
             placeholder="Search For Course . . ."
             value={searchKeyword}

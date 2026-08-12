@@ -18,9 +18,11 @@
 .categories {
     &-area {
         &--home {
-            padding-top: 70px;
+            padding-top: 32px;
+            padding-bottom: 24px;
             @media #{$xs} {
-                padding-top: 50px;
+                padding-top: 24px;
+                padding-bottom: 20px;
             }
         }
         &-four {

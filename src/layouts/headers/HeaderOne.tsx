@@ -1,14 +1,12 @@
 "use client";
 import Link from "next/link";
-import HeaderTopOne from "./menu/HeaderTopOne";
 import Image from "next/image";
 import NavMenu from "./menu/NavMenu";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MobileSidebar from "./menu/MobileSidebar";
-import InjectableSvg from "@/hooks/InjectableSvg";
 import dynamic from "next/dynamic";
 import logo from "@/assets/img/logo/23.png";
-import logo1 from "@/assets/img/logo/stella_logo.webp";
+import icon_2 from "@/assets/img/icons/envelope.svg";
 import { FaPhoneAlt } from "react-icons/fa";
 import StudentSupportForm from "./StudentSupportForm";
 
@@ -22,6 +20,23 @@ const HeaderOne = () => {
     setSelectedOption(option);
   };
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setSearchOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [searchOpen]);
+
   useEffect(() => {
     const handler = () => setSupportOpen(true);
     window.addEventListener("open-support-form", handler);
@@ -39,39 +54,10 @@ const HeaderOne = () => {
           width: "100%",
         }}
       >
-        {/* Top header with contact info - hidden on mobile */}
-        <div className="d-none d-lg-block">
-          <HeaderTopOne />
-        </div>
-
-        {/* Logo - fixed in top left */}
-        <div
-          className="floating-logo d-none d-lg-block"
-          style={{
-            position: "fixed",
-            top: "20px",
-            left: "25px",
-            zIndex: 10000,
-          }}
-        >
-          <Link href="/">
-            <Image
-              src={logo}
-              width={220}
-              height={100} // ✅ FIX (not 220)
-              style={{ height: "auto" }} // 🔥 keeps ratio
-              priority
-              quality={75}
-              alt="Stella College logo"
-            />
-          </Link>
-        </div>
-
         {/* Main navigation header */}
         <div
           id="sticky-header"
-          style={{ background: "#161439", padding: "20px" }}
-          className="tg-header__area"
+          className="tg-header__area header-one-bar"
         >
           <div
             className="custom-container"
@@ -81,24 +67,15 @@ const HeaderOne = () => {
               <div className="col-12" style={{ paddingRight: 0 }}>
                 <div className="tgmenu__wrap" style={{ paddingRight: 0 }}>
                   <nav
-                    className="tgmenu__nav"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      position: "relative",
-                      paddingRight: 0,
-                      marginRight: 0,
-                    }}
+                    className="tgmenu__nav header-one-nav"
                   >
-                    {/* Logo for mobile - shows only on small screens */}
-                    <div className="logo d-lg-none" style={{ flexShrink: 0 }}>
+                    <div className="logo header-one-logo">
                       <Link href="/">
                         <Image
-                          src={logo1}
-                          width={120}
-                          height={60} // ✅ FIX: use correct ratio (example)
-                          style={{ height: "auto" }} // 🔥 prevents distortion
+                          src={logo}
+                          width={220}
+                          height={100}
+                          className="header-one-logo__img"
                           priority
                           quality={75}
                           alt="Stella College logo"
@@ -106,44 +83,56 @@ const HeaderOne = () => {
                       </Link>
                     </div>
 
-                    {/* Empty space for logo on desktop (since logo is absolute) */}
-                    <div
-                      className="d-none d-lg-block"
-                      style={{ width: "220px", flexShrink: 0 }}
-                    ></div>
-
-                    {/* CENTER: Navigation Menu - absolutely centered (desktop only) */}
-                    <div
-                      className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex"
-                      style={{
-                        position: "absolute",
-                        left: "40%",
-                        transform: "translateX(-50%)",
-                        zIndex: 9999,
-                      }}
-                    >
+                    {/* CENTER: Navigation Menu - desktop only */}
+                    <div className="tgmenu__navbar-wrap tgmenu__main-menu header-one-nav-center d-none d-xl-flex">
                       <NavMenu />
                     </div>
 
-                    {/* RIGHT: Search + Actions - desktop only */}
-                    <div
-                      className="d-none d-lg-flex"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        marginLeft: "auto",
-                      }}
-                    >
-                      {/* Search Dropdown */}
-                      <div
-                        className="tgmenu__search d-none d-md-block"
-                        style={{ margin: 0, padding: 0 }}
+                    {/* RIGHT: Contact + Search + Actions - desktop only */}
+                    <div className="header-one-actions d-none d-lg-flex">
+                      <a
+                        href="mailto:info@stellacollege.edu.au"
+                        className="header-one-actions__btn"
+                        aria-label="Email info@stellacollege.edu.au"
                       >
-                        <CustomSelect
-                          value={selectedOption}
-                          onChange={handleSelectChange}
-                        />
+                        <Image src={icon_2} alt="" width={16} height={13} />
+                      </a>
+                      <a
+                        href="tel:1800069877"
+                        className="header-one-actions__btn"
+                        aria-label="Call 1800 069 877"
+                      >
+                        <FaPhoneAlt aria-hidden="true" />
+                      </a>
+                      <div
+                        ref={searchRef}
+                        className="header-one-search d-none d-md-block"
+                      >
+                        <button
+                          type="button"
+                          className="header-one-search__toggle"
+                          onClick={() => setSearchOpen((prev) => !prev)}
+                          aria-label="Search courses"
+                          aria-expanded={searchOpen}
+                        >
+                          <i
+                            className={
+                              searchOpen
+                                ? "tg-flaticon-close-1"
+                                : "flaticon-search"
+                            }
+                            aria-hidden="true"
+                          />
+                        </button>
+                        {searchOpen && (
+                          <div className="header-one-search__panel">
+                            <CustomSelect
+                              value={selectedOption}
+                              onChange={handleSelectChange}
+                              autoFocus
+                            />
+                          </div>
+                        )}
                       </div>
 
                       {/* Action buttons */}
@@ -177,23 +166,33 @@ const HeaderOne = () => {
                     </div>
 
                     {/* Mobile elements - show only on mobile */}
-                    <div className=" d-lg-none">
-                      <a href="tel:1800069877" style={{ color: "#d4a952" }}>
-                        <FaPhoneAlt /> 1800 069 877
+                    <div className="header-one-mobile-actions d-lg-none">
+                      <a
+                        href="mailto:info@stellacollege.edu.au"
+                        className="header-one-actions__btn"
+                        aria-label="Email info@stellacollege.edu.au"
+                      >
+                        <Image src={icon_2} alt="" width={15} height={12} />
                       </a>
-                    </div>
-
-                    <div
-                      onClick={() => setIsActive((prev) => !prev)}
-                      className="mobile-nav-toggler d-lg-none"
-                    >
-                      <i
-                        className={
-                          isActive
-                            ? "tg-flaticon-close-1"
-                            : "tg-flaticon-menu-1"
-                        }
-                      ></i>
+                      <a
+                        href="tel:1800069877"
+                        className="header-one-actions__btn"
+                        aria-label="Call 1800 069 877"
+                      >
+                        <FaPhoneAlt aria-hidden="true" />
+                      </a>
+                      <div
+                        onClick={() => setIsActive((prev) => !prev)}
+                        className="mobile-nav-toggler"
+                      >
+                        <i
+                          className={
+                            isActive
+                              ? "tg-flaticon-close-1"
+                              : "tg-flaticon-menu-1"
+                          }
+                        ></i>
+                      </div>
                     </div>
                   </nav>
                 </div>
@@ -203,8 +202,8 @@ const HeaderOne = () => {
         </div>
       </header>
 
-      {/* Add padding to body to account for fixed header */}
-      <div style={{ paddingTop: "100px" }}>
+      {/* Spacer for fixed header — shorter on mobile (no top bar) */}
+      <div className="header-one-spacer">
         <MobileSidebar isActive={isActive} setIsActive={setIsActive} />
       </div>
       <StudentSupportForm

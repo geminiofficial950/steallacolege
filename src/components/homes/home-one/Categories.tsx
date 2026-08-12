@@ -49,7 +49,7 @@ course_data[0].course_details.forEach((item) => {
 });
 // console.log(uniqueCategories);
 
-console.log("uniqueCategories", uniqueCategories);
+// console.log("uniqueCategories", uniqueCategories);
 const categoryFlatIcon = {
   CSAGEING: "flaticon-graphic-design",
   CSLEISURE: "flaticon-investment",

@@ -1,9 +1,8 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
 import Marquee from "react-fast-marquee";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import brand_1 from "@/assets/img/brands/1 and all care.png";
 // import brand_2 from "@/assets/img/brands/DACNIS.png.webp";
@@ -41,18 +40,36 @@ interface StyleType {
 }
 
 const BrandOne = ({ style }: StyleType) => {
+  const brandRef = useRef<HTMLDivElement | null>(null);
+  const [marqueePlaying, setMarqueePlaying] = useState(true);
+
+  useEffect(() => {
+    const el = brandRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setMarqueePlaying(entry.isIntersecting),
+      { threshold: 0.05 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <div
+        ref={brandRef}
         className={`brand-area ${style ? "brand-area-two" : ""}`}
         style={{
-          backgroundColor: "#f7f7f7", // ⭐ lighter background
-          padding: "30px 0",
+          backgroundColor: "#ffffff",
+          padding: "14px 0",
         }}
       >
         <div className="container-fluid">
           <Marquee
             className="marquee_mode"
+            play={marqueePlaying}
             pauseOnHover={false}
             speed={40} // ⭐ smoother loop speed
             gradient={false} // ⭐ makes it continuous loop with no fade
@@ -68,7 +85,17 @@ const BrandOne = ({ style }: StyleType) => {
                   gap: "50px",
                 }}
               >
-                <Image src={item} alt="brand" width={140} height={80} />
+                <Image
+                  src={item}
+                  alt="brand"
+                  width={120}
+                  height={60}
+                  style={{
+                    width: "120px",
+                    height: "60px",
+                    objectFit: "contain",
+                  }}
+                />
                 {/* ⭐ increased size */}
 
                 <Image
