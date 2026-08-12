@@ -1,6 +1,7 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -215,13 +216,12 @@ const HeroStyleSlide: React.FC<HeroStyleSlideProps> = ({
             </span>
           </h3>
           <p>{text}</p>
-          <button
-            type="button"
+          <Link
+            href="/courses?category_id=CSTECHNOLOGY"
             className="ai-center-slide__cta"
-            onClick={onEnquire}
           >
             Explore AI training <BtnArrow />
-          </button>
+          </Link>
         </div>
 
         <ul className="ai-center-slide__perks">

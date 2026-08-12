@@ -2180,6 +2180,7 @@
     font-size: 12px;
     font-weight: 500;
     letter-spacing: -0.01em;
+    text-decoration: none;
     box-shadow: 0 10px 24px rgba(99, 102, 241, 0.22);
     transition:
       transform 0.3s ease,
@@ -3714,19 +3715,19 @@
     & .creative-slide__float-card--main {
       background: linear-gradient(
         135deg,
-        var(--ds-accent) 0%,
-        var(--ds-accent-deep) 100%
+        rgba(255, 255, 255, 0.42) 0%,
+        rgba(255, 255, 255, 0.18) 100%
       );
-      color: #fff;
-      border-color: transparent;
+      color: var(--ds-text);
+      border-color: rgba(255, 255, 255, 0.62);
       font-size: 13px;
       min-height: 46px;
       padding: 10px 18px;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
       box-shadow:
-        0 14px 28px rgba(2, 132, 199, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        0 10px 32px rgba(32, 33, 36, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
     }
     & .creative-slide__float-card--top {
       top: 10px;
@@ -4673,7 +4674,8 @@
 
 /* Keep the homepage partner strip clear of the slider pagination. */
 .banner-area + .brand-area {
-  margin-top: 12px;
+  margin-top: 0;
+  background: #fff;
 }
 
 .banner-video-card {
