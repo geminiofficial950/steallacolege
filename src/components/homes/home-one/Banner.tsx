@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
 import BtnArrow from "@/svg/BtnArrow";
-import { BarChart3, Brain, GraduationCap, Star } from "lucide-react";
 
 import banner_shape_3 from "@/assets/img/banner/banner_shape01.svg";
 import banner_vr_person from "@/assets/img/banner/banner_vr_person.png";
@@ -37,10 +36,10 @@ const AI_IMAGE_WIDTH = 1875;
 const AI_IMAGE_HEIGHT = 1250;
 
 const AI_PERKS = [
-  { icon: GraduationCap, label: "Industry-focused training" },
-  { icon: BarChart3, label: "Learn by doing real projects" },
-  { icon: Star, label: "Stay ahead in your career" },
-  { icon: Brain, label: "AI skills for the real world" },
+  { label: "Industry-focused training" },
+  { label: "Learn by doing real projects" },
+  { label: "Stay ahead in your career" },
+  { label: "AI skills for the real world" },
 ] as const;
 
 const AiCenterGallery = () => (
@@ -209,7 +208,7 @@ const HeroStyleSlide: React.FC<HeroStyleSlideProps> = ({
           </span>
           <h3>
             <span className="ai-center-slide__hook">
-              From tradies to teachers
+              from Tradies to Teachers
             </span>
             <span className="ai-center-slide__subline">
               nurses and small business owners
@@ -226,11 +225,9 @@ const HeroStyleSlide: React.FC<HeroStyleSlideProps> = ({
         </div>
 
         <ul className="ai-center-slide__perks">
-          {AI_PERKS.map(({ icon: Icon, label }) => (
+          {AI_PERKS.map(({ label }) => (
             <li key={label}>
-              <span className="ai-center-slide__perk-icon" aria-hidden="true">
-                <Icon size={14} strokeWidth={2.2} />
-              </span>
+              <span className="ai-center-slide__perk-icon" aria-hidden="true" />
               <span>{label}</span>
             </li>
           ))}
@@ -525,6 +522,7 @@ const COLLEGE_SORTED_ZONES = [
     x: 0,
     w: 636,
     src: "/assets/bannerImages/college-sorted-v3/zone-left.mp4",
+    startAt: 0.28,
   },
   {
     key: "center",
@@ -532,6 +530,7 @@ const COLLEGE_SORTED_ZONES = [
     x: 636,
     w: 616,
     src: "/assets/bannerImages/college-sorted-v3/zone-center.mp4",
+    startAt: 0.8,
   },
   {
     key: "right",
@@ -539,15 +538,23 @@ const COLLEGE_SORTED_ZONES = [
     x: 1252,
     w: 668,
     src: "/assets/bannerImages/college-sorted-v3/zone-right.mp4",
+    startAt: 0.28,
   },
 ] as const;
 
 type CollegeSortedZoneKey = (typeof COLLEGE_SORTED_ZONES)[number]["key"];
 
 const COLLEGE_SORTED_ZONE_KEYS = COLLEGE_SORTED_ZONES.map((z) => z.key);
+const COLLEGE_SORTED_ZONE_STARTS = COLLEGE_SORTED_ZONES.reduce(
+  (starts, zone) => {
+    starts[zone.key] = "startAt" in zone ? zone.startAt : 0;
+    return starts;
+  },
+  {} as Record<CollegeSortedZoneKey, number>,
+);
 
-/** Start each next character 1s after the previous one begins. */
-const COLLEGE_SORTED_STAGGER_MS = 1000;
+/** Start each next character almost immediately so the bucket animation feels direct. */
+const COLLEGE_SORTED_STAGGER_MS = 120;
 const COLLEGE_SORTED_RESTART_MS = 1200;
 
 type ZonePlayState = "idle" | "playing" | "held";
@@ -634,7 +641,7 @@ const CollegeSortedSlide = () => {
       video.pause();
       video.loop = false;
       try {
-        video.currentTime = 0;
+        video.currentTime = COLLEGE_SORTED_ZONE_STARTS[key];
       } catch {
         /* ignore */
       }
@@ -655,26 +662,41 @@ const CollegeSortedSlide = () => {
       const video = videoRefs.current[zoneKey];
       if (!video) return;
 
-      zoneStateRef.current[zoneKey] = "playing";
       setActiveZone(zoneKey);
       swiper?.autoplay?.stop();
       video.muted = true;
       video.loop = loop;
 
       const playNow = () => {
+        const startAt = COLLEGE_SORTED_ZONE_STARTS[zoneKey];
+        const startPlayback = () => {
+          zoneStateRef.current[zoneKey] = "playing";
+          void video.play().catch(() => undefined);
+          startLoop();
+        };
+
+        zoneStateRef.current[zoneKey] = "idle";
+        drawFrame();
+
         try {
-          video.currentTime = 0;
+          if (Math.abs(video.currentTime - startAt) > 0.04) {
+            video.addEventListener("seeked", startPlayback, { once: true });
+            video.currentTime = startAt;
+            return;
+          }
         } catch {
           /* ignore */
         }
-        void video.play().catch(() => undefined);
-        startLoop();
+        startPlayback();
       };
 
       if (video.readyState >= 2) playNow();
-      else video.addEventListener("loadeddata", playNow, { once: true });
+      else {
+        video.load();
+        video.addEventListener("loadeddata", playNow, { once: true });
+      }
     },
-    [startLoop, swiper],
+    [drawFrame, startLoop, swiper],
   );
 
   const playZoneRef = useRef(playZone);
@@ -717,20 +739,26 @@ const CollegeSortedSlide = () => {
       userControlRef.current = true;
       clearStaggerTimers();
 
-      // Freeze others / clear idle ones; focus the hovered character
+      // Hover should only draw the selected character; the other zones stay on
+      // the base image so their video backplates do not show.
       for (const key of COLLEGE_SORTED_ZONE_KEYS) {
         if (key === zoneKey) continue;
         const video = videoRefs.current[key];
         if (!video) continue;
-        if (zoneStateRef.current[key] === "playing") {
-          video.pause();
-          zoneStateRef.current[key] = "held";
+        video.pause();
+        video.loop = false;
+        zoneStateRef.current[key] = "idle";
+        try {
+          video.currentTime = COLLEGE_SORTED_ZONE_STARTS[key];
+        } catch {
+          /* ignore */
         }
       }
 
+      drawFrame();
       playZone(zoneKey, { loop: true });
     },
-    [clearStaggerTimers, playZone],
+    [clearStaggerTimers, drawFrame, playZone],
   );
 
   useEffect(() => {
@@ -779,6 +807,8 @@ const CollegeSortedSlide = () => {
       const handler = onEnded(key);
       if (video) {
         video.muted = true;
+        video.preload = "auto";
+        video.load();
         video.addEventListener("ended", handler);
         // Warm decode so the first stagger is snappy
         const warm = () => {
@@ -787,13 +817,13 @@ const CollegeSortedSlide = () => {
             void p
               .then(() => {
                 video.pause();
-                video.currentTime = 0;
+                video.currentTime = COLLEGE_SORTED_ZONE_STARTS[key];
               })
               .catch(() => undefined);
           }
         };
-        if (video.readyState >= 3) warm();
-        else video.addEventListener("canplaythrough", warm, { once: true });
+        if (video.readyState >= 2) warm();
+        else video.addEventListener("loadeddata", warm, { once: true });
       }
       return { video, handler };
     });
@@ -1163,7 +1193,7 @@ const Banner: React.FC = () => {
                   </div>
 
                   {/* Top: video left | Coming Soon right */}
-                  <div className="row g-3 g-lg-4 align-items-center banner-video-zigzag__row">
+                  <div className="row g-3 g-lg-4 align-items-start banner-video-zigzag__row">
                     <div className="col-lg-6">
                       <div
                         className="banner-video-card"

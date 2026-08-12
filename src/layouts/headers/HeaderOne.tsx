@@ -6,8 +6,7 @@ import React, { useState, useEffect, useRef } from "react";
 import MobileSidebar from "./menu/MobileSidebar";
 import dynamic from "next/dynamic";
 import logo from "@/assets/img/logo/23.png";
-import icon_2 from "@/assets/img/icons/envelope.svg";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FiMail, FiPhone } from "react-icons/fi";
 import StudentSupportForm from "./StudentSupportForm";
 
 const CustomSelect = dynamic(() => import("@/ui/CustomSelect"), { ssr: false });
@@ -95,14 +94,14 @@ const HeaderOne = () => {
                         className="header-one-actions__btn"
                         aria-label="Email info@stellacollege.edu.au"
                       >
-                        <Image src={icon_2} alt="" width={16} height={13} />
+                        <FiMail aria-hidden="true" />
                       </a>
                       <a
                         href="tel:1800069877"
                         className="header-one-actions__btn"
                         aria-label="Call 1800 069 877"
                       >
-                        <FaPhoneAlt aria-hidden="true" />
+                        <FiPhone aria-hidden="true" />
                       </a>
                       <div
                         ref={searchRef}
@@ -172,14 +171,14 @@ const HeaderOne = () => {
                         className="header-one-actions__btn"
                         aria-label="Email info@stellacollege.edu.au"
                       >
-                        <Image src={icon_2} alt="" width={15} height={12} />
+                        <FiMail aria-hidden="true" />
                       </a>
                       <a
                         href="tel:1800069877"
                         className="header-one-actions__btn"
                         aria-label="Call 1800 069 877"
                       >
-                        <FaPhoneAlt aria-hidden="true" />
+                        <FiPhone aria-hidden="true" />
                       </a>
                       <div
                         onClick={() => setIsActive((prev) => !prev)}
