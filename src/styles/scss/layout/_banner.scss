@@ -4357,8 +4357,12 @@
   }
 
   @media (hover: none) {
+    &__hotspots {
+      pointer-events: none;
+    }
+
     &__copy p::after {
-      content: " Tap a character to play.";
+      content: "";
     }
   }
 }
