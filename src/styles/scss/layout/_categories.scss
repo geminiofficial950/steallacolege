@@ -20,6 +20,7 @@
         &--home {
             padding-top: 56px;
             padding-bottom: 24px;
+            background: var(--tg-common-color-white);
             @media #{$xs} {
                 padding-top: 40px;
                 padding-bottom: 20px;
@@ -52,6 +53,9 @@
         }
     }
     &-area--home &__wrap {
+        background: var(--tg-common-color-white);
+    }
+    &-area--home &__item .icon {
         background: var(--tg-common-color-white);
     }
     &__item {
