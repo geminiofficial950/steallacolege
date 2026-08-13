@@ -429,11 +429,11 @@ const GoogleProgramSlide = () => (
 
 const EDUCATE_EXCEL_PEERS = [
   {
-    name: "Roberta Fox",
+    name: "Sophia Carter",
     image: "/assets/img/others/testi_author02.png",
   },
   {
-    name: "Michel Jones",
+    name: "Michael Jones",
     image: "/assets/img/others/testi_author01.png",
   },
 ] as const;
