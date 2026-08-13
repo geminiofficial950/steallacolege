@@ -16,17 +16,27 @@ interface StyleType {
 const CourseArea = ({ style }: StyleType) => {
   const searchParams = useSearchParams();
   console.log("searchparam", searchParams);
-  const qCategoryId = searchParams.get("category_id");
+  const qCategoryIds = searchParams
+    .getAll("category_id")
+    .flatMap((categoryId) => categoryId.split(","))
+    .filter(Boolean);
 
   const [activeTab, setActiveTab] = useState(0);
 
   // Get the category name from query param
-  const initialCategory = qCategoryId
-    ? course_data[0].course_details.find(course => course.categoryId === qCategoryId)?.category
-    : null;
+  const initialCategories =
+    qCategoryIds.length > 0
+      ? Array.from(
+          new Set(
+            course_data[0].course_details
+              .filter((course) => qCategoryIds.includes(course.categoryId))
+              .map((course) => course.category),
+          ),
+        )
+      : [];
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    initialCategory ? [initialCategory] : []
+    initialCategories
   );
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 4600]);
   const [searchQuery, setSearchQuery] = useState("");
