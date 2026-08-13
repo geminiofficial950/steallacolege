@@ -133,9 +133,16 @@ const VIDEO_EMBED_SRC =
 const BOTTOM_VIDEO_EMBED_SRC =
   "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_2_lfo5x8&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
-const BANNER_AUTOPLAY_DELAY_MS = 3000;
-const BANNER_COUNTDOWN_START = BANNER_AUTOPLAY_DELAY_MS / 1000;
+const BANNER_DEFAULT_DELAY_MS = 3000;
+const BANNER_DEFAULT_COUNTDOWN_START = BANNER_DEFAULT_DELAY_MS / 1000;
+const STUDENT_BENEFITS_SLIDE_INDEX = 3;
+const STUDENT_BENEFITS_COUNTDOWN_START = 7;
 const BANNER_TRANSITION_SPEED_MS = 800;
+
+const getBannerCountdownStart = (swiper?: SwiperType | null) =>
+  swiper?.realIndex === STUDENT_BENEFITS_SLIDE_INDEX
+    ? STUDENT_BENEFITS_COUNTDOWN_START
+    : BANNER_DEFAULT_COUNTDOWN_START;
 
 const blockVideoActions = (e: React.SyntheticEvent) => {
   e.preventDefault();
@@ -823,13 +830,11 @@ const CollegeSortedSlide = () => {
         (key) => zoneStateRef.current[key] === "held",
       );
 
-      // All three videos done → advance like other slides' autoplay
+      // All three videos done → hold here; the shared countdown advances slides.
       if (isActiveRef.current && !userControlRef.current && allHeld) {
         restartTimerRef.current = window.setTimeout(() => {
           if (!isActiveRef.current || userControlRef.current) return;
-          const s = swiperInstanceRef.current;
-          s?.slideNext();
-          s?.autoplay?.start();
+          swiperInstanceRef.current?.autoplay?.start();
         }, COLLEGE_SORTED_RESTART_MS);
       }
     };
@@ -992,13 +997,15 @@ const Banner: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [bannerOffscreen, setBannerOffscreen] = useState(false);
-  const [bannerCountdown, setBannerCountdown] = useState(BANNER_COUNTDOWN_START);
+  const [bannerCountdown, setBannerCountdown] = useState(
+    BANNER_DEFAULT_COUNTDOWN_START,
+  );
   const [bannerCountdownVersion, setBannerCountdownVersion] = useState(0);
   const bannerRef = useRef<HTMLElement | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
   const resetBannerCountdown = useCallback(() => {
-    setBannerCountdown(BANNER_COUNTDOWN_START);
+    setBannerCountdown(getBannerCountdownStart(swiperRef.current));
     setBannerCountdownVersion((version) => version + 1);
   }, []);
 
