@@ -125,11 +125,17 @@ const NEW_BANNER_SLIDES = [
   },
 ] as const;
 
+const BANNER_REAL_SLIDE_COUNT = 4 + NEW_BANNER_SLIDES.length;
+
 const VIDEO_EMBED_SRC =
   "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
 const BOTTOM_VIDEO_EMBED_SRC =
   "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_2_lfo5x8&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
+
+const BANNER_AUTOPLAY_DELAY_MS = 3000;
+const BANNER_COUNTDOWN_START = BANNER_AUTOPLAY_DELAY_MS / 1000;
+const BANNER_TRANSITION_SPEED_MS = 800;
 
 const blockVideoActions = (e: React.SyntheticEvent) => {
   e.preventDefault();
@@ -424,11 +430,11 @@ const GoogleProgramSlide = () => (
 const EDUCATE_EXCEL_PEERS = [
   {
     name: "Roberta Fox",
-    image: "/assets/img/others/testi_author01.png",
+    image: "/assets/img/others/testi_author02.png",
   },
   {
     name: "Michel Jones",
-    image: "/assets/img/others/testi_author02.png",
+    image: "/assets/img/others/testi_author01.png",
   },
 ] as const;
 
@@ -986,8 +992,44 @@ const Banner: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [bannerOffscreen, setBannerOffscreen] = useState(false);
+  const [bannerCountdown, setBannerCountdown] = useState(BANNER_COUNTDOWN_START);
+  const [bannerCountdownVersion, setBannerCountdownVersion] = useState(0);
   const bannerRef = useRef<HTMLElement | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
+
+  const resetBannerCountdown = useCallback(() => {
+    setBannerCountdown(BANNER_COUNTDOWN_START);
+    setBannerCountdownVersion((version) => version + 1);
+  }, []);
+
+  const advanceBannerSlide = useCallback(() => {
+    const swiper = swiperRef.current;
+    if (!swiper || swiper.destroyed) return;
+
+    const currentIndex = swiper.activeIndex;
+    swiper.allowSlideNext = true;
+    swiper.update();
+
+    const nextRealIndex = (swiper.realIndex + 1) % BANNER_REAL_SLIDE_COUNT;
+
+    if (swiper.params.loop) {
+      swiper.slideToLoop(nextRealIndex, BANNER_TRANSITION_SPEED_MS, true);
+    } else {
+      swiper.slideNext(BANNER_TRANSITION_SPEED_MS, true);
+    }
+
+    window.setTimeout(() => {
+      if (!swiper.destroyed && swiper.activeIndex === currentIndex) {
+        if (swiper.params.loop) {
+          swiper.slideToLoop(nextRealIndex, BANNER_TRANSITION_SPEED_MS, true);
+          return;
+        }
+
+        const nextIndex = (currentIndex + 1) % swiper.slides.length;
+        swiper.slideTo(nextIndex, BANNER_TRANSITION_SPEED_MS, true);
+      }
+    }, 80);
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 991.98px)");
@@ -996,6 +1038,19 @@ const Banner: React.FC = () => {
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
+
+  useEffect(() => {
+    const countdownTimer = window.setTimeout(() => {
+      if (bannerCountdown <= 1) {
+        advanceBannerSlide();
+        return;
+      }
+
+      setBannerCountdown((current) => current - 1);
+    }, 1000);
+
+    return () => window.clearTimeout(countdownTimer);
+  }, [advanceBannerSlide, bannerCountdown, bannerCountdownVersion]);
 
   useEffect(() => {
     const el = bannerRef.current;
@@ -1198,19 +1253,16 @@ const Banner: React.FC = () => {
             autoHeight={isMobile}
             watchOverflow
             allowTouchMove
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
             pagination={{ clickable: true }}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
+              resetBannerCountdown();
               requestAnimationFrame(() => syncSlideSize(swiper));
               window.setTimeout(() => syncSlideSize(swiper), 300);
               window.setTimeout(() => syncSlideSize(swiper), 800);
             }}
             onSlideChange={(swiper) => {
+              resetBannerCountdown();
               if (!isMobile) return;
               requestAnimationFrame(() => syncSlideSize(swiper));
             }}
@@ -1339,6 +1391,10 @@ const Banner: React.FC = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+        </div>
+
+        <div className="banner-countdown" aria-hidden="true">
+          {bannerCountdown}
         </div>
 
         <Image
