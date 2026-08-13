@@ -128,10 +128,10 @@ const NEW_BANNER_SLIDES = [
 const BANNER_REAL_SLIDE_COUNT = 4 + NEW_BANNER_SLIDES.length;
 
 const VIDEO_EMBED_SRC =
-  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
+  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controls]=false&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
 const BOTTOM_VIDEO_EMBED_SRC =
-  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_2_lfo5x8&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controlslist]=nodownload&player[controlsList]=nodownload";
+  "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_2_lfo5x8&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controls]=false&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
 const BANNER_DEFAULT_DELAY_MS = 3000;
 const BANNER_DEFAULT_COUNTDOWN_START = BANNER_DEFAULT_DELAY_MS / 1000;
@@ -282,10 +282,7 @@ const HeroStyleSlide: React.FC<HeroStyleSlideProps> = ({
         <p>{text}</p>
         <div className="creative-slide__actions">
           {categoryHref ? (
-            <Link
-              href={categoryHref}
-              className="creative-slide__cta"
-            >
+            <Link href={categoryHref} className="creative-slide__cta">
               Explore training <BtnArrow />
             </Link>
           ) : (
@@ -899,7 +896,10 @@ const CollegeSortedSlide = () => {
           Stella College is partnered with UNiDAYS to give students discount
           over a range of products
         </p>
-        <div className="college-sorted-slide__logos" aria-label="Student benefit partners">
+        <div
+          className="college-sorted-slide__logos"
+          aria-label="Student benefit partners"
+        >
           {STUDENT_BENEFIT_LOGOS.map((logo) => (
             <Image
               key={logo.src}
