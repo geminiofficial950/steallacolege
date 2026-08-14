@@ -1425,11 +1425,14 @@ const Banner: React.FC = () => {
           />
 
           <div
-            className="modal fade show d-block"
+            className="modal fade show d-block banner-enquiry-modal"
             tabIndex={-1}
             role="dialog"
             aria-modal="true"
             style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               zIndex: 1050,
               position: "fixed",
               top: 0,
@@ -1438,26 +1441,29 @@ const Banner: React.FC = () => {
               bottom: 0,
               overflowX: "hidden",
               overflowY: "auto",
+              padding: "24px 12px",
             }}
           >
             <div
-              className="modal-dialog modal-dialog-scrollable mx-auto"
-              style={{ maxWidth: "500px", width: "90%", marginTop: "150px" }}
+              className="modal-dialog mx-auto banner-enquiry-modal__dialog"
+              style={{ maxWidth: "540px", width: "90%" }}
             >
-              <div className="modal-content rounded-4 shadow-lg border-0">
-                <div className="modal-header border-0 pb-0 pt-4 px-4">
-                  <h5 className="modal-title fw-bold fs-4">Enquire Now</h5>
+              <div className="modal-content banner-enquiry-modal__content">
+                <div className="modal-header banner-enquiry-modal__header">
+                  <h5 className="modal-title banner-enquiry-modal__title">
+                    Enquire Now
+                  </h5>
                   <button
                     type="button"
-                    className="btn-close"
+                    className="btn-close banner-enquiry-modal__close"
                     aria-label="Close"
                     onClick={handleClose}
                   />
                 </div>
 
-                <div className="modal-body px-4 pt-2 pb-4">
+                <div className="modal-body banner-enquiry-modal__body">
                   {submitted ? (
-                    <div className="text-center py-4">
+                    <div className="text-center py-4 banner-enquiry-modal__success">
                       <div className="mb-3" style={{ fontSize: "3rem" }}>
                         ✅
                       </div>
@@ -1469,14 +1475,18 @@ const Banner: React.FC = () => {
                         shortly.
                       </p>
                       <button
-                        className="btn btn-primary w-100"
+                        className="btn btn-primary w-100 banner-enquiry-modal__submit"
                         onClick={handleClose}
                       >
                         Close
                       </button>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} noValidate>
+                    <form
+                      onSubmit={handleSubmit}
+                      noValidate
+                      className="banner-enquiry-modal__form"
+                    >
                       {error && (
                         <div
                           className="alert alert-danger py-2 mb-3"
@@ -1486,10 +1496,10 @@ const Banner: React.FC = () => {
                         </div>
                       )}
 
-                      <div className="mb-3">
+                      <div className="mb-3 banner-enquiry-modal__field">
                         <label
                           htmlFor="enquiry-name"
-                          className="form-label fw-semibold"
+                          className="form-label fw-semibold banner-enquiry-modal__label"
                         >
                           Full Name <span className="text-danger">*</span>
                         </label>
@@ -1497,7 +1507,7 @@ const Banner: React.FC = () => {
                           id="enquiry-name"
                           type="text"
                           name="user_name"
-                          className="form-control form-control-lg"
+                          className="form-control form-control-lg banner-enquiry-modal__control"
                           placeholder="e.g. John Smith"
                           value={formData.user_name}
                           onChange={handleChange}
@@ -1505,10 +1515,10 @@ const Banner: React.FC = () => {
                         />
                       </div>
 
-                      <div className="mb-3">
+                      <div className="mb-3 banner-enquiry-modal__field">
                         <label
                           htmlFor="enquiry-email"
-                          className="form-label fw-semibold"
+                          className="form-label fw-semibold banner-enquiry-modal__label"
                         >
                           Email Address <span className="text-danger">*</span>
                         </label>
@@ -1516,7 +1526,7 @@ const Banner: React.FC = () => {
                           id="enquiry-email"
                           type="email"
                           name="user_email"
-                          className="form-control form-control-lg"
+                          className="form-control form-control-lg banner-enquiry-modal__control"
                           placeholder="e.g. john@example.com"
                           value={formData.user_email}
                           onChange={handleChange}
@@ -1524,10 +1534,10 @@ const Banner: React.FC = () => {
                         />
                       </div>
 
-                      <div className="mb-3">
+                      <div className="mb-3 banner-enquiry-modal__field">
                         <label
                           htmlFor="enquiry-phone"
-                          className="form-label fw-semibold"
+                          className="form-label fw-semibold banner-enquiry-modal__label"
                         >
                           Phone Number <span className="text-danger">*</span>
                         </label>
@@ -1535,24 +1545,24 @@ const Banner: React.FC = () => {
                           id="enquiry-phone"
                           type="tel"
                           name="user_phone"
-                          className="form-control form-control-lg"
+                          className="form-control form-control-lg banner-enquiry-modal__control"
                           placeholder="e.g. +61 400 000 000"
                           value={formData.user_phone}
                           onChange={handleChange}
                         />
                       </div>
 
-                      <div className="mb-4">
+                      <div className="mb-4 banner-enquiry-modal__field">
                         <label
                           htmlFor="enquiry-message"
-                          className="form-label fw-semibold"
+                          className="form-label fw-semibold banner-enquiry-modal__label"
                         >
                           Message
                         </label>
                         <textarea
                           id="enquiry-message"
                           name="message"
-                          className="form-control form-control-lg"
+                          className="form-control form-control-lg banner-enquiry-modal__control banner-enquiry-modal__textarea"
                           placeholder="Tell us what you're interested in..."
                           rows={4}
                           value={formData.message}
@@ -1561,10 +1571,10 @@ const Banner: React.FC = () => {
                         />
                       </div>
 
-                      <div className="d-flex flex-column flex-sm-row gap-2">
+                      <div className="d-flex flex-column flex-sm-row gap-2 banner-enquiry-modal__actions">
                         <button
                           type="submit"
-                          className="btn btn-primary btn-lg flex-fill"
+                          className="btn btn-primary btn-lg flex-fill banner-enquiry-modal__submit"
                           disabled={loading}
                         >
                           {loading ? (
@@ -1582,7 +1592,7 @@ const Banner: React.FC = () => {
                         </button>
                         <button
                           type="button"
-                          className="btn btn-outline-secondary btn-lg flex-fill"
+                          className="btn btn-outline-secondary btn-lg flex-fill banner-enquiry-modal__cancel"
                           onClick={handleClose}
                           disabled={loading}
                         >
