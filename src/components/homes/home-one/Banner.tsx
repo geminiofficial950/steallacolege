@@ -449,7 +449,8 @@ const EducateExcelSlide: React.FC<{ onEnquire: () => void }> = ({
     <div className="educate-excel-slide__grid">
       <div className="educate-excel-slide__copy">
         <h3 className="educate-excel-slide__title">
-          Educate. Evaluate. Excel.
+          Educate. Evaluate.{" "}
+          <span className="educate-excel-slide__title-highlight">Excel.</span>
         </h3>
 
         <p className="educate-excel-slide__desc">

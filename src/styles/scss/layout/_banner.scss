@@ -3082,6 +3082,13 @@
     white-space: nowrap;
   }
 
+  &__title-highlight {
+    display: inline-block;
+    padding: 0 8px 2px;
+    border-radius: 10px;
+    background: var(--ee-yellow);
+  }
+
   &__desc {
     max-width: 460px;
     margin: 0 0 28px;
