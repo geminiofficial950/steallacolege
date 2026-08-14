@@ -5022,37 +5022,6 @@
   }
 }
 
-.banner-countdown {
-  position: absolute;
-  top: 50%;
-  right: clamp(14px, 3vw, 44px);
-  z-index: 30;
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(87, 81, 225, 0.18);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.84);
-  color: #5751e1;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1;
-  box-shadow: 0 14px 28px rgba(22, 20, 57, 0.14);
-  backdrop-filter: blur(10px);
-  pointer-events: none;
-  transform: translateY(-50%);
-}
-
-@media #{$xs} {
-  .banner-countdown {
-    right: 10px;
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
-  }
-}
-
 /* Pause heavy banner motion when scrolled out of view — smoother page scroll */
 .banner-area--offscreen {
   iframe {

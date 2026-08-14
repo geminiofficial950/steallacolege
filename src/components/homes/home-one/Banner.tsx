@@ -1400,10 +1400,6 @@ const Banner: React.FC = () => {
           </Swiper>
         </div>
 
-        <div className="banner-countdown" aria-hidden="true">
-          {bannerCountdown}
-        </div>
-
         <Image
           src={banner_shape_3}
           alt="shape"
