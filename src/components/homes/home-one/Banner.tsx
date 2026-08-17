@@ -383,9 +383,12 @@ const GoogleProgramSlide = () => (
         <h3 className="google-program-slide__title">
           A flexible and secure{" "}
           <span className="google-program-slide__highlight">
-            foundation for learners
-            <span className="google-program-slide__verified" aria-hidden="true">
-              ✓
+            foundation for{" "}
+            <span className="google-program-slide__verified-wrap">
+              learners
+              <span className="google-program-slide__verified" aria-hidden="true">
+                ✓
+              </span>
             </span>
           </span>
         </h3>
