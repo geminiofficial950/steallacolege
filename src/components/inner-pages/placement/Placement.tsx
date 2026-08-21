@@ -121,7 +121,7 @@ const Placement = () => {
                 </p>
                 <p>
                   We will source and/or organise one placement opportunity in
-                  Victoria for each student enrolled in any of these four
+                  Australia for each student enrolled in any of these four
                   courses:
                 </p>
                 <ul className="list-wrap">

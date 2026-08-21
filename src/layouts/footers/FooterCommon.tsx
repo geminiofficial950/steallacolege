@@ -47,15 +47,6 @@ const FooterCommon = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://stellalearn.com.au"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
                   Portal login
                 </Link>
               </li>
