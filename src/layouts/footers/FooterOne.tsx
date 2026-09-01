@@ -29,7 +29,7 @@ const officeLocations = [
       "19–21 Kent Street, Busselton WA",
       "Lake Grace CRC, Corner Bishop St & School Place, Lake Grace WA 6353",
       "Suite 9, 110 Hay Street, Subiaco WA 6008",
-      "UCMAS Building, Shop 2, 365 High Road, Riverton WA 6148",
+      "UCMAS Building, Shop 2, 323 Durlacher Street , Geraldton, WA 6530",
     ],
   },
 ];
