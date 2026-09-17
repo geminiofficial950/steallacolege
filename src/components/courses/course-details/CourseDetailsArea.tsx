@@ -30,9 +30,13 @@ const CourseDetailsArea = ({ single_course }: any) => {
   const courseId = single_course?.courseId;
   const isNationallyRecognised =
     single_course?.certification === "Nationally Recognised Training";
-  const tabTitle = topicCategories.has(single_course?.category)
-    ? ["Overview", "Topics", "Entry Requirement"]
-    : defaultTabTitle;
+  const isContentOnlyCourse =
+    courseId === "masterclass-mental-health-sentio-framework-45-mins";
+  const tabTitle = isContentOnlyCourse
+    ? ["Overview"]
+    : topicCategories.has(single_course?.category)
+      ? ["Overview", "Topics", "Entry Requirement"]
+      : defaultTabTitle;
 
   return (
     <>
@@ -63,7 +67,14 @@ const CourseDetailsArea = ({ single_course }: any) => {
                     <Link href="/courses">{single_course?.category}</Link>
                   </li>
                 </ul>
-                <h2 className="title">
+                <h2
+                  className="title"
+                  style={
+                    isContentOnlyCourse
+                      ? { color: "#1e1c4a" }
+                      : undefined
+                  }
+                >
                   {single_course?.title
                     ? single_course.title
                     : "Resolving Conflicts Between Designers And Engineers"}
@@ -124,10 +135,10 @@ const CourseDetailsArea = ({ single_course }: any) => {
         </div>
 
         <style jsx>{`
-          @media (max-width: 768px) {
+          @media (max-width: 767.98px) {
             .course-details-container {
-              padding-left: 0 !important;
-              padding-right: 0 !important;
+              padding-left: 12px !important;
+              padding-right: 12px !important;
               max-width: 100% !important;
             }
 
@@ -138,8 +149,22 @@ const CourseDetailsArea = ({ single_course }: any) => {
 
             .courses__details-area .col-xl-8,
             .courses__details-area .col-lg-8 {
-              padding-left: 15px !important;
-              padding-right: 15px !important;
+              padding-left: 8px !important;
+              padding-right: 8px !important;
+              max-width: 100%;
+            }
+
+            .courses__details-content .title {
+              font-size: 22px;
+              line-height: 1.35;
+              overflow-wrap: anywhere;
+            }
+
+            .courses__details-thumb :global(img) {
+              max-width: 100%;
+              min-height: 0 !important;
+              height: auto !important;
+              object-fit: contain !important;
             }
           }
         `}</style>

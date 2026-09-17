@@ -96,6 +96,15 @@ const processedCourseDetails = course_detail_data.course_list.map((course: any) 
   };
 });
 
+const LATEST_COURSE_ID = "masterclass-mental-health-sentio-framework-45-mins";
+const latestCourseIndex = processedCourseDetails.findIndex(
+  (course) => course.courseId === LATEST_COURSE_ID,
+);
+if (latestCourseIndex > 0) {
+  const [latestCourse] = processedCourseDetails.splice(latestCourseIndex, 1);
+  processedCourseDetails.unshift(latestCourse);
+}
+
 const course_data: DataType[] = [
   {
     id: 1,

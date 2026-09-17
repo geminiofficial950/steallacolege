@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import InjectableSvg from "@/hooks/InjectableSvg";
 import BtnArrow from "@/svg/BtnArrow";
 import intlTelInput from "intl-tel-input";
@@ -43,6 +44,13 @@ const Sidebar = ({ courseId }: SidebarProps) => {
   );
   const description = overviewTab?.description || "";
   const isSentioCourse = courseData?.title?.toLowerCase().includes("sentio");
+  const formUrl =
+    courseData?.formUrl ||
+    (isSentioCourse ? "https://form.platoforms.com/fr0sh2hkqnr" : "");
+  const enrollLabel = courseData?.enrollLabel || "Enquiry Here";
+  const alignIncludes =
+    courseData?.courseId === "masterclass-mental-health-sentio-framework-45-mins";
+  const showBookingForm = Boolean(formUrl);
   // Debug: log the description to see what we're working with
   useEffect(() => {
     if (description) {
@@ -319,8 +327,9 @@ const Sidebar = ({ courseId }: SidebarProps) => {
                   Duration
                   <span
                     style={{
-                      marginLeft:
-                        courseData?.duration === "52 Weeks"
+                      marginLeft: alignIncludes
+                        ? "auto"
+                        : courseData?.duration === "52 Weeks"
                           ? "14%"
                           : [
                                 "34 Weeks",
@@ -336,6 +345,17 @@ const Sidebar = ({ courseId }: SidebarProps) => {
                   >
                     {courseData.duration}
                   </span>
+                </li>
+              )}
+              {courseData?.session && (
+                <li>
+                  <InjectableSvg
+                    src="/assets/img/icons/course_icon02.svg"
+                    alt="img"
+                    className="injectable"
+                  />
+                  Session
+                  <span style={{ marginLeft: "auto" }}>{courseData.session}</span>
                 </li>
               )}
               {courseData?.Topics && (
@@ -428,8 +448,9 @@ const Sidebar = ({ courseId }: SidebarProps) => {
                 Delivery Mode
                 <span
                   style={{
-                    marginLeft:
-                      courseData?.modeofdelivery === "Face to Face"
+                    marginLeft: alignIncludes
+                      ? "auto"
+                      : courseData?.modeofdelivery === "Face to Face"
                         ? "2%"
                         : courseData?.modeofdelivery === "Workshop + Online"
                           ? "3%"
@@ -487,7 +508,7 @@ const Sidebar = ({ courseId }: SidebarProps) => {
                 className="btn btn-two arrow-btn"
                 onClickCapture={openModalCapture}
               >
-                Enquiry Here
+                {enrollLabel}
                 <BtnArrow />
               </p>
             </div>
@@ -495,7 +516,8 @@ const Sidebar = ({ courseId }: SidebarProps) => {
         </div>
       </div>
 
-      {isModalOpen && (
+      {isModalOpen &&
+        createPortal(
         <div
           className="tg-modal-overlay"
           role="dialog"
@@ -504,24 +526,24 @@ const Sidebar = ({ courseId }: SidebarProps) => {
             position: "fixed",
             inset: 0,
             backgroundColor: "rgba(0,0,0,0.6)",
-            zIndex: 1050,
+            zIndex: 10050,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "16px",
+            padding: "24px 16px",
           }}
           onClick={closeModal}
         >
           <div
-            className="tg-modal-content container"
+            className="tg-modal-content"
             style={{
               background: "#fff",
               borderRadius: 8,
-              maxWidth: 600,
+              maxWidth: showBookingForm ? 640 : 600,
               width: "100%",
-              maxHeight: "77vh",
+              maxHeight: "90vh",
               overflowY: "auto",
-              marginTop: "180px",
+              margin: 0,
               boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
             }}
             onClick={(e) => e.stopPropagation()}
@@ -536,7 +558,9 @@ const Sidebar = ({ courseId }: SidebarProps) => {
                 alignItems: "center",
               }}
             >
-              <h5 className="mb-0">Request a Callback</h5>
+              <h5 className="mb-0">
+                {courseData?.enrollLabel || "Request a Callback"}
+              </h5>
 
               <button
                 onClick={closeModal}
@@ -553,10 +577,10 @@ const Sidebar = ({ courseId }: SidebarProps) => {
 
             {/* 🔥 CONDITIONAL RENDER */}
             <div style={{ padding: "20px" }}>
-              {isSentioCourse ? (
-                // ✅ SENTIO → SHOW EMBED FORM
+              {showBookingForm ? (
+                // ✅ SENTIO / bookable masterclass → SHOW EMBED FORM
                 <iframe
-                  src="https://form.platoforms.com/fr0sh2hkqnr"
+                  src={formUrl}
                   width="100%"
                   height="600"
                   style={{
@@ -639,8 +663,9 @@ const Sidebar = ({ courseId }: SidebarProps) => {
               )}
             </div>
           </div>
-        </div>
-      )}
+        </div>,
+          document.body,
+        )}
       <style>
         {`
       .courses__details-sidebar {
@@ -653,11 +678,35 @@ const Sidebar = ({ courseId }: SidebarProps) => {
           position: static;
           top: auto;
         }
-
       }
-      @media (max-width: 390px) {
-        .col-xl-3.col-lg-3 {
-          min-width: 100% !important;
+      @media (max-width: 767.98px) {
+        .courses__details-sidebar-col {
+          min-width: 0 !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          flex: 0 0 100%;
+        }
+        .courses__details-sidebar {
+          margin-left: 0;
+          margin-right: 0;
+          padding: 20px 16px 28px;
+        }
+        .courses__details-sidebar img {
+          max-width: 100%;
+          height: auto;
+        }
+        .courses__information-wrap .list-wrap li {
+          flex-wrap: wrap;
+          gap: 4px 8px;
+        }
+        .courses__information-wrap .list-wrap li span {
+          margin-left: auto !important;
+        }
+        .tg-modal-content {
+          max-width: 100% !important;
+        }
+        .tg-modal-content iframe {
+          height: 68vh !important;
         }
       }
     `}
