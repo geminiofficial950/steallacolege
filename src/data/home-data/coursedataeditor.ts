@@ -55,6 +55,7 @@ import sentio4Outside from "../../../public/assets/courseImages/sentio part 4 ou
 import sentio4Inside from "../../../public/assets/courseImages/sentio part 4 inside.png";
 import sentio5Outside from "../../../public/assets/courseImages/sentio part 5 outside.png";
 import sentio5Inside from "../../../public/assets/courseImages/sentio part 5 inside.png";
+import sentioMasterclass from "../../../public/Master Class - Mental Heath SENTIO Framework 45 mins session.jpeg";
 
 const courseImg = {
   ai: { out: aiOutside, in: aiInside },
@@ -72,6 +73,7 @@ const courseImg = {
   sentio3: { out: sentio3Outside, in: sentio3Inside },
   sentio4: { out: sentio4Outside, in: sentio4Inside },
   sentio5: { out: sentio5Outside, in: sentio5Inside },
+  sentioMasterclass: { out: sentioMasterclass, in: sentioMasterclass },
 };
 
 interface CourseType {
@@ -88,6 +90,9 @@ interface CourseType {
   price?: string;
   units?: string;
   intakes?: string;
+  session?: string;
+  formUrl?: string;
+  enrollLabel?: string;
   certification?: string;
   rating?: string;
   workplacement?: string;
@@ -2144,6 +2149,42 @@ Stella College recommends, as per the First Aid in the Workplace Code of Practic
               title: "Entry Requirement",
               description:
                 "<ul><li>No formal prerequisite qualifications are required to enrol.</li><li>You will be invited to attend a detailed information session.</li><li>Must be 18 years and above.</li></ul>",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      courseId: "masterclass-mental-health-sentio-framework-45-mins",
+      title: "MASTER CLASS - Mental Heath SENTIO Framework 45 mins session",
+      image: courseImg.sentioMasterclass.out,
+      courseimage: courseImg.sentioMasterclass.in,
+      review: "0",
+      category: "Mental Health",
+      categoryId: "PSODFCSD",
+      duration: "45 Mins",
+      price: "49",
+      session: "1st October",
+      formUrl:
+        "https://form.platoforms.com/fr0sh2hkqnr?sid=sred2e6138e63c40f0901cbabc02e7fb2f",
+      enrollLabel: "Book Now",
+      modeofdelivery: "Online",
+      rating: "5",
+      category_Image: image13,
+      allCourses: "All Courses",
+      review_data: [
+        { id: 1, rating: 5, width: "80", review: "0" },
+        { id: 2, rating: 4, width: "50", review: "0" },
+        { id: 3, rating: 3, width: "0", review: "0" },
+        { id: 4, rating: 2, width: "0", review: "0" },
+        { id: 5, rating: 1, width: "0", review: "0" },
+      ],
+      detail: [
+        {
+          tabs: [
+            {
+              title: "Overview",
+              description: `<p><strong>STELLA College's MASTERCLASS in Mental Health</strong></p><p>Sentio Framework Professional Development | 45 Mins ONLINE</p><p>What do you notice before someone tells you they’re struggling?</p><p>Emotional distress can often show up before it is ever named — through changes in behaviour, silence, posture, communication and withdrawal.</p><p>Join our engaging 1-hour online masterclass introducing the Sentio Framework — a perception-led approach to emotional awareness, engagement and early support.</p><p><strong>PERCEPTION BEFORE PATHOLOGY</strong></p><p>In this practical session, explore how to:</p><ul class="about__info-list list-wrap"><li class="about__info-list-item"><i class="flaticon-angle-right"></i><p class="content" style="font-weight: 400;">Recognise subtle signs of emotional distress</p></li><li class="about__info-list-item"><i class="flaticon-angle-right"></i><p class="content" style="font-weight: 400;">Create safety before moving to intervention</p></li><li class="about__info-list-item"><i class="flaticon-angle-right"></i><p class="content" style="font-weight: 400;">Build connection before relying on technique</p></li><li class="about__info-list-item"><i class="flaticon-angle-right"></i><p class="content" style="font-weight: 400;">Observe patterns without immediately labelling them</p></li><li class="about__info-list-item"><i class="flaticon-angle-right"></i><p class="content" style="font-weight: 400;">Respond with support that fits the individual</p></li><li class="about__info-list-item"><i class="flaticon-angle-right"></i><p class="content" style="font-weight: 400;">Understand when escalation may actually be required</p></li></ul><p>Sometimes better support starts with noticing what others miss.</p>`,
             },
           ],
         },

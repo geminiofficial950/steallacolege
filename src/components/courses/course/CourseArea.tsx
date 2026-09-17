@@ -361,6 +361,17 @@ const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
                               height={514}
                               loading="lazy"
                               sizes="(max-width: 576px) calc(100vw - 32px), (max-width: 992px) 340px, 340px"
+                              style={
+                                item.id ===
+                                "masterclass-mental-health-sentio-framework-45-mins"
+                                  ? {
+                                      height: "auto",
+                                      minHeight: 0,
+                                      objectFit: "contain",
+                                      background: "#fff",
+                                    }
+                                  : undefined
+                              }
                             />
                           </Link>
                         </div>
@@ -389,7 +400,17 @@ const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
                               </li>
                             </ul>
                             <h3 className="title">
-                              <Link href={`/course-details/${item.id}`}>{item.title}</Link>
+                              <Link
+                                href={`/course-details/${item.id}`}
+                                style={
+                                  item.id ===
+                                  "masterclass-mental-health-sentio-framework-45-mins"
+                                    ? { color: "#1e1c4a" }
+                                    : undefined
+                                }
+                              >
+                                {item.title}
+                              </Link>
                             </h3>
                             <p className="author">
                               Duration <Link href="#">{item.duration}</Link>
@@ -461,6 +482,18 @@ const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
                                 height={514}
                                 loading="lazy"
                                 sizes="(max-width: 576px) calc(100vw - 32px), (max-width: 992px) 340px, 340px"
+                                style={
+                                  item.id ===
+                                  "masterclass-mental-health-sentio-framework-45-mins"
+                                    ? {
+                                        height: "auto",
+                                        minHeight: 0,
+                                        width: "100%",
+                                        objectFit: "contain",
+                                        background: "#fff",
+                                      }
+                                    : undefined
+                                }
                               />
                             </Link>
                           </div>
@@ -485,7 +518,16 @@ const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
                             </ul>
 
                             <h3 className="title mt-2">
-                              <Link href={`/course-details/${item.id}`} aria-label={`Learn more about ${item.title}`}>
+                              <Link
+                                href={`/course-details/${item.id}`}
+                                aria-label={`Learn more about ${item.title}`}
+                                style={
+                                  item.id ===
+                                  "masterclass-mental-health-sentio-framework-45-mins"
+                                    ? { color: "#1e1c4a" }
+                                    : undefined
+                                }
+                              >
                                 {item.title} <span className="visually-hidden">about {item.title}</span>
                               </Link>
                             </h3>

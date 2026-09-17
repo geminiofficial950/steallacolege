@@ -86,6 +86,7 @@ const courseFilters = [
   },
 ];
 const upcomingCourseIds = [
+  "masterclass-mental-health-sentio-framework-45-mins",
   "chc43415-certificate-iv-in-leisure-and-health-(r4)",
   "the_sentio_framework_introduction_part_1_of_5_mental_health_series",
   "chc43121-certificate-iv-in-disability-support-(r1)",
@@ -102,6 +103,7 @@ const popularCourseIds = [
 ];
 
 const shortCourseIds = [
+  "masterclass-mental-health-sentio-framework-45-mins",
   "hltaid011-provide-first-aid-(r1)",
   "hltaid009-provide-cardiopulmonary-resuscitation-(r1)",
   "hltaid011-provide-first-aid-(r1)",
@@ -186,6 +188,16 @@ const CourseArea = ({ style }: StyleType) => {
 
   // STEP 3: Only reorder for All Courses
   if (activeFilter.name === "All Courses") {
+    const masterclassId = "masterclass-mental-health-sentio-framework-45-mins";
+    const masterclassIndex = finalCourses.findIndex(
+      (item) => item.id === masterclassId,
+    );
+
+    if (masterclassIndex !== -1) {
+      const [masterclass] = finalCourses.splice(masterclassIndex, 1);
+      finalCourses.unshift(masterclass);
+    }
+
     const sentioIndex = finalCourses.findIndex(
       (item) => item.title === SENTIO_TITLE,
     );
@@ -338,6 +350,17 @@ const CourseArea = ({ style }: StyleType) => {
                           <Image
                             src={item.thumb || item.courseimage!}
                             alt="img"
+                            style={
+                              item.id ===
+                              "masterclass-mental-health-sentio-framework-45-mins"
+                                ? {
+                                    height: "auto",
+                                    minHeight: 0,
+                                    objectFit: "contain",
+                                    background: "#fff",
+                                  }
+                                : undefined
+                            }
                           />
                         </Link>
                       </div>
@@ -350,7 +373,15 @@ const CourseArea = ({ style }: StyleType) => {
                         </ul>
 
                         <h3 className="title">
-                          <Link href={`/course-details/${item.id}`}>
+                          <Link
+                            href={`/course-details/${item.id}`}
+                            style={
+                              item.id ===
+                              "masterclass-mental-health-sentio-framework-45-mins"
+                                ? { color: "#1e1c4a" }
+                                : undefined
+                            }
+                          >
                             {item.title}
                           </Link>
                         </h3>
