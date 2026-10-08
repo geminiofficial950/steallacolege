@@ -14,7 +14,6 @@ import brand_6 from "@/assets/img/brands/premcar.png";
 import brand_7 from "@/assets/img/brands/unnamed-2.png";
 import brand_8 from "@/assets/img/brands/googla.png";
 import star from "@/assets/img/icons/brand_star.svg";
-import brand_9 from "@/assets/img/brands/srs.png";
 import brand_10 from "@/assets/img/brands/googla.jpg";
 import brand_11 from "@/assets/img/brands/microsoft.webp";
 
@@ -30,7 +29,6 @@ const brand_data: StaticImageData[] = [
   brand_3,
   brand_5,
   brand_8,
-  brand_9,
   brand_10,
   brand_11,
 ];
