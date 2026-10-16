@@ -6,8 +6,7 @@ import Link from "next/link";
 
 import country1 from "@/assets/img/country/image.png";
 import country2 from "@/assets/img/country/image1.png";
-import { FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
-import { MdOutlineMarkEmailUnread } from "react-icons/md";
+import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 
 interface StyleType {
   style?: boolean;
@@ -50,23 +49,45 @@ const FooterOne = ({ style, style_2 }: StyleType) => {
                 <h4 className="footer__widget-title">Connect with us</h4>
 
                 <ul className="list-wrap footer__contact-list">
-                  <li>
+                  <li className="footer__contact-item--toll-free">
                     <FaPhoneAlt />
-                    <a href="tel:1800069877">1800 069 877</a>
+                    <span className="footer__contact-line">
+                      <span className="footer__contact-label">Toll Free</span>
+                      <a href="tel:1800069877">1800 069 877</a>
+                    </span>
                   </li>
                   <li>
                     <FaPhoneAlt />
-                    <a href="tel:0871001320">(08) 7100 1320</a>
+                    <span className="footer__contact-line">
+                      <span className="footer__contact-label">
+                        South Australia &amp; Adelaide
+                      </span>
+                      <a href="tel:0871001320">(08) 7100 1320</a>
+                    </span>
                   </li>
                   <li>
                     <FaPhoneAlt />
-                    <a href="tel:61411620815">+61 411 620 815</a>
+                    <span className="footer__contact-line">
+                      <span className="footer__contact-label">Victoria</span>
+                      <a href="tel:0390019118">(03) 9001 9118</a>
+                    </span>
                   </li>
                   <li>
-                    <MdOutlineMarkEmailUnread />
-                    <a href="mailto:info@stellacollege.edu.au">
-                      info@stellacollege.edu.au
-                    </a>
+                    <FaPhoneAlt />
+                    <span className="footer__contact-line">
+                      <span className="footer__contact-label">All other</span>
+                      <a href="tel:0411620815">0411 620 815</a>
+                    </span>
+                  </li>
+                  <li className="footer__contact-item--email">
+                    <FaEnvelope aria-hidden />
+                    <span className="footer__contact-line">
+                      <span className="footer__contact-label">Email</span>
+                      <a href="mailto:info@stellacollege.edu.au">
+                        info@<wbr />
+                        stellacollege.edu.au
+                      </a>
+                    </span>
                   </li>
                 </ul>
 
