@@ -45,7 +45,15 @@ const menu_data: MenuItem[] = [
     link: "#",
     sub_menus: [
       // { link: "/funding", title: "Funding (Australia Only)", },
-      { link: "https://stellalearn.com.au", title: "Student Login" },
+      {
+        link: "#",
+        title: "Student Login",
+        dropdown: true,
+        mega_menus: [
+          { link: "https://stellalearn.com.au", title: "Old Portal", subtitle: "" },
+          { link: "https://lms.eduskills.com.au", title: "New Portal", subtitle: "" },
+        ],
+      },
       {
         link: "/current-student",
         title: "Student Support Form",
