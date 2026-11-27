@@ -22,7 +22,7 @@ const InstructorTwo = ({ style }: StyleType) => {
          <div className="container">
             <div className="instructor__item-wrap-two">
                <div className="row">
-                  <div className="col-xl-6">
+                  <div className="col-md-6">
                      <div className="instructor__item-two tg-svg" ref={svgIconRef}>
                         <div className="instructor__thumb-two">
                            <Image src={instructor_thumb2} alt="img" />
@@ -43,7 +43,7 @@ const InstructorTwo = ({ style }: StyleType) => {
                      </div>
                   </div>
 
-                  <div className="col-xl-6">
+                  <div className="col-md-6">
                      <div className="instructor__item-two tg-svg" ref={svgIconRef2}>
                         <div className="instructor__thumb-two" style={{marginBottom:"0px"}}>
                            <Image src={instructor_thumb1} alt="img" />

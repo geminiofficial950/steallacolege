@@ -16,7 +16,7 @@ const FaqArea = () => {
       <section className="faq__area">
          <div className="container">
             <div className="row align-items-start">
-               <div className="col-lg-6">
+               <div className="col-md-6">
                   <div className="faq__img-wrap tg-svg" ref={svgIconRef}>
                      <div className="faq__round-text">
                         <CurvedCircle />
@@ -38,8 +38,8 @@ const FaqArea = () => {
                   </div>
                </div>
 
-               <div className="col-lg-6">
-                  <div className="faq__content">
+               <div className="col-md-6">
+                  <div className="faq__content faq__content--raised">
                      <div className="section__title pb-10">
                         <span className="sub-title">Frequently Asked Question’s </span>
                         <h2 className="title">Comprehensive Guidance for Academic and Career Advancement</h2>
