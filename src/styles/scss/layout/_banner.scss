@@ -3404,6 +3404,78 @@
       font-size: 14px;
     }
   }
+
+  // Short landscape screens (e.g. foldables / phones turned sideways):
+  // stacking pushes the CTA below the fold, so keep copy + visual side by side.
+  @media (min-width: 640px) and (max-width: 991.98px) and (orientation: landscape) and (max-height: 700px) {
+    &__grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 20px;
+      padding: 20px 24px 0;
+      align-items: center;
+    }
+
+    &__copy {
+      order: 1;
+      text-align: left;
+      margin: 0;
+      padding-bottom: 20px;
+    }
+
+    &__title {
+      font-size: clamp(20px, 3vw, 26px);
+    }
+
+    &__desc {
+      max-width: none;
+      margin: 0 0 18px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    &__cta {
+      padding: 12px 22px;
+      font-size: 14px;
+    }
+
+    &__visual {
+      order: 2;
+      width: 100%;
+      min-height: 0;
+      padding-top: 8px;
+    }
+
+    &__photo {
+      width: min(86%, 260px);
+    }
+
+    &__image {
+      max-height: min(300px, 52vh);
+    }
+
+    &__peers {
+      top: 10%;
+      min-width: 132px;
+      padding: 8px 10px;
+    }
+
+    &__peer {
+      font-size: 12px;
+    }
+
+    &__peer-avatar {
+      width: 28px;
+      height: 28px;
+    }
+
+    &__yellow-arrow {
+      display: none;
+    }
+
+    &__blue-arrow {
+      width: 96px;
+    }
+  }
 }
 
 @keyframes educateExcelFloat {
@@ -5301,5 +5373,252 @@
 @media #{$md} {
   .banner-swiper .banner-slide:not(.ai-center-slide) {
     padding-bottom: 18px !important;
+  }
+}
+
+/* =====================================================================
+   Short landscape screens (phones / foldables turned sideways, e.g.
+   iPhone Duo 801×626). The ≤991px rules stack every slide vertically,
+   which makes each banner taller than the screen. Here copy and visual
+   sit side by side and visuals are capped to the viewport height.
+   ===================================================================== */
+$banner-landscape: "(min-width: 640px) and (max-width: 991.98px) and (orientation: landscape) and (max-height: 700px)";
+
+@media #{$banner-landscape} {
+  .banner-area .line-shape {
+    display: none;
+  }
+
+  .banner-swiper {
+    padding-bottom: 26px;
+  }
+
+  /* Slide 1 — Students Benefits (canvas stage) */
+  .banner-swiper .college-sorted-slide {
+    min-height: 0;
+    --college-sorted-copy-gap: 8px;
+
+    .college-sorted-slide__copy {
+      padding: 12px 14px 8px;
+
+      h3 {
+        margin-bottom: 4px;
+        font-size: 26px;
+      }
+
+      p {
+        font-size: 13px;
+      }
+
+      .college-sorted-slide__logos {
+        gap: 4px 12px;
+        margin-top: 6px;
+      }
+
+      .college-sorted-slide__logo {
+        width: 60px;
+        height: 26px;
+      }
+    }
+
+    .college-sorted-slide__stage {
+      aspect-ratio: auto;
+      min-height: 0;
+      height: min(300px, 50vh);
+    }
+  }
+
+  /* Slides 2 & 6 — Job Ready (disability) + Mental Health */
+  .banner-swiper .creative-slide {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+    padding: 18px 16px 14px;
+
+    .creative-slide__copy {
+      order: 1 !important;
+      text-align: left;
+    }
+
+    .creative-slide__visual {
+      order: 2 !important;
+      width: 100%;
+      margin: 0;
+      padding: 4px;
+    }
+
+    .creative-slide__title {
+      font-size: clamp(22px, 3.2vw, 28px);
+      margin-bottom: 10px;
+    }
+
+    .creative-slide__copy > p {
+      margin: 0 0 16px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .creative-slide__actions {
+      justify-content: flex-start;
+    }
+
+    .creative-slide__cta {
+      min-height: 44px;
+    }
+
+    .creative-slide__image {
+      height: min(270px, 46vh);
+    }
+
+    .creative-slide__float-card {
+      min-height: 32px;
+      padding: 6px 10px;
+      font-size: 11px;
+    }
+  }
+
+  .banner-swiper .creative-slide--mental-health .creative-slide__float-card--top {
+    top: 12px;
+    right: 12px;
+  }
+
+  /* Slide 3 — AI for everyone */
+  .banner-swiper .ai-center-slide {
+    --ai-strip-height: 140px;
+
+    .ai-center-slide__perks {
+      gap: 8px 20px;
+      margin-top: 16px;
+    }
+  }
+
+  /* Slide 4 — Immersive learning videos */
+  .banner-swiper .banner-video-zigzag {
+    gap: 10px;
+
+    .banner-video-zigzag__row {
+      flex-wrap: nowrap;
+      align-items: center;
+
+      > [class*="col-"] {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+
+      > .order-2 {
+        order: 1 !important;
+      }
+
+      > .order-1 {
+        order: 2 !important;
+      }
+    }
+
+    .banner-video-zigzag__person {
+      width: 96px;
+      height: 96px;
+    }
+
+    // Two-column here like desktop, so bring back the desktop copy
+    // (badge + extra lines are `d-none d-lg-*` below 992px).
+    .banner-video-zigzag__label {
+      display: inline-flex !important;
+      margin-bottom: 8px;
+      padding: 5px 12px;
+      font-size: 10px;
+    }
+
+    .banner-video-zigzag__copy {
+      align-items: flex-start;
+      text-align: left;
+      padding: 4px 0 4px 12px;
+
+      h3 {
+        margin-bottom: 6px;
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      p .d-lg-inline {
+        display: inline !important;
+      }
+    }
+
+    .banner-video-zigzag__copy--cta {
+      padding: 4px 12px 4px 0;
+
+      .banner-video-zigzag__copy-extra {
+        display: block !important;
+        margin-bottom: 12px;
+      }
+
+      .btn {
+        align-self: flex-start;
+        margin-top: 0;
+        min-height: 42px;
+      }
+    }
+  }
+
+  .banner-swiper .banner-video-card__frame {
+    height: 150px;
+  }
+
+  /* Slide 5 — Google Program */
+  .banner-swiper .google-program-slide {
+    .google-program-slide__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px 0;
+    }
+
+    .google-program-slide__content {
+      text-align: left;
+      margin: 0;
+      padding-bottom: 16px;
+    }
+
+    .google-program-slide__eyebrow {
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .google-program-slide__title {
+      margin-bottom: 10px;
+      font-size: clamp(22px, 3.2vw, 28px);
+    }
+
+    .google-program-slide__desc {
+      margin: 0 0 14px;
+    }
+
+    .google-program-slide__tools {
+      align-items: flex-start;
+    }
+
+    .google-program-slide__icons {
+      justify-content: flex-start;
+    }
+
+    .google-program-slide__visual {
+      order: 0;
+      min-height: 0;
+    }
+
+    .google-program-slide__arch {
+      width: min(100%, 230px);
+
+      &--shadow {
+        right: auto;
+        left: 50%;
+        transform: translate(calc(-50% + 12px), 10px);
+      }
+    }
   }
 }

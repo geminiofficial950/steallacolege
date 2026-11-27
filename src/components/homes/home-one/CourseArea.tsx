@@ -133,7 +133,7 @@ const setting = {
     1500: { slidesPerView: 4 },
     1200: { slidesPerView: 4 },
     992: { slidesPerView: 3, spaceBetween: 24 },
-    768: { slidesPerView: 2, spaceBetween: 24 },
+    768: { slidesPerView: 3, spaceBetween: 16 }, // tablets / iPhone Duo landscape (801px)
     600: { slidesPerView: 2, spaceBetween: 20 }, // iPhone Duo inner display (~626px) fits two cards
     576: { slidesPerView: 1 },
     0: { slidesPerView: 1 },
@@ -208,7 +208,12 @@ const CourseArea = ({ style }: StyleType) => {
 
     if (sentioIndex !== -1) {
       const [sentio] = finalCourses.splice(sentioIndex, 1);
-      finalCourses.splice(3, 0, sentio); // 3rd position
+      finalCourses.splice(3, 0, sentio); // 4th position (index 3)
+    }
+
+    // Swap the 1st and 3rd cards (masterclass moves to 3rd, the 3rd course leads)
+    if (finalCourses.length >= 3) {
+      [finalCourses[0], finalCourses[2]] = [finalCourses[2], finalCourses[0]];
     }
   }
   const prevRef = useRef<HTMLDivElement | null>(null);
@@ -241,7 +246,7 @@ const CourseArea = ({ style }: StyleType) => {
       <div className="container">
         <div className="section__title-wrap" style={{ marginBottom: "16px" }}>
           <div className="row justify-content-center">
-            <div className="col-lg-8">
+            <div className="col-12 col-xl-10">
               <div className="section__title text-center" style={{ marginBottom: "4px" }}>
                 {/* <span className="sub-title">Top Class Courses</span> */}
                 <h2 className="title">Explore Our Top Courses</h2>
@@ -254,9 +259,11 @@ const CourseArea = ({ style }: StyleType) => {
                   role="tablist"
                   style={{
                     display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                    gap: "10px",
+                    // keep all tabs on one line; tiny screens scroll sideways instead of wrapping
+                    flexWrap: "nowrap",
+                    // "safe" stops the first tab being clipped off-screen when the row overflows
+                    justifyContent: "safe center",
+                    gap: "clamp(4px, 1vw, 10px)",
                     overflowX: "auto",
                     whiteSpace: "nowrap",
                     scrollbarWidth: "none",
@@ -281,19 +288,29 @@ const CourseArea = ({ style }: StyleType) => {
                         id={`tab-${index}`}
                         aria-selected={activeTab === index}
                         aria-controls="course-tabpanel"
+                        aria-label={filter.name}
                         onClick={() => setActiveTab(index)}
                         style={{
                           transition: "all 0.5s ease",
                           // color: activeTab === index ? "#fff" : "inherit",
                           // backgroundColor: activeTab === index ? "#000" : "transparent",
-                          padding: "8px 16px",
+                          padding: "8px clamp(10px, 1.6vw, 16px)",
+                          fontSize: "clamp(14px, 1.9vw, 16px)",
                           border: "none",
                           cursor: "pointer",
                           borderRadius: "6px",
                           whiteSpace: "nowrap",
                         }}
                       >
-                        {filter.name}
+                        {/* Phones: drop the repeated " Courses" so all tabs fit on one line */}
+                        {filter.name.endsWith(" Courses") ? (
+                          <>
+                            {filter.name.slice(0, -" Courses".length)}
+                            <span className="d-none d-md-inline"> Courses</span>
+                          </>
+                        ) : (
+                          filter.name
+                        )}
                       </button>
                     </li>
                   ))}
@@ -437,6 +454,28 @@ const CourseArea = ({ style }: StyleType) => {
 
       {/* ✅ Mobile Scrollbar Hidden & Navigation Button Position */}
       <style jsx>{`
+        /* Below 1500px there's no room beside the slider, so the side arrows
+           sat on top of the cards — move them under the cards, centred */
+        @media (max-width: 1499.98px) {
+          .courses__nav--arrows {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            margin-top: 10px;
+          }
+          .courses__nav--arrows .courses-button-prev,
+          .courses__nav--arrows .courses-button-next {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            transform: none !important;
+            width: 46px;
+            height: 46px;
+            font-size: 18px;
+          }
+        }
         @media (max-width: 768px) {
           .courses__nav ul::-webkit-scrollbar {
             display: none;
@@ -487,6 +526,19 @@ const CourseArea = ({ style }: StyleType) => {
           }
           .courses__nav--arrows .courses-button-next {
             box-shadow: 2px 1.5px 0px 0px #23232b !important;
+          }
+        }
+        /* Phones: short labels + width-scaled pills so all tabs fit on one line, no scroll */
+        @media (max-width: 767.98px) {
+          .courses__nav ul {
+            justify-content: center !important;
+            gap: clamp(4px, 1.5vw, 8px) !important;
+            padding: 2px 0 6px !important;
+            overflow: visible !important;
+          }
+          .courses__nav .nav-link {
+            padding: 6px clamp(6px, 2vw, 14px) !important;
+            font-size: clamp(10px, 3.1vw, 14px) !important;
           }
         }
         /* Course card */

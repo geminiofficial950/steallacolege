@@ -13,7 +13,7 @@ const About = () => {
       <section className="about-area tg-motion-effects about-area--home">
         <div className="container">
           <div className="row align-items-center justify-content-between">
-            <div className="col-lg-6 col-md-9">
+            <div className="col-md-6">
               <div className="about__images">
                 <Image
                   src={about_img1}
@@ -40,7 +40,7 @@ const About = () => {
               </div>
             </div>
 
-            <div className="col-lg-6">
+            <div className="col-md-6">
               <div className="about__content">
                 <div className="section__title">
                   <h2 className="title">

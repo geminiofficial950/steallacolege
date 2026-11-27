@@ -28,10 +28,20 @@ const Blog = ({ style }: StyleType) => {
 
         <div className="row gutter-20">
           {blogToShow.map((item, index) => (
-            // Phones show only the first 2 posts (the "View All Blogs" button covers the rest)
+            // Phones show only the first 2 posts (the "View All Blogs" button covers the rest).
+            // Tablets / iPhone Duo (768–1199px) show 3 in one row, so the 4th is hidden there
+            // instead of sitting alone on a second row; desktop (xl) shows all 4.
             <div
               key={item.blogId}
-              className={`col-xl-3 col-md-6 ${!style && index >= 2 ? "d-none d-md-flex" : "d-flex"}`}
+              className={`col-xl-3 col-md-4 ${
+                index === 3
+                  ? style
+                    ? "d-flex d-md-none d-xl-flex"
+                    : "d-none d-xl-flex"
+                  : !style && index >= 2
+                    ? "d-none d-md-flex"
+                    : "d-flex"
+              }`}
             >
               <div className="blog__post-item shine__animate-item w-100">
                 <div className="blog__post-thumb">

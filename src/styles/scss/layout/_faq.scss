@@ -43,24 +43,31 @@
             z-index: 1;
         }
     }
+    &__img-wrap {
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            position: relative;
+            padding-top: 36px;
+        }
+    }
     &__img {
         position: relative;
         z-index: 1;
-        width: 450px;
-        height: 562px;
+        // ~25% smaller than the theme default (was 450x562 / 400x550 / 400x500)
+        width: 340px;
+        height: 425px;
         border-radius: 1000px;
         background: var(--tg-common-color-white);
         box-shadow: 9px 8px 0px #171717;
         margin: 0 auto;
         overflow: hidden;
         @media #{$lg} {
-            width: 400px;
-            height: 550px;
+            width: 300px;
+            height: 400px;
         }
         @media #{$xs} {
             width: 100%;
-            height: 500px;
-            max-width: 400px
+            height: 375px;
+            max-width: 300px
         }
         & img {
             position: absolute;
@@ -338,6 +345,52 @@
         & p {
             margin-bottom: 10px;
         }
+        // Home FAQ: start the copy a little higher so it lines up with the photo + curved text
+        &--raised {
+            padding-top: 0;
+            margin-top: -12px;
+            @media #{$xs} {
+                margin-top: 0;
+            }
+            // Side-by-side layout (≥768px, incl. iPhone Duo landscape): compact the copy so its
+            // height roughly matches the photo column
+            @media (min-width: 768px) and (max-width: 991.98px) {
+                margin-top: 0;
+                & .section__title .title {
+                    font-size: 24px !important;
+                }
+            }
+            @media (min-width: 768px) {
+                & .section__title {
+                    padding-bottom: 4px !important;
+                    & .sub-title {
+                        margin-bottom: 10px;
+                        font-size: 14px;
+                    }
+                    & .title {
+                        font-size: 30px;
+                        line-height: 1.25;
+                    }
+                }
+                & > p {
+                    font-size: 15px;
+                    margin-bottom: 4px;
+                }
+                & .faq__wrap {
+                    & .accordion-item .accordion-button {
+                        padding: 14px 0;
+                        font-size: 16px;
+                    }
+                    & .accordion-item .accordion-body {
+                        padding: 8px 0 4px;
+                        & p {
+                            font-size: 14px;
+                            line-height: 1.6;
+                        }
+                    }
+                }
+            }
+        }
         &-two {
             width: 80%;
             @media #{$xl} {
@@ -491,7 +544,7 @@
     }
 }
 .curved-circle {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--tg-common-color-dark);
@@ -501,9 +554,17 @@
     letter-spacing: 5px;
     position: absolute;
     @media #{$lg} {
-        font-size: 15px;
+        font-size: 13px;
         top: -6%;
         letter-spacing: 3px;
+    }
+    // Tablets / iPhone Duo (photo + FAQ side by side): centre the arc over the photo
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        left: 50%;
+        right: auto;
+        top: -36px;
+        font-size: 12px;
+        letter-spacing: 2px;
     }
     @media #{$xs} {
         display: none;

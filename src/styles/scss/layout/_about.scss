@@ -11,6 +11,41 @@
             @media #{$xs} {
                 padding: 20px 0 50px;
             }
+            // Tablets / iPhone Duo landscape: image left, content right (columns are col-md-6)
+            @media (min-width: 768px) and (max-width: 991.98px) {
+                & .about__images {
+                    margin: 0;
+                }
+                & .about__content {
+                    margin-top: 0;
+                    padding-left: 8px;
+                }
+                & .section__title .title {
+                    font-size: 26px;
+                    line-height: 1.4;
+                    // the yellow highlight is a fixed 59px tall (desktop size); scale it to the text
+                    // so it doesn't cover the lines above and below
+                    & span:not(.svg-icon) {
+                        padding: 0 8px 0 12px;
+                        margin: 0 4px;
+                        & > svg {
+                            top: -0.05em;
+                            height: 1.25em;
+                        }
+                    }
+                }
+                & .desc {
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    line-height: 1.6;
+                }
+                & .about__info-list {
+                    margin-bottom: 0;
+                }
+                & .tg-button-wrap {
+                    margin-top: 18px;
+                }
+            }
         }
         &-five {
             position: relative;

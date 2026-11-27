@@ -70,6 +70,37 @@
                 min-height: auto;
                 padding: 30px;
             }
+            // Tablets / iPhone Duo: two cards side by side (col-md-6), so each card
+            // stacks its copy on top and the photo along the bottom edge
+            @media (min-width: 768px) and (max-width: 1199.98px) {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                min-height: 0;
+                height: calc(100% - 30px);
+                padding: 24px 24px 0;
+                & .instructor__content-two {
+                    order: 1;
+                    margin-bottom: 0 !important;
+                    & .title {
+                        font-size: 22px;
+                    }
+                    & p {
+                        font-size: 14px;
+                        line-height: 1.6;
+                        margin-bottom: 14px;
+                    }
+                }
+                & .instructor__thumb-two {
+                    order: 2;
+                    margin: auto auto 0 !important;
+                    & > img {
+                        display: block;
+                        width: auto;
+                        height: 190px;
+                    }
+                }
+            }
             &:hover {
                 & .instructor__thumb-two {
                     & .shape-one {
