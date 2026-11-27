@@ -1611,7 +1611,9 @@
   width: 100%;
   max-width: 100%;
   padding-bottom: 52px;
-  overflow: hidden;
+  /* visible so slides animate through the empty space beside the container;
+     the .banner-area section (overflow-hidden) still clips at the screen edge */
+  overflow: visible;
   background: #fff;
   @media #{$md} {
     padding-bottom: 28px;
@@ -5269,5 +5271,35 @@
   *::before,
   *::after {
     animation-play-state: paused !important;
+  }
+}
+
+/* Desktop banner preview cards (see getBannerCreativeEffect in Banner.tsx):
+   side banners look like small rounded cards, and every move eases out softly into place */
+@media (min-width: 992px) {
+  .banner-swiper .swiper-slide {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+    border-radius: 50px; /* ~25px once scaled down to a card (same as before the 0.5 scale) */
+  }
+  .banner-swiper .swiper-slide:not(.swiper-slide-active) {
+    cursor: pointer;
+  }
+  /* the two visible side cards: content is clipped to the rounded corner (square inner panels used
+     to poke out), and only these two cast a shadow. The slides waiting stacked behind them share
+     the same spot, so giving every non-active slide a shadow piled up into a grey halo.
+     Shadow is set before the 0.5 scale-down: 16px / 48px read as ~8px / 24px on screen */
+  .banner-swiper .swiper-slide-prev,
+  .banner-swiper .swiper-slide-next {
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(22, 19, 58, 0.12);
+  }
+}
+
+/* Mobile/tablet: the swiper height follows the slide content, so a CTA sitting on the slide's
+   bottom edge got its bottom/shadow clipped and touched the pagination dots — keep room below it.
+   The AI slide is excluded: its padding-bottom reserves space for the absolutely-positioned photo strip. */
+@media #{$md} {
+  .banner-swiper .banner-slide:not(.ai-center-slide) {
+    padding-bottom: 18px !important;
   }
 }

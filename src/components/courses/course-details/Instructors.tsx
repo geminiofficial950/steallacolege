@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 import instructor_img from "@/assets/img/courses/course_instructors.png"
-import { course_detail_data } from "@/data/home-data/coursedataeditor";
+import type { Course as CourseDoc } from "@/types/content";
 
 interface Course {
   id: number;
@@ -22,17 +22,12 @@ interface Course {
 }
 
 interface InstructorsProps {
-  courseId?: number;
+  course?: CourseDoc; // full course document (from MongoDB)
 }
 
-const Instructors = ({ courseId }: InstructorsProps) => {
-   // Get course data by courseId instead of index
-   const course = course_detail_data.course_list.find(c => c.courseId === courseId);
+const Instructors = ({ course }: InstructorsProps) => {
 
-   console.log("Instructors component - courseId:", courseId);
-   console.log("Instructors component using coursedataeditor course:", course);
-
-   // Get entry requirements from coursedataeditor
+   // Get entry requirements from the course document
    const getEntryRequirements = () => {
       if (course?.detail?.[0]?.tabs) {
          const entryRequirementTab = course.detail[0].tabs.find(

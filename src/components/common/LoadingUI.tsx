@@ -1,10 +1,6 @@
+import { PageSkeleton } from "@/components/common/Skeletons";
 
-const LoadingUI = () => {
-   return (
-      <div style={{ textAlign: 'center', padding: '3rem' }}>
-         <h2>Loading...</h2>
-      </div>
-   )
-}
+// Default route loading state: shimmer skeleton instead of a "Loading..." heading
+const LoadingUI = () => <PageSkeleton />;
 
-export default LoadingUI
+export default LoadingUI;

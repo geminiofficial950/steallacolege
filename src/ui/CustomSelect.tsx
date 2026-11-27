@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useRouter } from "next/navigation";
-import course_data from "@/data/home-data/CourseData";
+import { useCourseCards } from "@/context/ContentContext";
 const animatedComponents = makeAnimated();
 
 const options = [
@@ -29,6 +29,8 @@ const options = [
 ];
 
 const CustomSelect = ({ value, onChange, autoFocus = false }: any) => {
+  // course cards come from MongoDB via ContentProvider (same shape the old static CourseData.ts exported)
+  const course_data = [{ id: 1, page: "home_1", course_details: useCourseCards() }];
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<any>(null);

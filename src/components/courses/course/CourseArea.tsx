@@ -1,19 +1,20 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 import Link from "next/link";
-import course_data from "@/data/home-data/CourseData";
+import { useCourseCards } from "@/context/ContentContext";
 import ReactPaginate from "react-paginate";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-// import { course_detail_data } from "@/data/home-data/coursedataeditor";
-import { courseDetailMap } from "@/components/courseLookup";
 
 interface StyleType {
   style?: boolean;
 }
 
 const CourseArea = ({ style }: StyleType) => {
+  // course cards come from MongoDB via ContentProvider (same shape the old static CourseData.ts exported)
+  const course_data = [{ id: 1, page: "home_1", course_details: useCourseCards() }];
   const searchParams = useSearchParams();
   console.log("searchparam", searchParams);
   const qCategoryIds = searchParams
@@ -80,7 +81,7 @@ const CourseArea = ({ style }: StyleType) => {
     }
 
     // 2. GET PRICE FROM course_detail_data USING courseId
-   const details = courseDetailMap.get(course.id);
+   const details = course; // price is part of the course card from MongoDB
 
     const coursePrice = details ? Number(details.price) : 0;
 
@@ -354,7 +355,7 @@ const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
                             className="shine__animate-link"
                             aria-label={`View details for ${item.title}`}
                           >
-                            <Image
+                            <ContentImage
                               src={item.thumb}
                               alt={item.title}
                               width={913}
@@ -475,7 +476,7 @@ const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
                               className="shine__animate-link"
                               aria-label={`View details for ${item.title}`}
                             >
-                              <Image
+                              <ContentImage
                                 src={item.thumb}
                                 alt={item.title}
                                 width={913}

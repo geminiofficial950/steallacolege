@@ -11,13 +11,13 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { toast, ToastContainer } from "react-toastify";
 import img_1 from "@/assets/img/header page .png";
 import img_2 from "@/assets/img/others/payment.png";
-import { course_detail_data } from "@/data/home-data/coursedataeditor";
+import type { Course } from "@/types/content";
 
 interface SidebarProps {
-  courseId?: string;
+  course?: Course; // full course document (from MongoDB)
 }
 
-const Sidebar = ({ courseId }: SidebarProps) => {
+const Sidebar = ({ course }: SidebarProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,10 +33,7 @@ const Sidebar = ({ courseId }: SidebarProps) => {
   const itiRef = useRef<Iti | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  // Get course data based on courseId
-  const courseData = course_detail_data.course_list.find(
-    (course: any) => course.courseId === courseId,
-  );
+  const courseData = course;
 
   // Extract duration and units from the course data
   const overviewTab = courseData?.detail?.[0]?.tabs?.find(

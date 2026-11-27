@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BlogSidebar from "@/components/blogs/blog-common/BlogSidebar";
-import { blog_detail_data, type BlogType } from "@/data/home-data/BlogDataEditor";
+import { getBlogById, getBlogs } from "@/lib/content";
+import type { Blog as BlogType } from "@/types/content";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import FooterOne from "@/layouts/footers/FooterOne";
 import { absoluteUrl, excerpt, getBlogPostingSchema, stripHtml, toIsoDate } from "@/lib/seo";
@@ -13,10 +15,6 @@ type PageProps = {
     id: string[];
   }>;
 };
-
-function getBlogById(blogId: string) {
-  return blog_detail_data.blog_list.find((blog) => blog.blogId === blogId);
-}
 
 function getBlogDescription(blog: BlogType) {
   const firstTab = blog.detail?.[0]?.tabs?.[0];
@@ -40,8 +38,11 @@ function getImageSrc(image: unknown) {
   return undefined;
 }
 
+// Blogs live in MongoDB; new ones added later are rendered on first visit and then cached
+export const revalidate = 300;
+
 export async function generateStaticParams() {
-  return blog_detail_data.blog_list.map((blog) => ({
+  return (await getBlogs()).map((blog) => ({
     id: [blog.blogId],
   }));
 }
@@ -49,7 +50,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const blogId = id?.[0];
-  const blog = blogId ? getBlogById(blogId) : undefined;
+  const blog = blogId ? await getBlogById(blogId) : undefined;
 
   if (!blog || !blogId) {
     return {
@@ -118,7 +119,7 @@ export default async function BlogDetailsPage({ params }: PageProps) {
     notFound();
   }
 
-  const blog = getBlogById(blogId);
+  const blog = await getBlogById(blogId);
   if (!blog) {
     notFound();
   }
@@ -144,7 +145,7 @@ export default async function BlogDetailsPage({ params }: PageProps) {
               <div className="blog__details-wrapper">
                 <div className="blog__details-thumb">
                   {blog.insideimage && (
-                    <Image src={blog.insideimage} alt={blog.title} width={800} height={400} className="w-100" />
+                    <ContentImage src={blog.insideimage} alt={blog.title} width={800} height={400} className="w-100" sizes="(max-width: 991px) 100vw, 75vw" priority />
                   )}
                 </div>
 
@@ -235,7 +236,7 @@ export default async function BlogDetailsPage({ params }: PageProps) {
                 </div>
               </div>
             </div>
-            <BlogSidebar />
+            <BlogSidebar articles={blog.detail?.[0]?.tabs?.[0]?.articles} />
           </div>
         </div>
       </section>

@@ -367,3 +367,14 @@
 .tgmobile__menu .navigation li > .mega-menu > li .mega-sub-menu li:first-child {
     border: none;
 }
+// Fixed header already shows the close toggle — hide the drawer's duplicate
+.has-fixed-header .tgmobile__menu {
+    & .close-btn {
+        display: none;
+    }
+    // Drawer already starts below the header, so trim the logo's top gap
+    & .nav-logo {
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+}

@@ -10,9 +10,10 @@ import { toast, ToastContainer } from "react-toastify";
 
 interface styleType {
   style_1?: boolean;
+  articles?: string[];
 }
 
-const BlogSidebar = ({ style_1 }: styleType) => {
+const BlogSidebar = ({ style_1, articles }: styleType) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -240,7 +241,7 @@ const BlogSidebar = ({ style_1 }: styleType) => {
               <i className="flaticon-arrow-right"></i>
             </button>
           </div>
-          <Categories />
+          <Categories articles={articles} />
           <LatestPost />
         </aside>
       </div>

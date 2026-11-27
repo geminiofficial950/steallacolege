@@ -14,13 +14,13 @@ const CourseDetailsTest = () => {
           {/* Overview Component - Uses coursedatas.ts directly */}
           <div className="mb-5">
             <h2>Overview Component</h2>
-            <Overview courseId={0} />
+            <Overview />
           </div>
           
           {/* Curriculum Component - Uses coursedatas.ts directly */}
           <div className="mb-5">
             <h2>Curriculum Component</h2>
-            <Curriculum courseId={0} />
+            <Curriculum />
           </div>
           
           {/* Show that components are self-contained */}

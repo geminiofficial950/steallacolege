@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CourseDetailsArea from "@/components/courses/course-details/CourseDetailsArea";
-import { course_detail_data } from "@/data/home-data/coursedataeditor";
+import { getCourseById, getCourses } from "@/lib/content";
+import type { Course } from "@/types/content";
 import { absoluteUrl, excerpt, getCourseSchema, stripHtml } from "@/lib/seo";
 
 type PageProps = {
@@ -10,12 +11,7 @@ type PageProps = {
   }>;
 };
 
-function getCourseById(courseId: string) {
-  return course_detail_data.course_list.find((course) => course.courseId === courseId);
-}
-
-function getOverviewDescription(courseId: string) {
-  const course = getCourseById(courseId);
+function getOverviewDescription(course: Course) {
   const overview = course?.detail?.[0]?.tabs?.find((tab) => tab.title === "Overview");
   return stripHtml(overview?.description);
 }
@@ -37,8 +33,11 @@ function getCourseImageSrc(image: unknown) {
   return undefined;
 }
 
+// Courses live in MongoDB; new ones added later are rendered on first visit and then cached
+export const revalidate = 300;
+
 export async function generateStaticParams() {
-  return course_detail_data.course_list
+  return (await getCourses())
     .filter((course) => Boolean(course.courseId))
     .map((course) => ({
       id: [course.courseId as string],
@@ -48,7 +47,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const courseId = id?.[0];
-  const course = courseId ? getCourseById(courseId) : undefined;
+  const course = courseId ? await getCourseById(courseId) : undefined;
 
   if (!course || !courseId) {
     return {
@@ -67,7 +66,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const description = excerpt(getOverviewDescription(courseId), 160);
+  const description = excerpt(getOverviewDescription(course), 160);
   const image = getCourseImageSrc(course.image);
   const urlPath = `/course-details/${courseId}`;
 
@@ -104,12 +103,12 @@ export default async function CourseDetailsPage({ params }: PageProps) {
     notFound();
   }
 
-  const course = getCourseById(courseId);
+  const course = await getCourseById(courseId);
   if (!course) {
     notFound();
   }
 
-  const description = excerpt(getOverviewDescription(courseId), 240);
+  const description = excerpt(getOverviewDescription(course), 240);
   const image = getCourseImageSrc(course.image);
   const schema = getCourseSchema({
     title: course.title,
@@ -129,6 +128,8 @@ export default async function CourseDetailsPage({ params }: PageProps) {
     rating: course.review || "4.5 Reviews",
     duration: course.duration || "Not specified",
     certification: course.certification,
+    // full course document (tabs, units, entry requirements...) for the detail tabs + sidebar
+    course,
   };
 
   return (

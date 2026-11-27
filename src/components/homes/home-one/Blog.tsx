@@ -1,6 +1,7 @@
 "use client";
-import { blog_detail_data } from "@/data/home-data/BlogDataEditor";
+import { useBlogSummaries } from "@/context/ContentContext";
 import Image from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 import Link from "next/link";
 
 interface StyleType {
@@ -8,16 +9,17 @@ interface StyleType {
 }
 
 const Blog = ({ style }: StyleType) => {
+  const blogs = useBlogSummaries(); // from MongoDB via ContentProvider
   const blogToShow = style
-    ? blog_detail_data.blog_list
-    : blog_detail_data.blog_list.slice(0, 4);
+    ? blogs
+    : blogs.slice(0, 4);
 
   return (
     <section className="blog__post-area blog__post-area--home">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-6">
-            <div className="section__title text-center mb-40">
+            <div className="section__title text-center mb-40 blog__home-title">
               <h2 className="title">Our Latest News Feed</h2>
               <p>News & Event Info</p>
             </div>
@@ -25,15 +27,19 @@ const Blog = ({ style }: StyleType) => {
         </div>
 
         <div className="row gutter-20">
-          {blogToShow.map((item) => (
-            <div key={item.blogId} className="col-xl-3 col-md-6 d-flex">
+          {blogToShow.map((item, index) => (
+            // Phones show only the first 2 posts (the "View All Blogs" button covers the rest)
+            <div
+              key={item.blogId}
+              className={`col-xl-3 col-md-6 ${!style && index >= 2 ? "d-none d-md-flex" : "d-flex"}`}
+            >
               <div className="blog__post-item shine__animate-item w-100">
                 <div className="blog__post-thumb">
                   <Link
                     href={`/blog-details/${item.blogId}`}
                     className="shine__animate-link"
                   >
-                    <Image
+                    <ContentImage
                       src={
                         typeof item.image === "string"
                           ? `/assets/img/blogs/outsideimage.jpg`

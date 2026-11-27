@@ -41,7 +41,7 @@ const LessonNavTav = ({ courseId }: LessonNavTavProps) => {
           role="tabpanel"
           aria-labelledby="overview-tab"
         >
-          <Overview courseId={courseId} />
+          <Overview />
         </div>
 
         <div
@@ -50,7 +50,7 @@ const LessonNavTav = ({ courseId }: LessonNavTavProps) => {
           role="tabpanel"
           aria-labelledby="entry-requirement-tab"
         >
-          <Instructors courseId={courseId} />
+          <Instructors />
         </div>
 
         <div

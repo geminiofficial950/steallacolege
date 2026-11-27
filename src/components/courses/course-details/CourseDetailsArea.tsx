@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 import Link from "next/link";
 import { useState } from "react";
 import Overview from "./Overview";
@@ -28,6 +29,7 @@ const CourseDetailsArea = ({ single_course }: any) => {
   };
 
   const courseId = single_course?.courseId;
+  const course = single_course?.course; // full course document from MongoDB
   const isNationallyRecognised =
     single_course?.certification === "Nationally Recognised Training";
   const isContentOnlyCourse =
@@ -49,7 +51,7 @@ const CourseDetailsArea = ({ single_course }: any) => {
           <div className="row">
             <div className="col-xl-8 col-lg-8">
               <div className="courses__details-thumb">
-                <Image
+                <ContentImage
                   src={
                     single_course?.courseimage ||
                     single_course?.thumb ||
@@ -109,7 +111,7 @@ const CourseDetailsArea = ({ single_course }: any) => {
                     role="tabpanel"
                     aria-labelledby="overview-tab"
                   >
-                    <Overview courseId={courseId} />
+                    <Overview course={course} />
                   </div>
                   <div
                     className={`tab-pane fade ${activeTab === 1 ? "show active" : ""}`}
@@ -117,7 +119,7 @@ const CourseDetailsArea = ({ single_course }: any) => {
                     role="tabpanel"
                     aria-labelledby="curriculum-tab"
                   >
-                    <Curriculum courseId={courseId} />
+                    <Curriculum course={course} />
                   </div>
                   <div
                     className={`tab-pane fade ${activeTab === 2 ? "show active" : ""}`}
@@ -125,12 +127,12 @@ const CourseDetailsArea = ({ single_course }: any) => {
                     role="tabpanel"
                     aria-labelledby="Entry Requirement-tab"
                   >
-                    <Instructors courseId={courseId} />
+                    <Instructors course={course} />
                   </div>
                 </div>
               </div>
             </div>
-            <Sidebar courseId={courseId} />
+            <Sidebar course={course} />
           </div>
         </div>
 

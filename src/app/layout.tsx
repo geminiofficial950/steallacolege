@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Providers from "./providers";
+import StyledJsxRegistry from "./StyledJsxRegistry";
 import "../styles/index.scss";
 import Script from "next/script";
 import { Inter, Poppins } from "next/font/google";
@@ -11,6 +12,9 @@ import { AppProvider } from "@/context/AppContext";
 import Toast from "@/components/Toast";
 import IssuedModal from "@/components/IssuedModal";
 import DownloadModal from "@/components/DownloadModal";
+import FloatingCall from "@/components/common/FloatingCall";
+import { ContentProvider } from "@/context/ContentContext";
+import { getBlogSummaries, getCourseCards } from "@/lib/content";
 import "@/styles/globals.css";
 import App from "next/app";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -31,6 +35,15 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.stellacollege.edu.au";
 const isDev = process.env.NODE_ENV === "development";
 
+// viewport-fit=cover lets the page use the full screen on notched/foldable iPhones (e.g. iPhone Duo);
+// safe-area insets in globals.css keep content clear of the Dynamic Island and rounded corners
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#16133a",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -38,7 +51,8 @@ export const metadata: Metadata = {
     template: "%s | Stella College",
   },
   description: "Stella College - Australia’s leading education provider",
-  icons: "https://www.stellacollege.edu.au/favicon.png",
+  // same favicon, resized (the original is 951px / 727KB and was downloaded on every page load)
+  icons: "/favicon-192.png",
   keywords: [
     "aged care",
     "childcare",
@@ -83,14 +97,21 @@ const organizationSchema = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Blogs and courses come from MongoDB (cached, see src/lib/content.ts)
+  const [courseCards, blogSummaries] = await Promise.all([getCourseCards(), getBlogSummaries()]);
+
   return (
     <html lang="en-AU" suppressHydrationWarning={isDev}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&family=Roboto:wght@400;500;700&display=swap" />
         {/* ── Font preloads: discovered 789ms late in CSS chain ── */}
         <link
           rel="preload"
@@ -155,14 +176,19 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <StyledJsxRegistry>
         <Providers>
           <AppProvider>
-            {children}
-            <Toast />
-            <IssuedModal />
-            <DownloadModal />
+            <ContentProvider courses={courseCards} blogs={blogSummaries}>
+              {children}
+              <Toast />
+              <IssuedModal />
+              <DownloadModal />
+              <FloatingCall />
+            </ContentProvider>
           </AppProvider>
         </Providers>
+        </StyledJsxRegistry>
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>

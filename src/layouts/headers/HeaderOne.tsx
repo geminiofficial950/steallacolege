@@ -89,6 +89,7 @@ const HeaderOne = () => {
                           height={100}
                           className="header-one-logo__img"
                           priority
+                          sizes="(max-width: 575px) 130px, 190px"
                           quality={75}
                           alt="Stella College logo"
                         />

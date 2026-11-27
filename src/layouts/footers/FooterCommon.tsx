@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/assets/img/logo/23.png";
+// Footer uses the logo without the RTO code
+import logo from "@/assets/img/logo/23-no-rto.png";
 
 const FooterCommon = () => {
   return (

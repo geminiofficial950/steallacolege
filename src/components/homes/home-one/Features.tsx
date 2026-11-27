@@ -74,6 +74,18 @@ const Features = () => {
             font-size: 20px !important;
             line-height: 1.3 !important;
           }
+
+          /* tighter stack of feature items (icon size unchanged) */
+          .features__item {
+            margin-bottom: 18px !important;
+          }
+          .features__icon {
+            min-height: 0 !important;
+            margin-bottom: 6px !important;
+          }
+          .features__content :global(.title) {
+            margin-bottom: 4px;
+          }
         }
       `}</style>
     </section>
