@@ -21,6 +21,19 @@ const HeaderOne = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const loginRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    if (!loginOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (loginRef.current && !loginRef.current.contains(event.target as Node)) {
+        setLoginOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [loginOpen]);
 
   useEffect(() => {
     if (!searchOpen) return;
@@ -151,15 +164,50 @@ const HeaderOne = () => {
                           }}
                         >
                           <li
-                            className="header-btn login-btn"
+                            ref={loginRef}
+                            className="header-btn login-btn login-dropdown"
                             style={{ margin: 0, padding: "0 0 0 8px" }}
+                            onMouseEnter={() => setLoginOpen(true)}
+                            onMouseLeave={() => setLoginOpen(false)}
                           >
-                            <Link
-                              href="https://stellalearn.com.au"
-                              target="_blank"
+                            <a
+                              href="#"
+                              role="button"
+                              aria-haspopup="true"
+                              aria-expanded={loginOpen}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setLoginOpen((prev) => !prev);
+                              }}
                             >
-                              Log in
-                            </Link>
+                              Student Login
+                              <i
+                                className="login-dropdown__caret"
+                                aria-hidden="true"
+                              />
+                            </a>
+                            {loginOpen && (
+                              <ul className="login-dropdown__menu">
+                                <li>
+                                  <a
+                                    href="https://stellalearn.com.au"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    Old Portal
+                                  </a>
+                                </li>
+                                <li>
+                                  <a
+                                    href="https://lms.eduskills.com.au"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    New Portal
+                                  </a>
+                                </li>
+                              </ul>
+                            )}
                           </li>
                         </ul>
                       </div>

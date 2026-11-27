@@ -161,7 +161,15 @@ const MobileMenu = () => {
                             </div>
                           </a>
                         ) : (
-                          <Link href={sub_m.link}>
+                          <Link
+                            href={sub_m.link}
+                            onClick={(e) => {
+                              if (sub_m.mega_menus) {
+                                e.preventDefault();
+                                openMobileSubMenu(sub_m.title);
+                              }
+                            }}
+                          >
                             <div style={{ display: "flex", flexDirection: "column" }}>
                               {sub_m.badge && (
                                 <span
@@ -188,7 +196,15 @@ const MobileMenu = () => {
                                 key={i}
                                 className={isActive(mega_m.link) ? "active" : ""}
                               >
-                                <Link href={mega_m.link}>{mega_m.title}</Link>
+                                <Link
+                                  href={mega_m.link}
+                                  {...(mega_m.link.startsWith("http") && {
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                  })}
+                                >
+                                  {mega_m.title}
+                                </Link>
                               </li>
                             ))}
                           </ul>
