@@ -1,0 +1,772 @@
+{
+  "/assets/img/blog/blog_post02.jpg": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897363/stella-college/content/blogs/blog-blog-post02.jpg",
+    "public_id": "stella-college/content/blogs/blog-blog-post02",
+    "width": 550,
+    "height": 428,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoMAAkAA4BaJQBWAB543HpAAAD5Udad+l4/QnndGZ847sTm0lIa8QM1JvTlXJ7lpTO22/UtCfVXFbwXtwfWUhyAbINAE4yYlD3xGbDgAAA="
+  },
+  "/assets/img/blog/blog_post01.jpg": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897364/stella-college/content/blogs/blog-blog-post01.jpg",
+    "public_id": "stella-college/content/blogs/blog-blog-post01",
+    "width": 698,
+    "height": 544,
+    "blurDataURL": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoMAAkAA4BaJaACdAEfp0g605NQAPz/wcW07yG4u/Sn52s0iujNcw3dfdGXmXUDNbIplUyPUjEFbdFXGwWHihsDtsE04xceAcXPjy3tXeSzdBIoTTKD2wsAAAA="
+  },
+  "/assets/img/blogs/outside/10%20Compelling%20Benefits%20of%20Working%20in%20Aged%20Care%20in%202025%20outside%20images.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897364/stella-college/content/blogs/outside-10-compelling-benefits-of-working-in-aged-care-in-2025-outside-images.png",
+    "public_id": "stella-college/content/blogs/outside-10-compelling-benefits-of-working-in-aged-care-in-2025-outside-images",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoMAAsAA4BaJZgCdAD7EB7bA5AA/b+0U6DU7bT8LLPPtyOE9hbnsR1STC0QYwvbT5j5pSUivI+iov/+PjeTfIZ27iJz+UAA"
+  },
+  "/assets/img/blogs/outside/7%20Essential%20Qualities%20That%20Make%20an%20Extraordinary%20Disability%20Support%20Worker%20in%202025%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897364/stella-college/content/blogs/outside-7-essential-qualities-that-make-an-extraordinary-disability-support-worker-in-2025-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-7-essential-qualities-that-make-an-extraordinary-disability-support-worker-in-2025-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwAgCdASoMAAsAA4BaJZQCdH8AE72ftIM+AAD+wk1QHC0Bjn2LFf+rFFuh2bo3T7ZiKiDyG7ucF5lM0W5oJG04V8jkTJomARm2xka4MgkgEgAA"
+  },
+  "/assets/img/blogs/inside/10%20Compelling%20Benefits%20of%20Working%20in%20Aged%20Care%20in%202025%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897365/stella-college/content/blogs/inside-10-compelling-benefits-of-working-in-aged-care-in-2025-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-10-compelling-benefits-of-working-in-aged-care-in-2025-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoMAAkAA4BaJZQC7AEPg8RxLugA/vCDcf7iOJF2mJGjzu5G6FLmGUfSaNGlHpfTqNNyibANSIAAAA=="
+  },
+  "/assets/img/blogs/inside/7%20Essential%20Qualities%20That%20Make%20an%20Extraordinary%20Disability%20Support%20Worker%20in%202025%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897367/stella-college/content/blogs/inside-7-essential-qualities-that-make-an-extraordinary-disability-support-worker-in-2025-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-7-essential-qualities-that-make-an-extraordinary-disability-support-worker-in-2025-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoMAAkAA4BaJbACdAD1fTLSzLQAAP6qC1Ye9Bgcm7d+VuK/bkECqTAB+diTAiG2aWM98novH+XGt4a6G+SmFT2tN/PFZ7o/odzgKS0D6w6cUq5hFvz6QjAA"
+  },
+  "/assets/img/blog/blog_post03.jpg": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897370/stella-college/content/blogs/blog-blog-post03.jpg",
+    "public_id": "stella-college/content/blogs/blog-blog-post03",
+    "width": 742,
+    "height": 578,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAQCdASoMAAkAA4BaJQBOgBuJUq8IAPxoAdf5XQt2+2W38TeP2Brt1bgmMz8CbdKDAqBr8rvXpjLNoNjnMjm2pEc7hks4bgVZr3G5w1ZdB5QAAAA="
+  },
+  "/assets/img/blog/blog_post04.jpg": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897370/stella-college/content/blogs/blog-blog-post04.jpg",
+    "public_id": "stella-college/content/blogs/blog-blog-post04",
+    "width": 634,
+    "height": 494,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoMAAkAA4BaJQBOgCLGschnb5oA/vB7nqrv2CXIFKlaXNgbnCRcz6aba+10oWKEWdwBIBYcz+pVzbGltCyoOPDBRGRcnHErZAkxbAy1nvRMc9WgAAA="
+  },
+  "/assets/img/blogs/outside/The%20Future%20is%20Green%20Sustainable%20Food%20Systems%20Transform%20Australia%20in%202025%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897370/stella-college/content/blogs/outside-the-future-is-green-sustainable-food-systems-transform-australia-in-2025-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-the-future-is-green-sustainable-food-systems-transform-australia-in-2025-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoMAAsAA4BaJbACdADbpOuDwAD8ju8hWDpHR4BUbf8UWDGa+gXydm9it6adgVZFswWIWZXuUl6xn+eLIaPA/Up9mdcgTSoA9FgE3xrYPYuPfagA"
+  },
+  "/assets/img/blogs/inside/The%20Future%20is%20Green%20Sustainable%20Food%20Systems%20Transform%20Australia%20in%202025%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897371/stella-college/content/blogs/inside-the-future-is-green-sustainable-food-systems-transform-australia-in-2025-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-the-future-is-green-sustainable-food-systems-transform-australia-in-2025-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoMAAkAA4BaJbACdAEDfVgGoAD+9V1NbvyFVc0QZFGIwDzNRSOrDFzuIazS/wRdsPpAzXNwptN382Y1fIxs0SHP6U0mZp7uiDgAAA=="
+  },
+  "/assets/img/blogs/outside/5%20Powerful%20Reasons%20to%20Choose%20Disability%20Support%20as%20Your%20Career%20in%202025%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897374/stella-college/content/blogs/outside-5-powerful-reasons-to-choose-disability-support-as-your-career-in-2025-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-5-powerful-reasons-to-choose-disability-support-as-your-career-in-2025-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoMAAsAA4BaJQBdgMWC7foh6kBAAP7rrzZSK0dyBwb+G8PVOrM5VDsKKKH6G7YLrJ2ZoulX2KzywvOF1bAddJJ/AcnVFgVFv7q+qwrAAAA="
+  },
+  "/assets/img/blogs/outside/Competitive%20Systems%20&%20Strategy%202025%20Build%20Your%20Career%20Driving%20Business%20Excellence%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897374/stella-college/content/blogs/outside-competitive-systems-and-strategy-2025-build-your-career-driving-business-excellence-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-competitive-systems-and-strategy-2025-build-your-career-driving-business-excellence-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoMAAsAA4BaJaACdAECo3QAdOUAAPdEj7BtWp/Wsmz1TeR81nJBEr9lZ5T/kx6MQkTU1M6k5HRBon9OeK5oOPlPF22QBZ3ohfYQ8NQaPa5iAAAA"
+  },
+  "/assets/img/blogs/outside/A%20Day%20in%20the%20Life%20What%20Really%20Happens%20When%20You%20Work%20in%20Aged%20Care%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897374/stella-college/content/blogs/outside-a-day-in-the-life-what-really-happens-when-you-work-in-aged-care-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-a-day-in-the-life-what-really-happens-when-you-work-in-aged-care-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoMAAsAA4BaJZgCdADbRD0fgAD+8GV3+K9zlOP3SBQjrjgnUXIiZGAvMbk90u0sVXdajUlHNBVq/tGuz7KIFpVUmYz1W7hI2iViV6JS9AAAAA=="
+  },
+  "/assets/img/blogs/inside/A%20Day%20in%20the%20Life%20What%20Really%20Happens%20When%20You%20Work%20in%20Aged%20Care%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897375/stella-college/content/blogs/inside-a-day-in-the-life-what-really-happens-when-you-work-in-aged-care-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-a-day-in-the-life-what-really-happens-when-you-work-in-aged-care-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoMAAkAA4BaJYgCdADdJz9NRgAA/up/NsNQYkJULzEL511eiPK//Od0gODYuWwVJIfdm76H+Gsj8wwAAAA="
+  },
+  "/assets/img/blogs/inside/5%20Powerful%20Reasons%20to%20Choose%20Disability%20Support%20as%20Your%20Career%20in%202025%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897377/stella-college/content/blogs/inside-5-powerful-reasons-to-choose-disability-support-as-your-career-in-2025-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-5-powerful-reasons-to-choose-disability-support-as-your-career-in-2025-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoMAAkAA4BaJZQCdADdh1CGZVgAAPuZkgGtUbAKfTXx6clzR9k0EjOZV5gY5gC/mtoSENqwLky+qYNZmegxk5jc+zgRkBcsIoGxYAAA"
+  },
+  "/assets/img/blogs/inside/Competitive%20Systems%20&%20Strategy%202025%20Build%20Your%20Career%20Driving%20Business%20Excellence%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897377/stella-college/content/blogs/inside-competitive-systems-and-strategy-2025-build-your-career-driving-business-excellence-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-competitive-systems-and-strategy-2025-build-your-career-driving-business-excellence-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoMAAkAA4BaJQBOgMWgtqwZhQAA+XcnT5+NC6rxYgC/PdjBydE2TfLJPPrx1M2k+dBRyOBXTcbw9r3lGIZWJeuAAAA="
+  },
+  "/assets/img/blogs/outside/Dispelling%20the%20Top%207%20Myths%20About%20Aged%20Care%20Work%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897380/stella-college/content/blogs/outside-dispelling-the-top-7-myths-about-aged-care-work-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-dispelling-the-top-7-myths-about-aged-care-work-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwAgCdASoMAAsAA4BaJbACdADdZcf1N8OrmAD+8Ez4LeiEmbAll9wlGewWs1wcKDoIPOjDV/7Gg0TunF3887Os3GyAuQsrRd5szTbXbv9lPO45AAA="
+  },
+  "/assets/img/blogs/outside/Eight%20Creative%20Activities%20to%20Enhance%20Wellbeing%20in%20Aged%20Care%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897380/stella-college/content/blogs/outside-eight-creative-activities-to-enhance-wellbeing-in-aged-care-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-eight-creative-activities-to-enhance-wellbeing-in-aged-care-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoMAAsAA4BaJbACdAEP08JjDUAA/vfwbeRoNx+vuHqrzvTmW3vGMxaIDfLH1zC3bTcKDrml3fZrWv76tspMsirRfuATPqql5mXySf41sQu7AAAA"
+  },
+  "/assets/img/blogs/outside/Innovations%20in%20Assistive%20Technology%20for%20Ageing%20&%20Disability%20in%202025%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897381/stella-college/content/blogs/outside-innovations-in-assistive-technology-for-ageing-and-disability-in-2025-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-innovations-in-assistive-technology-for-ageing-and-disability-in-2025-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoMAAsAA4BaJbACdAEf3NakoADh5nfzTJ9Kfbgte/oVSrXUR8Yg8OV2hi2f4EJmbyscNYfqPFLXgXLbIvoupY+7EEJ09Oa9TtxYMk4QnA5RPhIAAAA="
+  },
+  "/assets/img/blogs/inside/Dispelling%20the%20Top%207%20Myths%20About%20Aged%20Care%20Work%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897384/stella-college/content/blogs/inside-dispelling-the-top-7-myths-about-aged-care-work-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-dispelling-the-top-7-myths-about-aged-care-work-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoMAAkAA4BaJZQAAu0eCbw3SwGAAP7zgXhr8tm2BcM9SIXvcWHiQzw2Kco3bE7+2UumrlMKTxK5oF0W+l/0vdPLwAA="
+  },
+  "/assets/img/blogs/inside/Innovations%20in%20Assistive%20Technology%20for%20Ageing%20&%20Disability%20in%202025%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897384/stella-college/content/blogs/inside-innovations-in-assistive-technology-for-ageing-and-disability-in-2025-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-innovations-in-assistive-technology-for-ageing-and-disability-in-2025-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoMAAkAA4BaJZgCdAEfUrdhHiAAzj+jm8yoNI5AaSboMvFo6DwT2zG/TZgUm31r49dDcS/XbG3bJdW7OskeI8Ep5JQ/hEKfw/AAAA=="
+  },
+  "/assets/img/blogs/inside/Eight%20Creative%20Activities%20to%20Enhance%20Wellbeing%20in%20Aged%20Care%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897384/stella-college/content/blogs/inside-eight-creative-activities-to-enhance-wellbeing-in-aged-care-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-eight-creative-activities-to-enhance-wellbeing-in-aged-care-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoMAAkAA4BaJbACdACUbJIAgAD91JPLr2C+4ktoCgXonUZkeunWo0sfstH6XGLD7/IVnuQHWgx3MgSSgpDMfxwSUlLM6h5+LuAAAA=="
+  },
+  "/assets/img/blogs/outside/Building%20Meaningful%20Careers%20in%20Ageing%20&%20Disability%20Support%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897388/stella-college/content/blogs/outside-building-meaningful-careers-in-ageing-and-disability-support-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-building-meaningful-careers-in-ageing-and-disability-support-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAwAgCdASoMAAsAA4BaJbACdAYv1ayGsTvx8AD+aj5U7Q/fGGFAJxNkaQmyHVUBib6NBLWrSz5R1a8tX/lR1fC7abNuwpkvmOBREIk6fhC14eIWjqZm4gxYQH/leFcNEYw0cSZrnZhA5NGJYAA="
+  },
+  "/assets/img/blogs/outside/blog%201%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897388/stella-college/content/blogs/outside-blog-1-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-blog-1-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoMAAsAA4BaJZACdAEQ/RNU4oAA/vea7hZ0fBZ4oB5LQgl/1iTcpZCtWum1+rLU2eb0Gv4XcNYFXYSrEAVQvpOLU6GkAAAA"
+  },
+  "/assets/img/blogs/outside/blog%202%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897388/stella-college/content/blogs/outside-blog-2-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-blog-2-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAABQAgCdASoMAAsAA4BaJbACdLoAAw0tS329eQAA/qm7AFznXWfuS+Rpa1CeHJ44RSK2DAhlHDM1zED7oTvj39CwIFIz1kgCPC/TdD/xgwQrg7k+wJRy1FMyAAA="
+  },
+  "/assets/img/blogs/inside/Building%20Meaningful%20Careers%20in%20Ageing%20&%20Disability%20Support%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897391/stella-college/content/blogs/inside-building-meaningful-careers-in-ageing-and-disability-support-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-building-meaningful-careers-in-ageing-and-disability-support-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoMAAkAA4BaJQBOgCL9YQ7yEdcAAP4LEronp42BFC2iU1epZ/XnniguImXlURAnEHndM7XirA3DlKKVh3dkz9DgDrB4hp/QAAA="
+  },
+  "/assets/img/blogs/inside/blog%201%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897392/stella-college/content/blogs/inside-blog-1-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-blog-1-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoMAAkAA4BaJbACdADdCCDgAAD+9LZNaucTUHuMdNEjcmRyjPvXghpYCfyEXYRU/H6ihnhaBcebe7GEnSDv7Wn3WjvxV4gA"
+  },
+  "/assets/img/blogs/inside/blog%202%20inside%20%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897392/stella-college/content/blogs/inside-blog-2-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-blog-2-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACQAQCdASoMAAkAA4BaJaACdACBoEAA/uxERPp1luJCglIaS701IYhK/h3yW+Y3VHozW0U+RmAeFtUeRt8hgAAA"
+  },
+  "/assets/img/blogs/outside/blog%203%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897395/stella-college/content/blogs/outside-blog-3-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-blog-3-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoMAAsAA4BaJaACdADcWHBQy6UAAP6RSjWJ2RZge6g1qJHtGCOySqz9kqlWWWWC14dAqPF59UJI3B6jfjZd6ZSQDgY38T0IE64AAA=="
+  },
+  "/assets/img/blogs/outside/blog%204%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897395/stella-college/content/blogs/outside-blog-4-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-blog-4-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoMAAsAA4BaJZQCw7Ef3H/7k30AAP7tfDfVXyzncuBHViOnRb0mNwvboJOqxA1dDCjRE9iQqK9Kx6xT8AA="
+  },
+  "/assets/img/blogs/outside/blog%205%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897395/stella-college/content/blogs/outside-blog-5-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-blog-5-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoMAAsAA4BaJZACdAEOZRKMAADgDNo4Dgxx3M3Vdq6MIt4zH4AOgV6Kgvoa6d1xrKirhTfH+Q0n8hkaWvdR01eNHJ7VOuMmoRiLDG0yAAA="
+  },
+  "/assets/img/blogs/inside/blog%203%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897399/stella-college/content/blogs/inside-blog-3-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-blog-3-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoMAAkAA4BaJZgCdAEXZC4siowAAP5O0f34YKW0w5HDK9uvhLEWGdfvUZJklGRDQkgj1WKrNQ2qU70FuHRIWIyOYc9xAE5ywAAAAA=="
+  },
+  "/assets/img/blogs/inside/blog%204%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897400/stella-college/content/blogs/inside-blog-4-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-blog-4-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoMAAkAA4BaJQBYdiIaXGgahwIAAPfL+JPnK0N8vNxdj3cO2+u+aMQjBYzoiLmFH33ykGvlL1ugYo9yPXymh6SZAAA="
+  },
+  "/assets/img/blogs/inside/blog%205%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897400/stella-college/content/blogs/inside-blog-5-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-blog-5-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAwAgCdASoMAAkAA4BaJZACdAYtzvqS43qzAAD+woXMX05VkT91p80QVxiouNRBgckEpdjfiQ255iGaw27qcRxM4owThhcNswAAAA=="
+  },
+  "/assets/img/blogs/outside/blog%206%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897403/stella-college/content/blogs/outside-blog-6-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-blog-6-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACwAQCdASoMAAsAA4BaJQBYdhu1b0gAAP7wzr7UjqsIRt4Nbhy/lKmupv30XDkgIWUulqDQSoAAAA=="
+  },
+  "/assets/img/blogs/outside/blog%207%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897403/stella-college/content/blogs/outside-blog-7-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-blog-7-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoMAAsAA4BaJQBOgB+F3hHwV0AAAP7wZvmm7d4PF9hL0+Eo3wdo4uVkxLInKGb/Mr0FHOowro0A5DC0myyVPQfrh4UcCDghem18AAAA"
+  },
+  "/assets/img/april%20blog%20outside%20images/1.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897403/stella-college/content/blogs/april-blog-outside-images-1.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-1",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADwAQCdASoMAAsAA4BaJbACdADObGf4AAAAzj+G3ZTuTb6uWJDzMAbyM6XfnZ45ttkkllqYEg1sfeMaDRzEcZCpWkdqQDfleKdFVwh3vV1eIki2gpPf8++vylzvfOdkPtbtJiRHksiPoAAA"
+  },
+  "/assets/img/april%20blog%20inside%20image/1.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897405/stella-college/content/blogs/april-blog-inside-image-1.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-1",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoMAAkAA4BaJbACdAEWuIXtsyAA4n9h0OvDSBR+3lk/wUl1UsSFcEZjHZ1ABRvEptd+0qgcjtwu3RXt6pSxKaMhGubo9EXVLv6+8J9reAAAAA=="
+  },
+  "/assets/img/blogs/inside/blog%206%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897406/stella-college/content/blogs/inside-blog-6-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-blog-6-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoMAAkAA4BaJZQCdAEDe7EC72AAAPv5q4a+3pIe/RDSkye2i1RSIzdVa13NUHWryqUJToVAJaLTWm34N9e7uAAA"
+  },
+  "/assets/img/blogs/inside/blog%207%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897407/stella-college/content/blogs/inside-blog-7-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-blog-7-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoMAAkAA4BaJZwC7ADdlmTjlYAA/sX8yOUfG/8/b63LnEU6rc3wGZnS9TKBNZmBvkNjE00uDY8jposrpQEayQQJLgf3ZgIgFAAAAA=="
+  },
+  "/assets/img/april%20blog%20outside%20images/3.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897409/stella-college/content/blogs/april-blog-outside-images-3.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-3",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoMAAsAA4BaJbACdAEeh8e+3BRwAP3D8isa+E0/v8tfv+Tca5/aGPzTbpgRt9hyIRojal+QxG9jc/8reV+E1XvWrQg3alQcmfl7XHyEII7BRrQiHDwAAA=="
+  },
+  "/assets/img/april%20blog%20outside%20images/4.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897410/stella-college/content/blogs/april-blog-outside-images-4.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-4",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoMAAsAA4BaJYwAD4tRdSpLj8OdMQAA+XxUvaquwii9a1SD56C/J8qKI0rG4oDhnlGzNOXTOW5EGEq0VmVXgM69PbzeWKtVoFhxoPDE1Dxl5viiwGoH5l+B4hAAAA=="
+  },
+  "/assets/img/april%20blog%20inside%20image/2.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897411/stella-college/content/blogs/april-blog-inside-image-2.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-2",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoMAAkAA4BaJbACdADdc2+Zd8AA/tf6bnwYiz2hb7Ti7DHMKBvs7sPZLeFpGB3GsImwBwlXESEYUOncW7r4Wctrf9ft8Hxv/JomtRuN46WqJc8AAAA="
+  },
+  "/assets/img/april%20blog%20inside%20image/3.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897412/stella-college/content/blogs/april-blog-inside-image-3.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-3",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAACwAQCdASoMAAkAA4BaJbACdACUFi6AAP5OdVSLbQKkzp7ckgcO6h/peswyFLdGzpCYAcsz4vYny0O4dkvwLUIdtwHdDfg6S92h2Q9kcFuPQHdCLFYAAA=="
+  },
+  "/assets/img/april%20blog%20inside%20image/4.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897413/stella-college/content/blogs/april-blog-inside-image-4.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-4",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoMAAkAA4BaJYwAD4nRenNxVRQYAP3HCzj5zb5XaSzd/Obpl820ftNRdzbPGYATre0VIuj580HwUO/R4CnO8TxyczHjF8DxCAA="
+  },
+  "/assets/img/april%20blog%20inside%20image/5.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897413/stella-college/content/blogs/april-blog-inside-image-5.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-5",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoMAAkAA4BaJYgCdAEYGPLmNAAA/uiomF/eTabrpnCOYFePfUSqjZrEak3YCUG99n9KjxjOiJUBgu88xPyKVhFDMLBHXvDPbvBT5h8yuPF+k2MAwLWAAA=="
+  },
+  "/assets/img/april%20blog%20outside%20images/6.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897415/stella-college/content/blogs/april-blog-outside-images-6.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-6",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoMAAsAA4BaJQBOgMXS31Wf9FNsAAD+mFgVCiUzmUDdM0xUHx0a5EvlEr1k6l/hiSgZO+ZqP2E9ZX0yZ3njzSJpABw3wA6rIC33taxcofER1xZ2AAA="
+  },
+  "/assets/img/april%20blog%20outside%20images/5.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897415/stella-college/content/blogs/april-blog-outside-images-5.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-5",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABQAgCdASoMAAsAA4BaJZACdAYqhkrJecg3EwAA/uionPw9i859ftAcUKWSeuOootE+ClBqUqQzAcsSfFHndPNCJfqpgTSW2X++Pc/bKiWwVQBy1CgRXSVvBJGhwCS7IAA="
+  },
+  "/assets/img/april%20blog%20outside%20images/7.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897415/stella-college/content/blogs/april-blog-outside-images-7.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-7",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoMAAsAA4BaJbACdAELKhQtrhgAAP7qpRzYTOZVfYaK9jqZZ13s9qwL9gHWXwMLEEHTGWbYG1ks5v+f+7Hcb0Lbcxd29y8p979sfBAtv1agwvxf2AAAAA=="
+  },
+  "/assets/img/april%20blog%20inside%20image/8.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897417/stella-college/content/blogs/april-blog-inside-image-8.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-8",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoMAAkAA4BaJYwCdADcPPK8JAD+ai1FrohTwbjn/ma42aP4udXNUO3IS59sKHmi14VhvGJNhrgFSH5GQiQ/GG3e5IgEBl+OEFyORyHUAAA="
+  },
+  "/assets/img/april%20blog%20inside%20image/6.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897417/stella-college/content/blogs/april-blog-inside-image-6.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-6",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoMAAkAA4BaJQBOgCFrjBP2mvgAAP5mwNyXIx+xNuvC6J6Cg0pmprDzPeE5LJpR6gaUdx4rxYqN7F6LBwJyqmLIPg3b5XHIom8Vn7AA"
+  },
+  "/assets/img/april%20blog%20inside%20image/7.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897417/stella-college/content/blogs/april-blog-inside-image-7.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-7",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoMAAkAA4BaJbACdADhl+pUBAD+4hp+TBchV7//mmJ5eedhmEbpCA4KmCR6L1YyReMHCRJ5G33d7iPq91NGuLKNJhASNiOlA9sEqdcWfQ8QAA=="
+  },
+  "/assets/img/april%20blog%20outside%20images/9.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897419/stella-college/content/blogs/april-blog-outside-images-9.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-9",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoMAAsAA4BaJagCdAYsjuFby1H9GAAA/vcOuwCTbO7q9cgQTlLYReCtc6eP+eCcRkZCeWwdaGcBaCpza8HNJ9V8MRPaM/vtpZ4J35nOBuG/V72/BumFLcaYZiM9gAAA"
+  },
+  "/assets/img/april%20blog%20outside%20images/10.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897420/stella-college/content/blogs/april-blog-outside-images-10.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-10",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoMAAsAA4BaJQAB8dYfXG3bfM4AAP5m3tgHs36O7KmPiNX7J0N1oZrV5s3vseCVz+7SDJ4rWBHunv76kRsYPoVvSNVX7bSS7HG/4SnN84gGdLgz9MAAAA=="
+  },
+  "/assets/img/april%20blog%20outside%20images/8.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897419/stella-college/content/blogs/april-blog-outside-images-8.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-8",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABQAgCdASoMAAsAA4BaJYwCdAYtpgfaPTWJRfIA/rcid0xqIvn/P/2NRiT+KNlDRas3lF9vVjCfFdLfNNdQybTG2e8BOPoAQoLvamqViwL2oCOdJ04PyjuCgcFDRTwA"
+  },
+  "/assets/img/april%20blog%20inside%20image/9.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897421/stella-college/content/blogs/april-blog-inside-image-9.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-9",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoMAAkAA4BaJagCdAEPDQJp5boAAP72JZjNB4WfGr+zJvAfV2eAEKDizTCOxnJ83SVAfLqP76HX2obFjeuBUOHxWQpIFnC7XRoZrlkTXPBk4k2alsbFLVAAAAA="
+  },
+  "/assets/img/april%20blog%20inside%20image/11.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897421/stella-college/content/blogs/april-blog-inside-image-11.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-11",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAABwAgCdASoMAAkAA4BaJYgCdAYtV2WUXYHrN18AAP2ZPzw6LnrSHgOB4BLaOthBiKeMf06DXJqr8Q0s97/cCYeK7OZricfJ/Wzi4lOnvRLmfoAA"
+  },
+  "/assets/img/april%20blog%20inside%20image/10.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897436/stella-college/content/blogs/april-blog-inside-image-10.png",
+    "public_id": "stella-college/content/blogs/april-blog-inside-image-10",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoMAAkAA4BaJQADZb0NjuA8YgAA/puC0iEkkBlr9+tIPr4wVUpqqoztfHNaEX8MZA3ESCpuX+0g3RVEBEjM/XUSL0NAbLlm7xfUC4AAAAA="
+  },
+  "/assets/img/graphics%203/ageing%20and%20disability.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897439/stella-college/content/courses/graphics-3-ageing-and-disability.webp",
+    "public_id": "stella-college/content/courses/graphics-3-ageing-and-disability",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRvQAAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSHIAAAABcFvbtqI8XEN3iCyzlBrcoZvJICNyJ6QFrYAi3N1lfIYWImIC4F9dTsMCwRxcC511fHUl0DBNF8NG+VeSwt1hWBHD+hTxBHtmMOzhBgAIYd8GimI9ih/7Fiqd+1IDAD70iGR7s7UXAEQ2m1Nhkpt5wB5WUDggXAAAAPABAJ0BKgwADAADgFolsALDtiyPMCwYAADffM+AK0IKl0RV7Lxr1itW7NWiO+MgtRRHhbjN/r+mxUn34PrKQASYYpC9HaQOTcEahWrxro6PlQbwQy4t1JCoAAAA"
+  },
+  "/assets/img/graphics%203/leisure%20and%20health.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897439/stella-college/content/courses/graphics-3-leisure-and-health.webp",
+    "public_id": "stella-college/content/courses/graphics-3-leisure-and-health",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRvoAAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSHgAAAABgJpt27Ls/g6SJU3u7jaAJSIkolUOIhtQtesENKI7NEZgAHd4gF9HiIgJwB/FQKaVzbEBsOI8/oqIAgBgHcgSRB3TF3VHwlQLHHzrN4KpzF1fPIdr2EO00wBYEU2bRJQGYgeitWNDRznA5J/UR2SZAQBWtO3GPwJWUDggXAAAANABAJ0BKgwADAADgFolsAJ0BizbhvYAAPzU06kntnJOQ5zyGuP7xlfGpMuVYBmQB4c7OX9rsGcwUUiywXSlmMdIlyun+St6r5R8XHB7GRjP0nmK1CfX0U4DwAAA"
+  },
+  "/assets/img/new_course/pics/ageing.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897439/stella-college/content/courses/pics-ageing.webp",
+    "public_id": "stella-college/content/courses/pics-ageing",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoMAAcAA4BaJbACdAD0UXNui0AA/qz60mN35bAHHBq2uVGLaDxWgWiznSKBp5f2yBox+85GAZDow6LSU/U3HOrjqobXm2IOfy1f8GxDSgAAAA=="
+  },
+  "/assets/img/new_course/pics/big%20card%202.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897439/stella-college/content/courses/pics-big-card-2.webp",
+    "public_id": "stella-college/content/courses/pics-big-card-2",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoMAAcAA4BaJbACdAEXZ2k5hLYAAP73XEzc7hQ3deMVw7Lgg/oRt9cwR1YhYcgCcE8DhWfbJ18o2plUR6ZfU8p6ydQAAA=="
+  },
+  "/assets/img/new_course/pics/liesure.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897439/stella-college/content/courses/pics-liesure.webp",
+    "public_id": "stella-college/content/courses/pics-liesure",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoMAAcAA4BaJbACdADdZozYnvAA/rVlXMeGYXwhIgLdUZNiH5bxUWOpoJlzancWk4FoVndtBW3awnRH8/d73xEzDrfvn1uBl+PtFgMAAAA="
+  },
+  "/assets/img/april%20blog%20outside%20images/11.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897439/stella-college/content/blogs/april-blog-outside-images-11.png",
+    "public_id": "stella-college/content/blogs/april-blog-outside-images-11",
+    "width": 250,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoMAAsAA4BaJYgCdAYvNa+21nuyAAD9rlVbw97e85IUTGWr/S0CP4SftTrOXKD1Iu8IKF3jplwuWhlgTd4i9SWOJ3pqm2E62yXcyxB/qTObW1hNgpQrUBBfqWwAAA=="
+  },
+  "/assets/img/graphics%203/first%20aid.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897442/stella-college/content/courses/graphics-3-first-aid.webp",
+    "public_id": "stella-college/content/courses/graphics-3-first-aid",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRtgAAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSFkAAAABcFpt27I8v7sLjfNndBqqW9UlmMKlMQIzQCNaIhPdXv4VImICED9KSYSYWA1m7Jc33J93y02/oALFJ9kCqlQbqFFdoE71/uoC+ePjeb2ctus8ADZKmhziAwBWUDggWAAAABACAJ0BKgwADAADgFolsAJ0BiwUuul+pUAAzBqZ93F5kVJqPuz+i41Q1dhJ78Mb48rDBXgI1PRKjsouvvUrNmRHWVDRZM2+RqG6cmv4jeoY/ktq0b/DiAA="
+  },
+  "/assets/img/graphics%203/food%20processing.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897442/stella-college/content/courses/graphics-3-food-processing.webp",
+    "public_id": "stella-college/content/courses/graphics-3-food-processing",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRtgAAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSGMAAAABcFtr25p88SAVFfTUrhuwgLu2dD4KNQMwBrW27u4u8WSFiJgAUK43yqB3v5iU4fQrSxGNqUmqwDBLnZi9939evCLlX41hWlUfAIRmTJNhGGagBfDkcvnbpF9PqkFURatwUAoAVlA4IE4AAAAwAgCdASoMAAwAA4BaJZQAD4lwK6ngVaaJ8AD+5zmWIXmRWBAdcPzzG3lzjllHxsAa/x4Leg0v7Lgg8dVqYFCqKm6HZ8qRiJ+v2s4HsAA="
+  },
+  "/assets/img/new_course/pics/disablility.jpeg": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897442/stella-college/content/courses/pics-disablility.jpg",
+    "public_id": "stella-college/content/courses/pics-disablility",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoMAAcAA4BaJbACdLoAAnfUPy3wAP7qqVf1pYNXwl3MeAO1/ctaOgUm7hUq7rCRre7Trf/dSQ95frBES28O9N0SWWlu3aBquYWC3rop4j5kQAAA"
+  },
+  "/assets/img/courseimages/fb.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897443/stella-college/content/courses/courseimages-fb.webp",
+    "public_id": "stella-college/content/courses/courseimages-fb",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoMAAcAA4BaJbACdADdcJ2OmvAA/pnHj3sfMAmzF904Mhkg/htha+lLOlyTkOgKtsyv5gzWodz/m1AceJ1k4eArs72AAA=="
+  },
+  "/assets/img/courseimages/fa.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897443/stella-college/content/courses/courseimages-fa.webp",
+    "public_id": "stella-college/content/courses/courseimages-fa",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoMAAcAA4BaJbACdAEDeZDT/wAA/pbgDIH3xn+sKTaxmiYjPjp87F9emEHaZtlmiF131Hm+am0gEeP9qMRgkt+2H51NwLwAAAA="
+  },
+  "/assets/img/courseimages/cpr.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897443/stella-college/content/courses/courseimages-cpr.webp",
+    "public_id": "stella-college/content/courses/courseimages-cpr",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAABQAgCdASoMAAcAA4BaJZACdH8AF8hzVlhNkwAA/vH4ncMp4EHNlenuZ6UpeXI9Q+2BFqUzanx7adsfw9Ob4iSMbz9Sq6Exk6S/zNIAAAA="
+  },
+  "/assets/img/graphics%203/technology.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897445/stella-college/content/courses/graphics-3-technology.webp",
+    "public_id": "stella-college/content/courses/graphics-3-technology",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRv4AAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSHgAAAABgGLb1vLmhiQzakbHiYpj5vjIKPbMTCNIWsdMqr6rE8ARVDPOICImAL8lCGDUy76SOpTVvJr2ifi88oNVeREBsGRV16cEQ90CIBNiMHNXSdcMIDx1kjuv2y49FQDHv/X6+np3EwNAOTl+fX29XTvxeXh/f7+H/wRWUDggYAAAAPABAJ0BKgwADAADgFolsAJ0BivEP+jzUAD+AyqRUFlAqZkBrLhIhwOMFxKZES5/4XQ9rSp0wRrHPAbKEZRCVLsD4mACgfN9BKoCt+ht5J3mXMuiwdFM18ZAAikDAVogAA=="
+  },
+  "/assets/courseImages/ai%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897445/stella-college/content/courses/courseimages-ai-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-ai-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoMAAgAA4BaJQBOgCKiyWNdwAD+88Pr2hNlJt40RZcjrK9tKH7qMjsW2o8Lu6/UbO3OvzXvkto1s3uAWGAAAA=="
+  },
+  "/assets/courseImages/ai%20for%20business%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897446/stella-college/content/courses/courseimages-ai-for-business-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-ai-for-business-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAQCdASoMAAgAA4BaJbACdAD5zZ3wAP6YAsDZ9KhqJa8CCtCaV/yZvVknolcOTogVQKUKfuwpS6hhjfsYU+w7F0/xCus4b/M51qJYKK/cRt2zRj6vrdgA"
+  },
+  "/assets/courseImages/advanced%20ai%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897446/stella-college/content/courses/courseimages-advanced-ai-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-advanced-ai-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoMAAgAA4BaJbACdAEfbm+QfpRAAP7q5XOP8qe9Xp4besvKdgjxpqAL7FL73amS2umjMNX2Isp7D/e8FHki7eyEK/k3xOfrYnx33BdmX04AAA=="
+  },
+  "/assets/courseImages/ai%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897447/stella-college/content/courses/courseimages-ai-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-ai-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoMAAcAA4BaJYgCdAEfhQc0DuIAAP7zg4lKU9ybwHaw0SrZF+uUwZTmj/EIdK5H0ux4oTpBaj8baNbN7gDqAAAA"
+  },
+  "/assets/courseImages/ai%20for%20businesss%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897448/stella-college/content/courses/courseimages-ai-for-businesss-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-ai-for-businesss-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoMAAcAA4BaJbACdAD6J1bG8j4wAP6W43Pj/2WDvbU2NkYiOxnHo+/O3hAJwCd4MNpNyNP+2Bi0uAZC/cZHUk1/putfIl/4q+Wt+iDP3RzZtwAA"
+  },
+  "/assets/img/graphics%203/professional%20development.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897451/stella-college/content/courses/graphics-3-professional-development.webp",
+    "public_id": "stella-college/content/courses/graphics-3-professional-development",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRswAAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSFEAAAABcFtr29J8uHYutesMUDoDQEsLScdJTRuZISP5QNgIETEBsJ9SqTUzaRN+hX4MPSwLxjyn8dLl6o3yX1vIWrmDJ6zmL0BW0MfUwCo1neu1YwEAVlA4IFQAAACQAgCdASoMAAwAA4BaJbACdDiAN5ABifSJWe8SAAD+r40EWfy/rdTXc42syMT4/xiMfmQl3If6pezraxJVW/ywi/JmxZ0MQ4PWtKOGzjR0RiV0AAA="
+  },
+  "/assets/courseImages/australian%20workspace%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897452/stella-college/content/courses/courseimages-australian-workspace-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-australian-workspace-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoMAAgAA4BaJbACdAD0oudfp2aAAP6RDLARQ+E8P9BXGwStXfi0Qr+ajmS54Iay4OJHp4XPFHQ+wRv9pAnIu/cxevwTVezftdr14caNV5AAAA=="
+  },
+  "/assets/courseImages/australian%20values%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897452/stella-college/content/courses/courseimages-australian-values-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-australian-values-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwAgCdASoMAAgAA4BaJbACdDiAAQysPv4/AAD+7ab0vd00cxU7d+tipH1vTEEOFmmSU7CiH2/LCfv+Go6GBYet5yvFCNr80ssoPZWBP4nyY0Hb+d2bLsT3OyyAAA=="
+  },
+  "/assets/courseImages/australian%20workspace%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897454/stella-college/content/courses/courseimages-australian-workspace-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-australian-workspace-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoMAAcAA4BaJbACdADzxqR7wAD+mclK+WrZylvvQD2M1O43oj7GFDbDi2xVBg6K3oGoERR0A3/saGw6o8A7Xsezf1Pmv78h39/r8AAA"
+  },
+  "/assets/courseImages/advanced%20ai%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897454/stella-college/content/courses/courseimages-advanced-ai-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-advanced-ai-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMAAcAA4BaJbACdADdtB9GfAAA/utb5+r/H5+m0BFnkGst7Cn58XHJepm2YmSBvuzwfeHixeWxPHUTpi7/5N8TlzRPGUEA4UaDeIAA"
+  },
+  "/assets/courseImages/australia%20value%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897454/stella-college/content/courses/courseimages-australia-value-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-australia-value-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMAAcAA4BaJbACdAEf3bn2hAAA/u4MxNgxIQtoiUzq4sKV+Q8IfEvFPOLPGgdp7flA1P86j9sVZe9ufCe+y8yTE/9iOLOrz0hsAAAA"
+  },
+  "/assets/img/graphics%203/business.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897457/stella-college/content/courses/graphics-3-business.webp",
+    "public_id": "stella-college/content/courses/graphics-3-business",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRt4AAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSFwAAAABcFvbtqKccVyKIHbXEGIiciYj8i4IpwuaoAxqIHNnXEqIiAkgtJAUBdErvThtG/m4x/xmmr+dAuT3d9M9BqpP0/NYBHQvcwQcPP5GAdAvZ9M0DTzjw8l01vWKGFZQOCBcAAAA0AEAnQEqDAAMAAOAWiUAToDFfdVfaPAAzgHaLUdMiOvD1jk1sx+ZcCPxyH5tvP89g/M3NETXlLfQWb9ndWNOnLkebnXWV0BGhfSt0gNhCzIgsGFdPUlx83FggAA="
+  },
+  "/assets/img/graphics/Language.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897457/stella-college/content/courses/graphics-language.png",
+    "public_id": "stella-college/content/courses/graphics-language",
+    "width": 875,
+    "height": 875,
+    "blurDataURL": "data:image/webp;base64,UklGRiIBAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSIYAAAABgGJt2zLlHndZxExylzgrsOySZgPTOCTyQPTk7u6SyCQO0d0d3gRriIjkj0oPKInPZ7GOnaVBQ6cskBRZBSWu/a1m4/ijDuGDWot8SqtNCW1ydy2vsoEKnCP5JfmUXpSgwNT/8nEy1eFAgfFQ+pypHxlGgelImvifpB0UuIt2BYmcmf8UAFZQOCB2AAAAMAIAnQEqDAAMAAOAWiWwAnQwSgiEBhE76QAAyQE4LhHpQmKCJALoZNPe16NPPZVaU4TvRUCUmxLx+jzaSxdhEdsz4Nl6bp/RfjxrzBIPU5OVcgthMNMaxspqtABzVxztlrIcfdVtHxbN+eJrcYr+PIDgdYAAAA=="
+  },
+  "/assets/courseImages/business%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897457/stella-college/content/courses/courseimages-business-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-business-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoMAAgAA4BaJbACdAEDfi5vs+wQAP7rFYtfsdI0xZzJjZPh7PqwRnfaEDalnyxtfJDKUpREYBelN1+shhL+26dervHbsuwsJGtiaW+O482EzmVb41sxKQAA"
+  },
+  "/assets/courseImages/communication%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897457/stella-college/content/courses/courseimages-communication-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-communication-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAABQAgCdASoMAAgAA4BaJbACdLoAAnbvW8sRkqAA/udEVL7f3NC+6rhopOFVzBYGYGd897O+vYRHZE+oHQe3rR3rPMAAAA=="
+  },
+  "/assets/courseImages/business%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897459/stella-college/content/courses/courseimages-business-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-business-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoMAAcAA4BaJbACdAD0vDaMw+iAAP7rWBYlcvtRlKsdeYnNb0+nAVJiBpdkQ62WZE1JGEAn/mOT9XjN2Gn4mdTrK3MGecBO2D2D8OIzcmI/gAAA"
+  },
+  "/assets/courseImages/communication%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897459/stella-college/content/courses/courseimages-communication-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-communication-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAABQAgCdASoMAAcAA4BaJbACdLoAAnfV9s7UV4AA/ugotxUAMyeCPUrRhSCd1lHpWW/UmiEtOVS8pym+V/4otHes4sAAAA=="
+  },
+  "/assets/img/graphics%203/cybersecurity.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897461/stella-college/content/courses/graphics-3-cybersecurity.webp",
+    "public_id": "stella-college/content/courses/graphics-3-cybersecurity",
+    "width": 100,
+    "height": 100,
+    "blurDataURL": "data:image/webp;base64,UklGRvAAAABXRUJQVlA4WAoAAAAQAAAACwAACwAAQUxQSGsAAAABcFtr25o8SXBngKyAOyNA55VVLJAK7/42VHQsw6H0aVxjK0TEBODQrRgUt6Gh1VP5mtYAuonB9nrfDdJdmK4/ppsZhHpmoxBQuBteVSAuhEEXcQhm3fvP5+LNBAF11R8vh7oKIPkAfJLBLgBWUDggXgAAABACAJ0BKgwADAADgFolsAJ0Bi1W4YQT+AAA/mYghIUZSFqd91NssRB8se9ryiHLZHwvzrZfMG42V9JY6oYCa91VXcxsDTPScEs7/8ZsClnNLDPgAObu5eSMsK+mAAA="
+  },
+  "/assets/courseImages/enterprenuer%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897461/stella-college/content/courses/courseimages-enterprenuer-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-enterprenuer-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoMAAgAA4BaJbACdAD1RVXOgADh1amJhoWbRikccMRhH7bZVeOU3jZxt0ruvOcVXv2/3L8MfbwElw4kIMtk2AAA"
+  },
+  "/assets/courseImages/cybersecurity%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897462/stella-college/content/courses/courseimages-cybersecurity-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-cybersecurity-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMAAgAA4BaJbACdAD0o2MAsCAA/u1vQoRBcSMHMZrRCQKLwQGG/dHIx18QJPXsJ9erP/9dC/tvHR34bn13381DQ+nKpRLhgCjmwjAA"
+  },
+  "/assets/courseImages/cybersecurity%20awareness%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897462/stella-college/content/courses/courseimages-cybersecurity-awareness-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-cybersecurity-awareness-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoMAAgAA4BaJbACdAEXtjmeytYAAP6YAsEE6+FznZrsYgKSoNO7Jhz9ChcRwmi1e/rQyrKV2qYqnDvqOLa2Guhme5x7/4ImF8tqaCDb/L8inZAA"
+  },
+  "/assets/courseImages/enterprenuer%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897463/stella-college/content/courses/courseimages-enterprenuer-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-enterprenuer-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoMAAcAA4BaJbACdADcpLVI6cAA4TjD2GoOI4vqKsX6olTAiUrCnVl+01Gd2ZJPR5xO5vJkqIS+tXY+BKJNJP5gqvZuUrSgAAA="
+  },
+  "/assets/courseImages/cybersecurity%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897463/stella-college/content/courses/courseimages-cybersecurity-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-cybersecurity-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoMAAcAA4BaJbACdADdsqT+1kAA/u4MxNlIZ/hkSmJHfv8DybxZoGkJW6mQrPB/8YQSTSe/SV/rGif2EJOMfhcRJ8N80AAA"
+  },
+  "/assets/img/graphics%203/hd.webp": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897466/stella-college/content/courses/graphics-3-hd.webp",
+    "public_id": "stella-college/content/courses/graphics-3-hd",
+    "width": 256,
+    "height": 104,
+    "blurDataURL": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAACwAABAAAQUxQSD0AAAAAAAAAAAAAQjIYLQAAAAAAG1pNwJJFt0RUACFZtI9vu4ti0qZbHUCPiFNBa1RujYsoLzciJRcVJBMaKRwXAFZQOCA2AAAA0AEAnQEqDAAFAAOAWiWcAAMXQneC8gAA/kC3ehNMsKmq1tYR7TcV8Nllx9fOsYv6A2fsPIAA"
+  },
+  "/assets/courseImages/sentio%20part%201%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897466/stella-college/content/courses/courseimages-sentio-part-1-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-1-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAwAgCdASoMAAgAA4BaJbACdADdZgC7QCVkAAD+7adaZF/7eHfVy0Mrpp8XItY7akQj1UAzGjFyw/7pR6j2RW4EzUFqOxKELRQmK/9ME4AAAA=="
+  },
+  "/assets/courseImages/sentio%20part%202%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897467/stella-college/content/courses/courseimages-sentio-part-2-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-2-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoMAAgAA4BaJbACdADdZi37chAA/rXqTlfyT/v6xoKpvetZMw0MHMr+gmPgvBYiZ+FdqrWeGvrQzjFwiUrBJ4s8WwPcwL8THzBBMrr2udFsAAAA"
+  },
+  "/assets/courseImages/cybersecurity%20awreness%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897468/stella-college/content/courses/courseimages-cybersecurity-awreness-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-cybersecurity-awreness-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoMAAcAA4BaJbACdADcUoWN9sAA/pnL388fc9PJvD/L+tui9wyKvkloAOWm0gH3gToAra08RtEDT/+IwI74UH3h89v+LtiNV5AAAA=="
+  },
+  "/assets/courseImages/sentio%20part%201%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897468/stella-college/content/courses/courseimages-sentio-part-1-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-1-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoMAAcAA4BaJbACdADds/+IioAA/u4QJ/f/zGcoNZUJvsJNUvUmTaIcqcaB8LcB9Isvr1kSD551j0G7DTY/G3HY2AYFQnoH6/tgAA=="
+  },
+  "/assets/courseImages/sentio%20part%202%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897469/stella-college/content/courses/courseimages-sentio-part-2-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-2-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMAAcAA4BaJbACdAD5f7ppXmAA/rbzuJ5MsParyIIdlLY7x/Ex4PX5PSzsNyliBW9yrz6U5vGYTeLPFsD7VOxV5NvoNxWG5WmcAAAA"
+  },
+  "/assets/courseImages/sentio%20part%203%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897471/stella-college/content/courses/courseimages-sentio-part-3-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-3-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoMAAgAA4BaJQBdgB9lYDSe9wAA/tAk5Q84nJGQ9NW/FJ05GoNWXjLCYFegVWH/njgc6ChpsaYqYTNk458OMgAA"
+  },
+  "/assets/courseImages/sentio%20part%204%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897471/stella-college/content/courses/courseimages-sentio-part-4-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-4-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoMAAgAA4BaJYgCdAEDnO/v4wAA/mZEG6S677hZghsHMHwc5td5nTmkzqhlPI5+C+lbBTWFpw6DLl5Aam0XijhzjDLRduwAAAA="
+  },
+  "/assets/courseImages/sentio%20part%205%20outside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897471/stella-college/content/courses/courseimages-sentio-part-5-outside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-5-outside",
+    "width": 291,
+    "height": 190,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoMAAgAA4BaJbACdADZoU8TAAD+ZkQbqCkqP2pw3FqsTDPzqtwGq5YliuJAPN0wCQRiXqBcMB7+T9soacfLeflqLxNh5d8CAAA="
+  },
+  "/assets/courseImages/sentio%20part%205%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897472/stella-college/content/courses/courseimages-sentio-part-5-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-5-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoMAAcAA4BaJbACdADhAqu0AAD+aTR8yZbSIskqzPlk/Qd9tNnMNjOEGN40VrGHWTEWemjIHaHc/QCAfMxwciH+lPAAAA=="
+  },
+  "/assets/courseImages/sentio%20part%203%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897472/stella-college/content/courses/courseimages-sentio-part-3-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-3-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAwAgCdASoMAAcAA4BaJZACdH8AGEnJSQ2iwAD+wWdygQUI5OUnhOssnf0ThMU73VuxF6rhKqGKN5GIksi+QBMssR9X7mu/9wBAAA=="
+  },
+  "/assets/courseImages/sentio%20part%204%20inside.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897473/stella-college/content/courses/courseimages-sentio-part-4-inside.png",
+    "public_id": "stella-college/content/courses/courseimages-sentio-part-4-inside",
+    "width": 913,
+    "height": 514,
+    "blurDataURL": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoMAAcAA4BaJZACdADdhpIw0AD+aTR82qq4IvTAa71gCyffACS/RzB3ntvBomfCRvFeGzptZkOX36HhP7ReqqeclXwfwAAA"
+  },
+  "/Master%20Class%20-%20Mental%20Heath%20SENTIO%20Framework%2045%20mins%20session.jpeg": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897476/stella-college/content/courses/master-class-mental-heath-sentio-framework-45-mins-session.jpg",
+    "public_id": "stella-college/content/courses/master-class-mental-heath-sentio-framework-45-mins-session",
+    "width": 1280,
+    "height": 721,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoMAAcAA4BaJbACdAEQz4VbmwAA/u3hviZy9XaJiWxNlVp4iYocNO9GKvyr/k02ftXP92zxrOOKdLrTASn2ewachjCfpVpE0va6q+zQm00+0EY7jbAAAA=="
+  },
+  "/assets/img/graphics%203/hd.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897476/stella-college/content/courses/graphics-3-hd.png",
+    "public_id": "stella-college/content/courses/graphics-3-hd",
+    "width": 787,
+    "height": 317,
+    "blurDataURL": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4WAoAAAAQAAAACwAABAAAQUxQSD0AAAAAAAECAQAOKCghHQEBAgAGCk51lZZwg1lVACNkd5qckqCUlrpqI2uNbmNlRl+Faog9L0QiJCMkJRghKCURAFZQOCBKAAAAsAEAnQEqDAAFAAOAWiWwAnQA1tb3AAD89ki0N5dafwEQO3ifchINZvTEU7tKPMueBnbz9aSTREBpBSYZ7CrSi9mRkdBhTouwAAA="
+  },
+  "/assets/img/blogs/outside/Leisure%20&%20Health%202025%20Transforming%20Lives%20Through%20Recreation,%20Connection%20&%20Wellbeing%20outside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897508/stella-college/content/blogs/outside-leisure-and-health-2025-transforming-lives-through-recreation-connection-and-wellbeing-outside-image.png",
+    "public_id": "stella-college/content/blogs/outside-leisure-and-health-2025-transforming-lives-through-recreation-connection-and-wellbeing-outside-image",
+    "width": 251,
+    "height": 224,
+    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQAgCdASoMAAsAA4BaJbACdAYsZa+MX4AAAPl+HFIcga8QuafMALDxtDe7sXh9IK6sqGwFw7uWYFPJw3yuXYtIn4SQHAyh79mDoVbpyuRaH7OxJ1jh1Jn1AqqXMHOhHZk/apyUAAA="
+  },
+  "/assets/img/blogs/inside/Leisure%20&%20Health%202025%20Transforming%20Lives%20Through%20Recreation,%20Connection%20&%20Wellbeing%20inside%20image.png": {
+    "url": "https://res.cloudinary.com/com4tunc/image/upload/v1794897512/stella-college/content/blogs/inside-leisure-and-health-2025-transforming-lives-through-recreation-connection-and-wellbeing-inside-image.png",
+    "public_id": "stella-college/content/blogs/inside-leisure-and-health-2025-transforming-lives-through-recreation-connection-and-wellbeing-inside-image",
+    "width": 945,
+    "height": 735,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABQAgCdASoMAAkAA4BaJbACdAYtpbM5OxLXUAAA/rILO2Km50ZZiod1E6bLBE7eNy9LiFZ7refpO/9pdOHWUH6tmV7nbcNLUqCv6AvHgl3DUQEEDVBt8JnTp6AAAA=="
+  }
+}

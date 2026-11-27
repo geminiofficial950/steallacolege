@@ -1,17 +1,11 @@
-// Import the data directly from coursedatas.ts
-import { course_detail_data } from "@/data/home-data/coursedataeditor";
+import type { Course } from "@/types/content";
 
 interface OverviewProps {
-  courseId?: number; // Optional course ID to select specific course, defaults to first course
+  course?: Course; // full course document (from MongoDB)
 }
 
-const Overview = ({ courseId }: OverviewProps) => {
-  // Get course data directly from coursedatas
-  const course = course_detail_data.course_list.find(c => c.courseId === courseId);
-
-  // Debug: Log course data
-  console.log("Overview component - courseId:", courseId);
-  console.log("Overview component using coursedatas course:", course);
+const Overview = ({ course }: OverviewProps) => {
+  const courseId = course?.courseId;
 
   // Extract data from coursedatas structure
   const getCoursedatasData = () => {
@@ -87,7 +81,6 @@ const notes = getNotesData();
 
   const defaultDescription =
     '<p><span style="background-color: transparent;">This course provides comprehensive training and knowledge in the specified field. Students will gain practical skills and theoretical understanding through structured learning modules.</span></p><p><span style="background-color: transparent;">The course is designed to prepare students for real-world applications and career advancement in their chosen field.</span></p>';
-  console.log(course_detail_data.course_list.length); // Should be >= 4
 
   // Use course description from coursedatas only
   const description = getCoursedatasDescription() || defaultDescription;

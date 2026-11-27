@@ -18,6 +18,7 @@ export default function SupportFormPage() {
         .form-wrapper {
           padding: 20px;
           height: 100vh;
+          height: 100dvh;
           background: #f8f9fa;
         }
 

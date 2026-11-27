@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&family=Roboto:wght@400;500;700&display=swap');
-
 :root {
   --navy: #0d1b4b;
   --navy2: #122060;
@@ -26,11 +23,13 @@ body {
   background: var(--cream);
   color: var(--text);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* ── LOGIN ── */
 .login-screen {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -402,4 +401,335 @@ body {
 
 .student-feedback__form {
   min-height: 120px;
+}
+
+/* Safe areas: with viewport-fit=cover (see app/layout.tsx), keep content clear of the
+   Dynamic Island and rounded corners on iPhones, incl. both iPhone Duo displays in landscape */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+header {
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+.header-one-spacer {
+  margin-top: env(safe-area-inset-top);
+}
+.tgmobile__menu-box {
+  padding-bottom: env(safe-area-inset-bottom) !important;
+}
+
+/* Never let a wide decorative element make the page scroll sideways on narrow screens
+   (iPhone Duo cover display is ~466px wide). `clip` does not break position: sticky. */
+html,
+body {
+  overflow-x: clip;
+}
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+/* Homepage: tight, even spacing between sections (banner & gallery set their own) */
+.home-one-compact > section:not(.banner-area):not(.gallery__area),
+.home-one-compact > div > section {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+@media (max-width: 767px) {
+  .home-one-compact > section:not(.banner-area):not(.gallery__area),
+  .home-one-compact > div > section {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+}
+/* Courses sits close to the newsletter band below it */
+/* (main + :not() so this outranks the generic compact rule above, which has two :not()s) */
+main.home-one-compact > section.courses-area:not(.gallery__area) {
+  padding-bottom: 12px !important;
+}
+/* FAQ: the rotating "Education system can make change" text rises above the image and the section
+   clips overflow, so it needs real top room */
+main.home-one-compact > div > section.faq__area:not(.gallery__area) {
+  padding-top: 90px !important;
+}
+@media (max-width: 767px) {
+  /* the round text is hidden on phones (theme: display none), so no extra room is needed there */
+  main.home-one-compact > div > section.faq__area:not(.gallery__area) {
+    padding-top: 4px !important;
+  }
+  /* counter card sits right above the FAQ photo */
+  main.home-one-compact > section.fact__area:not(.gallery__area) {
+    padding-bottom: 6px !important;
+  }
+  .faq__area .faq__img-wrap {
+    padding-top: 0;
+    margin-bottom: 14px;
+  }
+}
+/* Newsletter on phones: room inside the purple band, smaller heading, compact form */
+@media (max-width: 767px) {
+  main.home-one-compact > section.newsletter__area:not(.gallery__area) {
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+  }
+  .newsletter__area .newsletter__content .title {
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    padding: 0 8px;
+  }
+  /* same 12px between heading → input and input → button */
+  .newsletter__area .newsletter__form form {
+    gap: 12px;
+  }
+  .newsletter__area .newsletter__content .title br {
+    display: none;
+  }
+  .newsletter__area .newsletter__form input {
+    height: 46px;
+    font-size: 15px;
+    padding: 0 20px;
+  }
+  .newsletter__area .newsletter__form .btn {
+    padding: 11px 28px;
+    font-size: 15px;
+  }
+}
+/* Counter card on phones: even padding, two balanced columns split by a thin divider */
+@media (max-width: 767px) {
+  .fact__area .fact__inner-wrap {
+    padding: 22px 12px !important;
+    border-radius: 24px;
+  }
+  .fact__area .fact__item {
+    margin-bottom: 0 !important;
+    min-height: 0 !important;
+  }
+  .fact__area .fact__item .count {
+    font-size: 32px;
+    margin-bottom: 6px;
+  }
+  .fact__area .fact__item p {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .fact__area .fact__item .fact__skills {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+  }
+  .fact__area .fact__inner-wrap .row > [class*="col-"]:last-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+  }
+}
+/* News feed heading on phones: title, subtitle and cards sit close together */
+@media (max-width: 767px) {
+  .blog__home-title {
+    margin-bottom: 16px !important;
+  }
+  .blog__home-title .title {
+    margin-bottom: 4px;
+  }
+  .blog__home-title.section__title p {
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+}
+
+/* Floating call button (FloatingCall.tsx) — round icon, bottom right, just above the scroll-to-top
+   button; tapping it dials the toll-free number */
+.floating-call {
+  position: fixed;
+  right: 44px;
+  bottom: 140px;
+  z-index: 98;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #16a34a;
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(22, 163, 74, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.floating-call:hover {
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 10px 28px rgba(22, 163, 74, 0.55);
+}
+.floating-call__icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  animation: floatingCallRing 2.4s ease-in-out infinite;
+}
+.floating-call__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #16a34a;
+  animation: floatingCallPulse 2s ease-out infinite;
+}
+@keyframes floatingCallPulse {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+/* small phone "ring" wiggle, then rest */
+@keyframes floatingCallRing {
+  0%, 60%, 100% { transform: rotate(0); }
+  65% { transform: rotate(-14deg); }
+  70% { transform: rotate(14deg); }
+  75% { transform: rotate(-10deg); }
+  80% { transform: rotate(10deg); }
+  85% { transform: rotate(0); }
+}
+@media (max-width: 1199.98px) {
+  .floating-call { right: 19px; bottom: 130px; }
+}
+@media (max-width: 991.98px) {
+  .floating-call { right: 24px; }
+}
+@media (max-width: 767.98px) {
+  .floating-call { right: 12px; bottom: 100px; width: 46px; height: 46px; }
+  .floating-call__icon { width: 20px; height: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-call__icon,
+  .floating-call__pulse { animation: none; }
+}
+/* Become a Student / Instructor cards on phones: tighter stack, nothing extra under the last card */
+@media (max-width: 767px) {
+  .instructor__area-two .instructor__item-two {
+    margin-bottom: 14px;
+  }
+  .instructor__area-two .row > [class*="col-"]:last-child .instructor__item-two {
+    margin-bottom: 0;
+  }
+  /* compact card: less padding, smaller title/text and button */
+  .instructor__area-two .instructor__item-two {
+    padding: 18px 18px 20px !important;
+    border-radius: 16px;
+  }
+  .instructor__area-two .instructor__content-two {
+    margin-bottom: 0 !important;
+  }
+  .instructor__area-two .instructor__content-two .title {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  .instructor__area-two .instructor__content-two p {
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .instructor__area-two .instructor__content-two .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* ── Page loading skeletons (src/components/common/Skeletons.tsx) ── */
+.sk-page { min-height: 100vh; background: #fff; }
+.sk {
+  display: inline-block;
+  background: linear-gradient(90deg, #eceaf6 0%, #f7f6fc 40%, #eceaf6 80%);
+  background-size: 300% 100%;
+  animation: sk-shimmer 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+.sk--dark { background-image: linear-gradient(90deg, #2a2660 0%, #3a3578 40%, #2a2660 80%); }
+.sk-bar { display: block; max-width: 100%; }
+@keyframes sk-shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+
+.sk-header { background: #16133a; height: 76px; }
+.sk-header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 24px; }
+.sk-header__logo { width: 96px; height: 40px; }
+.sk-header__nav { gap: 34px; align-items: center; }
+.sk-header__btn { width: 96px; height: 40px; border-radius: 50px; }
+
+.sk-breadcrumb { background: linear-gradient(120deg, #f4f1fd 0%, #faf8ff 50%, #f3eefc 100%); padding: 110px 0 90px; }
+.sk-section { padding-top: 70px; padding-bottom: 70px; }
+
+.sk-card { border: 1px solid #ebe9f3; border-radius: 10px; padding: 12px; background: #fff; height: 100%; }
+.sk-card__img { display: block; width: 100%; aspect-ratio: 4 / 3; border-radius: 8px; }
+.sk-card__body { padding: 16px 4px 8px; display: flex; flex-direction: column; gap: 10px; }
+.sk-panel { border: 1px solid #ebe9f3; border-radius: 10px; padding: 24px; background: #fff; }
+.sk-hero { display: block; width: 100%; aspect-ratio: 16 / 8; border-radius: 12px; }
+.sk-hero--course { aspect-ratio: 16 / 9; border-radius: 20px; }
+
+@media (max-width: 767.98px) {
+  .sk-header { height: 64px; }
+  .sk-header__inner { padding: 0 16px; }
+  .sk-breadcrumb { padding: 60px 0 50px; }
+  .sk-section { padding-top: 32px; padding-bottom: 32px; }
+}
+.sk-breadcrumb .sk { background-image: linear-gradient(90deg, #e1dcf3 0%, #eeebf9 40%, #e1dcf3 80%); }
+
+/* Keep the homepage divider centered between the visible logo edges. */
+.brand-area--compact {
+  --brand-divider-spacing: 30px;
+}
+
+.brand-area--compact .brand__item {
+  gap: var(--brand-divider-spacing);
+  margin-left: 0 !important;
+  margin-right: var(--brand-divider-spacing);
+}
+
+/* Sizes are precomputed in BrandOne.tsx (same result as auto + max-*) so the strip doesn't grow when logos load */
+.brand-area--compact .container-fluid {
+  min-height: var(--brand-strip-h, 0px);
+}
+
+.brand-area--compact .brand__logo {
+  display: block;
+  width: var(--logo-w, auto);
+  height: var(--logo-h, auto);
+  max-width: 120px;
+  max-height: 60px;
+}
+
+.brand-area--compact .brand__logo--wide {
+  max-width: 260px;
+  max-height: 72px;
+}
+
+.brand-area--compact .brand__logo--notebooklm {
+  max-width: 232px;
+  max-height: 64px;
+}
+
+@media (max-width: 767px) {
+  .brand-area--compact .container-fluid {
+    min-height: var(--brand-strip-h-m, 0px);
+  }
+
+  .brand-area--compact .brand__logo {
+    width: var(--logo-w-m, auto);
+    height: var(--logo-h-m, auto);
+    max-width: 72px;
+    max-height: 36px;
+  }
+
+  .brand-area--compact .brand__logo--wide {
+    max-width: 128px;
+    max-height: 40px;
+  }
+
+  .brand-area--compact .brand__logo--notebooklm {
+    max-width: 114px;
+    max-height: 36px;
+  }
+
+  .brand-area--compact .brand__divider {
+    height: 18px !important;
+  }
 }

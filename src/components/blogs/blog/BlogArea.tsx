@@ -1,6 +1,7 @@
 "use client";
-import { blog_detail_data } from "@/data/home-data/BlogDataEditor";
+import { useBlogSummaries } from "@/context/ContentContext";
 import Image from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 import Link from "next/link";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -12,7 +13,7 @@ interface DataType {
 }
 
 const BlogArea = ({ style_1, limit }: DataType) => {
-  const blog = blog_detail_data.blog_list;
+  const blog = useBlogSummaries(); // from MongoDB via ContentProvider
 
   // If 'limit' exists, slice only that many blogs (no pagination)
   const displayedBlogs = limit ? blog.slice(0, limit) : blog;
@@ -49,7 +50,7 @@ const BlogArea = ({ style_1, limit }: DataType) => {
                         href={`/blog-details/${item.blogId}`}
                         className="shine__animate-link"
                       >
-                        <Image src={item.outsideimage} alt="img" />
+                        <ContentImage src={item.outsideimage} alt="img" />
                       </Link>
                     </div>
                     <div className="blog__post-content">

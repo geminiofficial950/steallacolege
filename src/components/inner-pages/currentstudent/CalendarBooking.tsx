@@ -82,6 +82,7 @@ const STYLES = `
     font-family: 'DM Sans', sans-serif;
     color: var(--text-primary);
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
   }
 

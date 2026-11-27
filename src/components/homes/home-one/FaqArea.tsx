@@ -5,7 +5,8 @@ import CurvedCircle from "./CurvedCircle"
 import SvgAnimation from '@/hooks/SvgAnimation'
 import InjectableSvg from "@/hooks/InjectableSvg"
 
-import faq_img1 from "@/assets/img/faqsa.png"
+// Stock photo: Bangun Stock Production on Unsplash (https://unsplash.com/photos/3g9VyuI2sd0), Unsplash License
+import faq_img1 from "@/assets/img/faq-student.jpg"
 
 const FaqArea = () => {
 
@@ -21,7 +22,15 @@ const FaqArea = () => {
                         <CurvedCircle />
                      </div>
                      <div className="faq__img">
-                        <Image src={faq_img1} alt="img" />
+                        {/* full photo fills the rounded frame (the theme centres a cut-out PNG, so undo its offset) */}
+                        <Image
+                           src={faq_img1}
+                           alt="Smiling Stella College student with a backpack and books"
+                           fill
+                           sizes="(max-width: 767px) 100vw, 450px"
+                           placeholder="blur"
+                           style={{ objectFit: "cover", objectPosition: "center top", transform: "none" }}
+                        />
                         <div className="shape-one">
                            <InjectableSvg src="/assets/img/others/faq_shape01.svg" className="injectable tg-motion-effects4" alt="img" />
                         </div>

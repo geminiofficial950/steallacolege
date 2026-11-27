@@ -7,10 +7,14 @@ const CurvedCircle: React.FC = () => {
   const curvedCircleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (curvedCircleRef.current) {
-      const circleType = new CircleType(curvedCircleRef.current);
-      circleType.radius(280).dir(1); // Customize as needed
-    }
+    if (!curvedCircleRef.current) return;
+    const circleType = new CircleType(curvedCircleRef.current);
+    circleType.radius(280).dir(1); // Customize as needed
+    // Restore the plain text on cleanup; otherwise a re-run (StrictMode / Fast Refresh) splits the
+    // already-split letters again and they all collapse into one spot
+    return () => {
+      circleType.destroy();
+    };
   }, []);
 
   return (

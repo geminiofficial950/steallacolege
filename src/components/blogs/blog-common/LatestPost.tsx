@@ -1,10 +1,11 @@
 import Image from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 import Link from "next/link";
-import { blog_detail_data } from "@/data/home-data/BlogDataEditor";
+import { useBlogSummaries } from "@/context/ContentContext";
 
 const LatestPost = () => {
   // Extract blog list from data
-  const blogs = blog_detail_data.blog_list.slice(0, 4); // You can limit it to latest 4 posts
+  const blogs = useBlogSummaries().slice(0, 4); // You can limit it to latest 4 posts
 
   return (
     <div className="blog-widget">
@@ -14,7 +15,7 @@ const LatestPost = () => {
         <div key={item.blogId} className="rc-post-item">
           <div className="rc-post-thumb">
             <Link href={`/blog-details/${item.blogId}`} passHref>
-              <Image
+              <ContentImage
                 src={item.outsideimage}
                 alt={item.title}
                 width={90}

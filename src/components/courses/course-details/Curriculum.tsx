@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { course_detail_data } from "@/data/home-data/coursedataeditor";
+import type { Course } from "@/types/content";
 
 import icon_1 from "@/assets/img/icons/lock.svg"
 
 interface CurriculumProps {
-  courseId?: number;
+  course?: Course; // full course document (from MongoDB)
 }
 
 interface DataType {
@@ -22,16 +22,11 @@ interface DataType {
    }[]
 }[]
 
-const Curriculum = ({ courseId }: CurriculumProps) => {
+const Curriculum = ({ course }: CurriculumProps) => {
    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-   // Get course data by courseId instead of index
-   const course = course_detail_data.course_list.find(c => c.courseId === courseId);
 
-   console.log("Curriculum component - courseId:", courseId);
-   console.log("Curriculum component using coursedataeditor course:", course);
-
-   // Get curriculum description from coursedataeditor
+   // Get curriculum description from the course document
    const getCurriculumDescription = () => {
       if (course?.detail?.[0]?.tabs) {
          const curriculumTab = course.detail[0].tabs.find(
@@ -42,7 +37,7 @@ const Curriculum = ({ courseId }: CurriculumProps) => {
       return "";
    };
 
-   // Get syllabus data from coursedataeditor
+   // Get syllabus data from the course document
    const getSyllabusData = () => {
       if (course?.detail?.[0]?.tabs) {
          const curriculumTab = course.detail[0].tabs.find(

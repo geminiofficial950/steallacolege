@@ -48,6 +48,7 @@ export default function StudentSupportForm({ isOpen, onClose }: StudentSupportFo
         .custom-modal-content {
           /* fill from just below header to bottom of viewport */
           height: calc(100vh - 126px) !important;
+          height: calc(100dvh - 126px) !important;
           display: flex !important;
           flex-direction: column !important;
           overflow: hidden !important;
@@ -88,6 +89,7 @@ export default function StudentSupportForm({ isOpen, onClose }: StudentSupportFo
           .custom-modal-content {
             /* fill exactly the remaining viewport */
             height: calc(100vh - 80px) !important;
+            height: calc(100dvh - 80px) !important;
             border-radius: 0 !important;
           }
         }

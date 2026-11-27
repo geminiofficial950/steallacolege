@@ -2,15 +2,13 @@
 
 import Image from "next/image";
 import img_1 from "@/assets/img/courses/review-author.png";
-import { course_detail_data } from "@/data/home-data/coursedataeditor";
+import type { Course } from "@/types/content";
 
 interface ReviewsProps {
-  courseId?: string; // use string type since your courseId is a string
+  course?: Course; // full course document (from MongoDB)
 }
 
-const Reviews = ({ courseId }: ReviewsProps) => {
-  // Find the specific course by its string courseId
-  const course = course_detail_data.course_list.find(c => c.courseId === courseId);
+const Reviews = ({ course }: ReviewsProps) => {
 
 
   if (!course) {

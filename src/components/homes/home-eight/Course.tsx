@@ -1,6 +1,7 @@
 "use client"
-import course_data from "@/data/home-data/CourseData";
+import { useCourseCards } from "@/context/ContentContext";
 import Image from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 import { useState } from "react";
 import Link from "next/link";
 import BtnArrow from "@/svg/BtnArrow";
@@ -14,6 +15,8 @@ import course_img2 from "@/assets/img/courses/h8_course_shape02.svg"
 const tab_title: string[] = ["All", "Chinese", "Dessert", "Italian", "Italian"];
 
 const Course = () => {
+  // course cards come from MongoDB via ContentProvider (same shape the old static CourseData.ts exported)
+  const course_data = [{ id: 1, page: "home_1", course_details: useCourseCards() }];
 
    const [activeTab, setActiveTab] = useState(0);
 
@@ -75,7 +78,7 @@ const Course = () => {
                            <div key={item.id} className="col-xl-3 col-lg-4 col-md-6">
                               <div className="courses__item-nine shine__animate-item">
                                  <div className="courses__item-thumb-eight shine__animate-link">
-                                    <Link href="/course-details"><Image src={item.thumb} alt="img" /></Link>
+                                    <Link href="/course-details"><ContentImage src={item.thumb} alt="img" /></Link>
                                     <a onClick={() => handleAddToWishlist(item)} className="courses__wishlist"><InjectableSvg src="/assets/img/icons/heart02.svg" alt="" className="injectable" /></a>
                                     <Link href="/courses" className="courses__item-tag-three">{item.tag}</Link>
                                  </div>

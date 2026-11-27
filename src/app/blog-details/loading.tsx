@@ -1,11 +1,5 @@
-import LoadingUI from "@/components/common/LoadingUI"
+import { BlogDetailsSkeleton } from "@/components/common/Skeletons";
 
-const Loading = () => {
-   return (
-      <>
-         <LoadingUI />
-      </>
-   )
-}
+const Loading = () => <BlogDetailsSkeleton />;
 
-export default Loading
+export default Loading;

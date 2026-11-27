@@ -82,12 +82,20 @@ const FeaturesTwo = () => {
                   font-size: 14px !important;
                }
                .features__item {
-                  margin-bottom: 40px !important; /* space between cards */
+                  margin-bottom: 18px !important; /* space between cards */
                   text-align: center;
                }
-               .features__icon img {
-                  max-width: 60px;
-                  height: auto;
+               .features__icon {
+                  min-height: 0 !important;
+                  margin-bottom: 6px !important;
+               }
+               /* the icon PNGs carry ~25% transparent padding above and below the artwork;
+                  pull that empty space in (icon size unchanged). :global — next/image */
+               .features__icon :global(img) {
+                  margin: -24px 0 -30px;
+               }
+               .features__content :global(.title) {
+                  margin-bottom: 4px;
                }
             }
 
@@ -103,7 +111,7 @@ const FeaturesTwo = () => {
                   font-size: 13px !important;
                }
                .features__item {
-                  margin-bottom: 35px !important;
+                  margin-bottom: 16px !important;
                }
             }
          `}</style>

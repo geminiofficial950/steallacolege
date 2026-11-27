@@ -11,15 +11,15 @@ const CourseDetailsExample = () => {
       <h1>Course Details Example - Using coursedatas.ts Directly</h1>
       
       {/* Overview component automatically uses data from coursedatas.ts */}
-      <Overview courseId={0} />
+      <Overview />
       
       {/* Curriculum component automatically uses data from coursedatas.ts */}
-      <Curriculum courseId={0} />
+      <Curriculum />
       
       {/* You can also use different courses by changing courseId */}
       <h2>Second Course (if available)</h2>
-      <Overview courseId={1} />
-      <Curriculum courseId={1} />
+      <Overview />
+      <Curriculum />
     </div>
   );
 };

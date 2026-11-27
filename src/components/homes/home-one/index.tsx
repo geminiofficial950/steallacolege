@@ -7,6 +7,7 @@ import Instructor from "./Instructor";
 import Counter from "./Counter";
 import FaqArea from "./FaqArea";
 import Features from "./Features";
+import Gallery from "./Gallery";
 import FeaturesTwo from "./FeaturesTwo";
 import InstructorTwo from "./InstructorTwo";
 import Blog from "./Blog";
@@ -19,13 +20,14 @@ const HomeOne = () => {
   return (
     <>
       <HeaderOne />
-      <main className="main-area fix">
+      <main className="main-area fix home-one-compact">
         <Banner />
-        <BrandOne />
-        <Categories />
-        <About />
+        <BrandOne compact />
+        {/* <Categories /> */}
+        <Gallery />
         <CourseArea />
         <Newsletter />
+        <About />
         {/* <Instructor /> */}
         <Counter />
         {/* Add id here */}

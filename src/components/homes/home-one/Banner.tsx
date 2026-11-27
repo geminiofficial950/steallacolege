@@ -1,10 +1,10 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, EffectCreative, Pagination } from "swiper/modules";
 import BtnArrow from "@/svg/BtnArrow";
 
 import banner_shape_3 from "@/assets/img/banner/banner_shape01.svg";
@@ -125,19 +125,41 @@ const NEW_BANNER_SLIDES = [
   },
 ] as const;
 
-const BANNER_REAL_SLIDE_COUNT = 4 + NEW_BANNER_SLIDES.length;
-
 const VIDEO_EMBED_SRC =
   "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_vjqn5r&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controls]=false&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
 const BOTTOM_VIDEO_EMBED_SRC =
   "https://player.cloudinary.com/embed/?cloud_name=xttgh7x6&public_id=WhatsApp_Video_2026-08-03_at_12.39.06_PM_2_lfo5x8&player[muted]=true&player[autoplay]=true&player[loop]=true&player[controls]=false&player[controlslist]=nodownload&player[controlsList]=nodownload";
 
+type BannerSlideTransform = {
+  translate: [string, number, number];
+  scale: number;
+  opacity: number;
+};
+
+// Desktop: the previous and next banners sit as small preview cards right beside the active one.
+// A card is the whole banner scaled to PEEK_SCALE; PEEK_GAP is the space between it and the active
+// banner (both as % of the banner width). Advancing moves everything left: the outgoing banner shrinks
+// into the left card, the right card grows into the centre.
+// Slides further away stay stacked (opaque) behind the cards, so only one card shows per side.
+// Mobile: no cards — next enters from the right, outgoing exits left, neighbours hidden.
+const PEEK_SCALE = 0.5;
+const PEEK_GAP = 2;
+const PEEK_OFFSET = 50 + PEEK_GAP + (PEEK_SCALE * 100) / 2;
+
+const getBannerCreativeEffect = (isMobile: boolean) => {
+  const peek = (x: number): BannerSlideTransform => ({ translate: [`${x}%`, 0, 0], scale: PEEK_SCALE, opacity: 1 });
+  const hidden = (x: number): BannerSlideTransform => ({ translate: [`${x}%`, 0, 0], scale: 1, opacity: 0 });
+  return isMobile
+    ? { limitProgress: 1, prev: hidden(-115), next: hidden(115) }
+    : { limitProgress: 1, prev: peek(-PEEK_OFFSET), next: peek(PEEK_OFFSET) };
+};
+
 const BANNER_DEFAULT_DELAY_MS = 3000;
 const BANNER_DEFAULT_COUNTDOWN_START = BANNER_DEFAULT_DELAY_MS / 1000;
-const STUDENT_BENEFITS_SLIDE_INDEX = 3;
+const STUDENT_BENEFITS_SLIDE_INDEX = 0; // College Sorted slide (first)
 const STUDENT_BENEFITS_COUNTDOWN_START = 7;
-const BANNER_TRANSITION_SPEED_MS = 800;
+const BANNER_TRANSITION_SPEED_MS = 900;
 
 const getBannerCountdownStart = (swiper?: SwiperType | null) =>
   swiper?.realIndex === STUDENT_BENEFITS_SLIDE_INDEX
@@ -394,7 +416,7 @@ const GoogleProgramSlide = () => (
         </h3>
 
         <p className="google-program-slide__desc">
-          <strong>Starting from 1st September.</strong> A suite of secure and
+          <strong>Starting from 1st December.</strong> A suite of secure and
           easy-to-use tools, with AI-driven features to create more personalized
           and engaging learning experiences provided at no cost.
         </p>
@@ -599,6 +621,18 @@ const COLLEGE_SORTED_RESTART_MS = 1200;
 
 type ZonePlayState = "idle" | "playing" | "held";
 
+// The base <img> is CSS-hidden (1px) but is drawn onto the full-width canvas, so its
+// real output width is the viewport width: sizes="100vw" keeps desktop sharp while
+// letting small screens download a smaller candidate than the 1920px original.
+const { props: collegeSortedBaseImgProps } = getImageProps({
+  src: "/assets/bannerImages/college-sorted-v3/complete.jpg",
+  alt: "",
+  width: 1920,
+  height: 1080,
+  sizes: "100vw",
+  quality: 75,
+});
+
 const CollegeSortedSlide = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const baseImgRef = useRef<HTMLImageElement>(null);
@@ -611,6 +645,8 @@ const CollegeSortedSlide = () => {
     right: "idle",
   });
   const rafRef = useRef<number | null>(null);
+  // false while the banner is scrolled out of view — no point repainting a canvas nobody sees
+  const onScreenRef = useRef(true);
   const staggerTimersRef = useRef<number[]>([]);
   const restartTimerRef = useRef<number | null>(null);
   const userControlRef = useRef(false);
@@ -667,7 +703,17 @@ const CollegeSortedSlide = () => {
   const startLoop = useCallback(() => {
     if (rafRef.current != null) return;
     const tick = () => {
-      drawFrame();
+      if (onScreenRef.current) drawFrame();
+      // Nothing playing (all idle / held on their last frame) → the canvas is static, so stop
+      // repainting it 60×/s; playZone() restarts the loop when a video plays again.
+      const anyPlaying = COLLEGE_SORTED_ZONE_KEYS.some(
+        (key) => zoneStateRef.current[key] === "playing",
+      );
+      if (!anyPlaying) {
+        drawFrame();
+        rafRef.current = null;
+        return;
+      }
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
@@ -840,14 +886,21 @@ const CollegeSortedSlide = () => {
       }
     };
 
+    let loadStarted = false;
+    const startVideoLoads: Array<() => void> = [];
+
     const endedHandlers = COLLEGE_SORTED_ZONE_KEYS.map((key) => {
       const video = videoRefs.current[key];
       const handler = onEnded(key);
       if (video) {
         video.muted = true;
-        video.preload = "auto";
-        video.load();
         video.addEventListener("ended", handler);
+        // Start downloading once (load() restarts a download already in progress, which made every
+        // video download twice); playZone() still calls load() itself if a video is needed sooner
+        startVideoLoads.push(() => {
+          video.preload = "auto";
+          if (video.networkState === HTMLMediaElement.NETWORK_EMPTY) video.load();
+        });
         // Warm decode so the first stagger is snappy
         const warm = () => {
           const p = video.play();
@@ -866,7 +919,16 @@ const CollegeSortedSlide = () => {
       return { video, handler };
     });
 
+    const loadVideos = () => {
+      if (loadStarted) return;
+      loadStarted = true;
+      startVideoLoads.forEach((start) => start());
+    };
+    if (document.readyState === "complete") loadVideos();
+    else window.addEventListener("load", loadVideos, { once: true });
+
     return () => {
+      window.removeEventListener("load", loadVideos);
       stopLoop();
       clearStaggerTimers();
       endedHandlers.forEach(({ video, handler }) => {
@@ -874,6 +936,17 @@ const CollegeSortedSlide = () => {
       });
     };
   }, [clearStaggerTimers, drawFrame, stopLoop]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => {
+      onScreenRef.current = entry.isIntersecting;
+      if (entry.isIntersecting) drawFrame();
+    });
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, [drawFrame]);
 
   useEffect(() => {
     if (isActive) {
@@ -933,7 +1006,9 @@ const CollegeSortedSlide = () => {
         <img
           ref={baseImgRef}
           className="college-sorted-slide__asset"
-          src="/assets/bannerImages/college-sorted-v3/complete.jpg"
+          src={collegeSortedBaseImgProps.src}
+          srcSet={collegeSortedBaseImgProps.srcSet}
+          sizes="100vw"
           alt=""
           aria-hidden="true"
           draggable={false}
@@ -948,7 +1023,9 @@ const CollegeSortedSlide = () => {
             src={zone.src}
             muted
             playsInline
-            preload="auto"
+            // loaded once the page has finished loading (see effect below) so the ~10MB of video
+            // doesn't compete with the page's own images, fonts and scripts
+            preload="none"
             aria-hidden="true"
           />
         ))}
@@ -1021,23 +1098,14 @@ const Banner: React.FC = () => {
     swiper.allowSlideNext = true;
     swiper.update();
 
-    const nextRealIndex = (swiper.realIndex + 1) % BANNER_REAL_SLIDE_COUNT;
-
-    if (swiper.params.loop) {
-      swiper.slideToLoop(nextRealIndex, BANNER_TRANSITION_SPEED_MS, true);
-    } else {
-      swiper.slideNext(BANNER_TRANSITION_SPEED_MS, true);
-    }
+    // slideNext always moves forward (in loop mode it re-arranges slides in the "next" direction first),
+    // so the incoming banner enters from the right. slideToLoop could take the backward path and
+    // make a slide come in from the left.
+    swiper.slideNext(BANNER_TRANSITION_SPEED_MS, true);
 
     window.setTimeout(() => {
       if (!swiper.destroyed && swiper.activeIndex === currentIndex) {
-        if (swiper.params.loop) {
-          swiper.slideToLoop(nextRealIndex, BANNER_TRANSITION_SPEED_MS, true);
-          return;
-        }
-
-        const nextIndex = (currentIndex + 1) % swiper.slides.length;
-        swiper.slideTo(nextIndex, BANNER_TRANSITION_SPEED_MS, true);
+        swiper.slideNext(BANNER_TRANSITION_SPEED_MS, true);
       }
     }, 80);
   }, []);
@@ -1088,6 +1156,20 @@ const Banner: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    if (!swiper || swiper.destroyed) return;
+    // Update fields in place: replacing the whole object would drop Swiper's merged
+    // defaults (rotate, origin, ...) and crash the effect
+    const effect = swiper.params.creativeEffect;
+    const next = getBannerCreativeEffect(isMobile);
+    if (!effect?.prev || !effect?.next) return;
+    effect.limitProgress = next.limitProgress;
+    Object.assign(effect.prev, next.prev);
+    Object.assign(effect.next, next.next);
+    swiper.setTranslate(swiper.translate);
+  }, [isMobile]);
+
   const syncSlideSize = useCallback((swiper: SwiperType) => {
     if (!swiper?.el || !swiper.wrapperEl) return;
 
@@ -1130,7 +1212,7 @@ const Banner: React.FC = () => {
       return;
     }
 
-    // Desktop: restore any mobile collapse, then lock all slides to first slide height
+    // Desktop: restore any mobile collapse, then lock all slides to the Educate slide's height
     swiper.params.autoHeight = false;
     swiper.el.style.height = "";
     swiper.wrapperEl.style.height = "";
@@ -1141,13 +1223,15 @@ const Banner: React.FC = () => {
       el.style.overflow = "";
     });
 
-    const firstSlide = swiper.slides[0] as HTMLElement | undefined;
+    const firstSlide = (swiper.el.querySelector(".banner-height-ref") ??
+      swiper.slides[0]) as HTMLElement | undefined;
     if (!firstSlide) return;
     const firstBanner = firstSlide.querySelector(
       ".banner-slide",
     ) as HTMLElement | null;
     const measureEl = firstBanner || firstSlide;
-    const height = Math.ceil(measureEl.getBoundingClientRect().height);
+    // offsetHeight ignores transforms — the reference slide may be scaled down while peeking
+    const height = Math.ceil(measureEl.offsetHeight);
     if (height <= 0) return;
 
     swiper.el.style.height = `${height}px`;
@@ -1243,6 +1327,27 @@ const Banner: React.FC = () => {
     }
   };
 
+  const renderHeroSlide = (key: (typeof NEW_BANNER_SLIDES)[number]["key"]) => {
+    const slide = NEW_BANNER_SLIDES.find((item) => item.key === key)!;
+    return (
+      <SwiperSlide key={slide.key}>
+        <HeroStyleSlide
+          slideKey={slide.key}
+          titleBefore={slide.titleBefore}
+          titleHighlight={slide.titleHighlight}
+          text={slide.text}
+          image={slide.image}
+          images={"images" in slide ? slide.images : undefined}
+          imageWidth={slide.imageWidth}
+          imageHeight={slide.imageHeight}
+          alt={slide.alt}
+          authors={slide.authors}
+          onEnquire={handleOpen}
+        />
+      </SwiperSlide>
+    );
+  };
+
   return (
     <>
       <section
@@ -1255,12 +1360,21 @@ const Banner: React.FC = () => {
 
         <div className="container">
           <Swiper
-            modules={[Autoplay, Pagination]}
+            modules={[Autoplay, Pagination, EffectCreative]}
             className="banner-swiper"
+            effect="creative"
+            creativeEffect={getBannerCreativeEffect(isMobile)}
             slidesPerView={1}
             spaceBetween={0}
             loop
-            speed={800}
+            // keep two banners on each side of the active one so both peeks are always filled.
+            // centeredSlides makes the initial loop setup place slides on BOTH sides (without it
+            // Swiper only appends to the right, leaving the very first banner with an empty left peek)
+            centeredSlides
+            loopAdditionalSlides={1}
+            // clicking a peeking banner brings it to the centre
+            slideToClickedSlide
+            speed={BANNER_TRANSITION_SPEED_MS}
             autoHeight={isMobile}
             watchOverflow
             allowTouchMove
@@ -1281,12 +1395,18 @@ const Banner: React.FC = () => {
               if (isMobile) syncSlideSize(swiper);
             }}
           >
-            {/* ── Slide 1: Educate. Evaluate. Excel. ── */}
+            {/* ── Slide 1: College Sorted hover characters ── */}
             <SwiperSlide>
-              <EducateExcelSlide onEnquire={handleOpen} />
+              <CollegeSortedSlide />
             </SwiperSlide>
 
-            {/* ── Slide 2: Zigzag videos + Coming Soon ── */}
+            {/* ── Slide 2: Disability / Job Ready ── */}
+            {renderHeroSlide("disability")}
+
+            {/* ── Slide 3: AI Learning ── */}
+            {renderHeroSlide("ai-learning")}
+
+            {/* ── Slide 4: Zigzag videos + Coming Soon ── */}
             <SwiperSlide>
               <div className="banner-slide banner-slide--video">
                 <div className="banner-video-zigzag">
@@ -1373,34 +1493,19 @@ const Banner: React.FC = () => {
               </div>
             </SwiperSlide>
 
-            {/* ── Slide 3: Google Program coming soon ── */}
+            {/* ── Slide 5: Google Program coming soon ── */}
             <SwiperSlide>
               <GoogleProgramSlide />
             </SwiperSlide>
 
-            {/* ── Slide 4: College Sorted hover characters ── */}
-            <SwiperSlide>
-              <CollegeSortedSlide />
+            {/* ── Slide 6: Mental Health ── */}
+            {renderHeroSlide("mental-health")}
+
+            {/* ── Slide 7: Educate. Evaluate. Excel. ── */}
+            <SwiperSlide className="banner-height-ref">
+              <EducateExcelSlide onEnquire={handleOpen} />
             </SwiperSlide>
 
-            {/* ── Slides 5–7: New hero-style topic banners ── */}
-            {NEW_BANNER_SLIDES.map((slide) => (
-              <SwiperSlide key={slide.key}>
-                <HeroStyleSlide
-                  slideKey={slide.key}
-                  titleBefore={slide.titleBefore}
-                  titleHighlight={slide.titleHighlight}
-                  text={slide.text}
-                  image={slide.image}
-                  images={"images" in slide ? slide.images : undefined}
-                  imageWidth={slide.imageWidth}
-                  imageHeight={slide.imageHeight}
-                  alt={slide.alt}
-                  authors={slide.authors}
-                  onEnquire={handleOpen}
-                />
-              </SwiperSlide>
-            ))}
           </Swiper>
         </div>
 

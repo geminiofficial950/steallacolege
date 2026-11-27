@@ -2,8 +2,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import Link from "next/link";
-import course_data from "@/data/home-data/CourseData";
+import { useCourseCards } from "@/context/ContentContext";
+import type { CourseCard } from "@/types/content";
 import Image, { StaticImageData } from "next/image";
+import ContentImage from "@/components/common/ContentImage";
 interface CategoryItem {
   categoryId: CategoryId;
   categoryName: string;
@@ -24,18 +26,19 @@ interface DatatYpe {
 //     ])
 //   ).values()
 // ];
-// Count unique categories
+// Count unique categories from the course cards (loaded from MongoDB)
+const buildCategories = (courses: CourseCard[]) => {
 const uniqueCategories = new Map<
   string,
   {
     categoryName: string;
     categoryId: string;
     count: number;
-    category_Image: string | StaticImageData;
+    category_Image?: CourseCard["category_Image"];
   }
 >();
 
-course_data[0].course_details.forEach((item) => {
+courses.forEach((item) => {
   const categoryKey = item.category.trim();
   if (uniqueCategories.has(categoryKey)) {
     uniqueCategories.get(categoryKey)!.count += 1;
@@ -48,6 +51,8 @@ course_data[0].course_details.forEach((item) => {
     });
   }
 });
+return uniqueCategories;
+};
 // console.log(uniqueCategories);
 
 // console.log("uniqueCategories", uniqueCategories);
@@ -143,6 +148,7 @@ const setting = {
 };
 
 const Categories = () => {
+  const uniqueCategories = buildCategories(useCourseCards());
   return (
     <section className="categories-area section-py-80 categories-area--home">
       <div className="container">
@@ -178,8 +184,8 @@ const Categories = () => {
                             {categoryName === "Technology and AI" ? (
                               <TechnologyAiIcon />
                             ) : (
-                              <Image
-                                src={category_Image}
+                              <ContentImage
+                                src={category_Image ?? ""}
                                 alt={categoryName}
                                 width={350}
                                 height={100}

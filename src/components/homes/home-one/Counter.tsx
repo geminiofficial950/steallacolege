@@ -65,7 +65,7 @@ const Counter = () => {
             </div>
             <div className="col-lg-6 col-6 text-center">
               <div className="fact__item" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "90px" }}>
-                <p style={{ fontSize: "28px", fontWeight: 600, lineHeight: 1.3, margin: 0 }}>
+                <p className="fact__skills" style={{ fontSize: "28px", fontWeight: 600, lineHeight: 1.3, margin: 0 }}>
                   Industry Specific
                   <br />
                   Skills Training

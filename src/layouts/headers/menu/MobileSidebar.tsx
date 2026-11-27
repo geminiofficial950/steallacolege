@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 import logo from "@/assets/img/logo/23.png";
 import InjectableSvg from "@/hooks/InjectableSvg";
-import course_data from "@/data/home-data/CourseData";
+import { useCourseCards } from "@/context/ContentContext";
 import { FaXTwitter } from "react-icons/fa6";
 
 interface MobileMenuProps {
@@ -15,12 +15,29 @@ interface MobileMenuProps {
 }
 
 const MobileSidebar = ({ isActive, setIsActive }: MobileMenuProps) => {
+  // course cards come from MongoDB via ContentProvider (same shape the old static CourseData.ts exported)
+  const course_data = [{ id: 1, page: "home_1", course_details: useCourseCards() }];
   const router = useRouter();
   const allCourses = course_data[0]?.course_details || [];
 
   const [searchKeyword, setSearchKeyword] = useState("");
   const [filteredCourses, setFilteredCourses] = useState<any[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // A fixed header (e.g. HeaderOne) sits above the drawer — open the drawer below it
+  const [headerOffset, setHeaderOffset] = useState(0);
+  useEffect(() => {
+    if (!isActive) return;
+    const header = document.querySelector("header");
+    if (header && getComputedStyle(header).position === "fixed") {
+      setHeaderOffset(Math.max(0, header.getBoundingClientRect().bottom));
+    } else {
+      setHeaderOffset(0);
+    }
+  }, [isActive]);
+  const offsetStyle = headerOffset
+    ? { top: headerOffset, height: `calc(100% - ${headerOffset}px)` }
+    : undefined;
 
   // ── Contact Modal State ──
   const [showModal, setShowModal] = useState(false);
@@ -113,8 +130,10 @@ const MobileSidebar = ({ isActive, setIsActive }: MobileMenuProps) => {
 
   return (
     <>
-      <div className={isActive ? "mobile-menu-visible" : ""}>
-        <div className="tgmobile__menu">
+      <div
+        className={`${isActive ? "mobile-menu-visible" : ""} ${headerOffset ? "has-fixed-header" : ""}`}
+      >
+        <div className="tgmobile__menu" style={offsetStyle}>
           <nav className="tgmobile__menu-box">
             <div onClick={() => setIsActive(false)} className="close-btn">
               <i className="tg-flaticon-close-1"></i>
@@ -251,6 +270,7 @@ const MobileSidebar = ({ isActive, setIsActive }: MobileMenuProps) => {
         {/* Overlay close area */}
         <div
           className="tgmobile__menu-backdrop "
+          style={offsetStyle}
           onClick={() => setIsActive(false)}
         ></div>
       </div>

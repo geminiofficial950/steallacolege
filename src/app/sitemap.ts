@@ -1,9 +1,12 @@
 import type { MetadataRoute } from "next";
-import { blog_detail_data } from "@/data/home-data/BlogDataEditor";
-import { course_detail_data } from "@/data/home-data/coursedataeditor";
+import { getBlogs, getCourses } from "@/lib/content";
 import { absoluteUrl } from "@/lib/seo";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Re-generated with the content cache so new blogs/courses in MongoDB get listed
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [courses, blogs] = await Promise.all([getCourses(), getBlogs()]);
   const now = new Date().toISOString();
   const fallbackBase = process.env.NEXT_PUBLIC_SITE_URL || "https://www.stellacollege.edu.au";
 
@@ -39,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Dynamic Course Pages
-  const coursePages: MetadataRoute.Sitemap = course_detail_data.course_list
+  const coursePages: MetadataRoute.Sitemap = courses
     .filter((c) => Boolean(c.courseId))
     .map((course) => {
       const id = encodeURIComponent(String(course.courseId).trim());
@@ -52,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
 
   // Dynamic Blog Pages
-  const blogPages: MetadataRoute.Sitemap = blog_detail_data.blog_list.map((blog) => {
+  const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => {
     const blogId = encodeURIComponent(String(blog.blogId).trim());
 
     const validDate =
